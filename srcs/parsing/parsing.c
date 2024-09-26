@@ -6,19 +6,18 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:36:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/26 10:37:00 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:14:10 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	parsing(int ac, char **av)
+int	parsing(int ac, char **av, t_map *map)
 {
 	if (ac != 2)
 		return (1);
 	if (ac == 2)
-		if (!file_check(av[1]))
+		if (!file_check(av[1], map))
 			return (0);
 	return (1);
-
 }

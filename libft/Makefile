@@ -50,6 +50,7 @@ SRC = ft_atoi.c\
 	ft_free_dtab.c\
 	ft_strndup.c\
 	ft_strncpy.c\
+	
 
 SRC_B =	ft_lstnew_bonus.c\
 	ft_lstadd_front_bonus.c\

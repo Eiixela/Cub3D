@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/26 10:37:08 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:48:56 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@
 
 int	main(int ac, char **av)
 {
-	if (!parsing(ac, av))
+	t_map	map;
+
+	
+	if (!parsing(ac, av, &map))
 	{
 		printf("ok!\n");
 		return (0);
