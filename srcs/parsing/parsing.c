@@ -1,39 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/26 10:37:08 by aljulien         ###   ########.fr       */
+/*   Created: 2024/09/26 10:36:34 by aljulien          #+#    #+#             */
+/*   Updated: 2024/09/26 10:37:00 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-/* int	close_win(int keycode, t_vars *vars)
+int	parsing(int ac, char **av)
 {
-	if (keycode == 65307)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
-	}
-	return (0);
-} */
-
-int	main(int ac, char **av)
-{
-	if (!parsing(ac, av))
-	{
-		printf("ok!\n");
-		return (0);
-	}
-	printf("hmmm...\n");
+	if (ac != 2)
+		return (1);
+	if (ac == 2)
+		if (!file_check(av[1]))
+			return (0);
 	return (1);
-	//t_vars	vars;
-	/* vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "cub");
-	mlx_hook(vars.win, 02, 1L<<0, close_win, &vars);
-	mlx_loop(vars.mlx); */
+
 }

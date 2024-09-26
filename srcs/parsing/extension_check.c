@@ -1,39 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   extension_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/26 10:37:08 by aljulien         ###   ########.fr       */
+/*   Created: 2024/09/26 10:36:17 by aljulien          #+#    #+#             */
+/*   Updated: 2024/09/26 10:37:02 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-/* int	close_win(int keycode, t_vars *vars)
+int	file_extension_check(char *file)
 {
-	if (keycode == 65307)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
-	}
-	return (0);
-} */
+	char	*db_ext;
 
-int	main(int ac, char **av)
-{
-	if (!parsing(ac, av))
+	if (file)
 	{
-		printf("ok!\n");
-		return (0);
+		db_ext = ft_strnstr(file, ".cub", ft_strlen(file));
+		if (db_ext != NULL)
+		{
+			db_ext = db_ext + 4;
+			if (*db_ext == '\0')
+			{
+				db_ext = ft_strnstr(db_ext, ".cub", ft_strlen(db_ext));
+				if (db_ext == NULL)
+					if (ft_strcmp(file, ".cub"))
+						return (0);
+			}
+		}
 	}
-	printf("hmmm...\n");
 	return (1);
-	//t_vars	vars;
-	/* vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "cub");
-	mlx_hook(vars.win, 02, 1L<<0, close_win, &vars);
-	mlx_loop(vars.mlx); */
+}
+
+int	file_check(char *file)
+{
+	if (file_extension_check(file))
+		return (1);
+	return (0);
 }
