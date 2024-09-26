@@ -6,7 +6,7 @@
 #    By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/09/26 10:38:09 by aljulien         ###   ########.fr        #
+#    Updated: 2024/09/26 10:49:14 by aljulien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJECT_DIR = .obj/
 OBJECTS = $(patsubst srcs/%.c,$(OBJECT_DIR)%.o,\
 		srcs/main.c\
 		srcs/parsing/parsing.c\
-		srcs/parsing/extension_check.c\
+		srcs/parsing/file_check.c\
 							)
 
 OBJ_SUBDIRS = $(sort $(dir ${OBJECTS}))

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extension_check.c                                  :+:      :+:    :+:   */
+/*   file_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:36:17 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/26 10:37:02 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:53:44 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,26 @@ int	file_extension_check(char *file)
 			}
 		}
 	}
+	printf("Please use .cub map\n");
 	return (1);
+}
+
+int	file_access(char *file)
+{
+	if (open(file, O_RDONLY) == -1)
+	{
+		printf("Please check the permission of the map\n");
+		return (1);
+	}
+	return (0);
 }
 
 int	file_check(char *file)
 {
 	if (file_extension_check(file))
 		return (1);
+	if (file_access(file))
+		return (1);
+	
 	return (0);
 }
