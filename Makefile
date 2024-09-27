@@ -6,7 +6,7 @@
 #    By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/09/26 12:34:00 by aljulien         ###   ########.fr        #
+#    Updated: 2024/09/27 14:27:48 by aljulien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,10 @@ OBJECTS = $(patsubst srcs/%.c,$(OBJECT_DIR)%.o,\
 		srcs/main.c\
 		srcs/parsing/parsing.c\
 		srcs/parsing/file_check.c\
+		srcs/parsing/init.c\
+		srcs/parsing/parsing_utils.c\
+		srcs/parsing/cardinal_check.c\
+		srcs/parsing/textures_check.c\
 		srcs/gnl/get_next_line.c\
 		srcs/gnl/get_next_line_utils.c\
 							)

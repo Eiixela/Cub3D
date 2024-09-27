@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 10:36:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/27 11:23:57 by aljulien         ###   ########.fr       */
+/*   Created: 2024/09/27 14:25:00 by aljulien          #+#    #+#             */
+/*   Updated: 2024/09/27 14:26:00 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	parsing(int ac, char **av, t_map **map)
+int	map_started(char *line)
 {
-	if (ac != 2)
+	if (ft_strncmp("1", line, 1) == 0)
 		return (1);
-	if (ac == 2)
-		if (!file_check(av[1], map))
-			return (0);
-	return (1);
+	else if (ft_strncmp("0", line, 1) == 0)
+		return (1);
+	else
+		return (0);
 }

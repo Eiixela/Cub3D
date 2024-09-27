@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_check.c                                       :+:      :+:    :+:   */
+/*   textures_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 10:36:17 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/27 14:26:52 by aljulien         ###   ########.fr       */
+/*   Created: 2024/09/27 14:22:34 by aljulien          #+#    #+#             */
+/*   Updated: 2024/09/27 14:23:07 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	file_access(char *file)
-{
-	int	fd;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-	{
-		printf("Please check the permission of the map\n");
-		return (-1);
-	}
-	return (fd);
-}
-
-int	file_extension_check(char *file)
+int	check_extention_textures(char *file)
 {
 	char	*db_ext;
 
 	if (file)
 	{
-		db_ext = ft_strnstr(file, ".cub", ft_strlen(file));
+		db_ext = ft_strnstr(file, ".xpm", ft_strlen(file));
 		if (db_ext != NULL)
 		{
 			db_ext = db_ext + 4;
@@ -48,16 +35,28 @@ int	file_extension_check(char *file)
 	return (1);
 }
 
-int	file_check(char *file, t_map **map)
+int	check_access_textures(t_map *map)
 {
-	int	fd;
-
-	if (file_extension_check(file))
-		return (1);
-	fd = file_access(file);
-	if (fd == -1)
-		return (1);
-	if (cardinal_check(fd, map))
-		return (1);
+	if (map->north)
+	{	
+		if (access(map->north, O_RDONLY) == -1 || check_extention_textures(map->north))
+			return (1);	
+	}
+	if (map->south)
+	{
+		
+		if (access(map->south, O_RDONLY) == -1 || check_extention_textures(map->south))
+			return (1);	
+	}
+	if (map->west)
+	{
+		if (access(map->west, O_RDONLY) == -1 || check_extention_textures(map->west))
+			return (1);	
+	}
+	if (map->east)
+	{	
+		if (access(map->east, O_RDONLY) == -1 || check_extention_textures(map->east))
+			return (1);	
+	}
 	return (0);
 }

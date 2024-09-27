@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/26 13:58:57 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:29:55 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "../mlx/mlx.h"
 # include "libft.h"
 
-# define BUFFER_SIZE 100
+# define BUFFER_SIZE 1
 
 /* enum
 {
@@ -57,10 +57,26 @@ typedef struct s_map
 
 
 //PARING
-int	parsing(int ac, char **av, t_map *map);
+int		parsing(int ac, char **av, t_map **map);
+
+//init
+t_map	*init_map(void);
+
+//parsing_utils
+int		map_started(char *line);
+
+//cardinal_check
+t_map	*fill_cardinal(char *line, char *path, t_map *map);
+t_map	*found_one_cardinal(char *line, t_map *map);
+bool	found_all_cardinal(t_map *map);
+int		cardinal_check(int fd, t_map **map);
+
+//textures_check
+int		check_extention_textures(char *file);
+int		check_access_textures(t_map *map);
 
 //extension_check
-int	file_check(char *file, t_map *map);
+int		file_check(char *file, t_map **map);
 
 //GNL
 char	*get_next_line(int fd);
