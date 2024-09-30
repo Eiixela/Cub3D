@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/27 14:29:55 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:32:50 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_map
 	char	*south;
 	char	*east;
 	char	*west;
-	int		ceiling_c[3];
-	int		floor_c[3];
+	int		*ceiling_c;
+	int		*floor_c;
 	char	**map;
 	
 }	t_map;
@@ -64,6 +64,7 @@ t_map	*init_map(void);
 
 //parsing_utils
 int		map_started(char *line);
+char	*format_line(const char *line);
 
 //cardinal_check
 t_map	*fill_cardinal(char *line, char *path, t_map *map);

@@ -1,10 +1,10 @@
-SO textures/try.xpm
 EA textures/try.xpm
-WE textures/try.xpm
-NO textures/try.xpm
-
 F 164,169,20
+WE textures/try.xpm
+
+SO textures/try.xpm
 C 153,204,255
+NO textures/try.xpm
 
 111111111111111111111
 101000001000000000001
