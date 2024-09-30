@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:36:17 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/30 13:54:17 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:19:07 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,82 +48,47 @@ int	file_extension_check(char *file)
 	return (1);
 }
 
-char	*remove_virgule(char *path)
+int	*fill_color_int(char **color, int *color_tab)
 {
-	char	*line;
-	size_t	i;
-	size_t	j;
+ 	int	i;
 
-	line = malloc(ft_strlen(path + 1) * sizeof(char *));
-	if (!line)
-		return (NULL);
 	i = 0;
-	j = 0;
-	while(path[i])
+	while (i < 4)
 	{
-		if (path[i] == ',')
-			i++;
-		else 
+		color_tab[i] = ft_atoi(color[i]);
+		if (color_tab[i] < 0 || color_tab[i] > 255)
 		{
-			line[j] = path[i];
-			i++;
-			j++;
+			printf("Color not in 0-255 range\n");
+			return (NULL);
 		}
+		i++;
 	}
-	while (j < ft_strlen(path + 1))
-		line[j++] = '\0';
-	return (line);
-}
-
-t_map *fill_color_int(char **color, t_map *map)
-{
-    int i;
-
-    i = 0;
-    while (color[i] && i < 3)  // Assume max 3 color components (R,G,B)
-    {
-        map->ceiling_c[i] = ft_atoi(color[i]);
-        if (map->ceiling_c[i] < 0 || map->ceiling_c[i] > 255)
-        {
-            printf("Color not in 0-255 range\n");
-            return (NULL);
-        }
-        i++;
-    }
-    if (i != 3)  // Ensure we have exactly 3 color components
-    {
-        printf("Invalid number of color components\n");
-        return (NULL);
-    }
-    return (map);
+	if (i != 3)
+	{
+		printf("Invalid number of color components\n");
+		return (NULL);
+	}
+	return (color_tab);
 }
 
 t_map *fill_color(char *line, char *path, t_map *map)
 {
-    char **color = NULL;
+    char **color;
 
-    path = remove_virgule(path);
-   /*  if (ft_strncmp("F ", line, 2) == 0)
+    if (ft_strncmp("F ", line, 2) == 0)
     {
-        color = ft_split(path, ' ');
+        color = ft_split(path, ',');
         if (!color)
             return (NULL);
-        if (!fill_color_int(color, map))
-            return (NULL);
+        map->floor_c = fill_color_int(color, map->floor_c);
     }
-    else */if (ft_strncmp("C ", line, 2) == 0)
+    else if (ft_strncmp("C ", line, 2) == 0)
     {
-        color = ft_split(path, ' ');
+        color = ft_split(path, ',');
         if (!color)
             return (NULL);
-        if (!fill_color_int(color, map))
-            return (NULL);
+       map->ceiling_c = fill_color_int(color, map->ceiling_c);
     }
-    
-    // Don't forget to free the color array after use
-    // (Assuming you have a function to free a char**)
-   // free_char_array(color);
-    
     return (map);
 }
 
@@ -148,26 +113,35 @@ t_map	*found_one_color(char *line, t_map *map)
     return (map);
 }
 
-int	color_check(int fd, t_map **map)
+/* bool	found_all_color(t_map *map)
 {
-	char	*line;
-	bool	all_color_found;
+	
+} */
 
-	all_color_found = false;
-	while (!all_color_found)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			return (1);
-		if (map_started(line))
-			return (free(line), 1);
-		line = format_line(line);
-		found_one_color(line, *map);
-		//all_color_found = found_all_color(*map);
-		free(line);
+int color_check(int fd, t_map **map)
+{
+    char *line;
+    bool all_color_found = false;
+
+    if (!map || !*map)
+		return (1);
+    while (!all_color_found)
+    {
+        line = get_next_line(fd);
+	    if (!line)
+            return (1);
+        if (map_started(line))
+            return (free(line), 1);
+        line = format_line(line);
+        *map = found_one_color(line, *map);
+        if (!*map)
+            return (free(line), 1);
+        //all_color_found = found_all_color(*map);
+        free(line);
 	}
-	return (0);
+    return (0);
 }
+
 
 int	file_check(char *file, t_map **map)
 {
@@ -178,9 +152,9 @@ int	file_check(char *file, t_map **map)
 	fd = file_access(file);
 	if (fd == -1)
 		return (1);
- 	/* if (cardinal_check(fd, map))
-		return (1); */
- 	if (color_check(fd, map))
+ 	if (cardinal_check(fd, map))
+		return (1);
+	if (color_check(fd, map))
 		return (1);
 	return (0);
 }

@@ -11,6 +11,14 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <stdbool.h>
+#include <math.h>
 
 void	ft_free_tab(char **tab)
 {
