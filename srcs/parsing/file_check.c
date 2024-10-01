@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:36:17 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/30 17:19:07 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:26:06 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	file_extension_check(char *file)
 
 int	*fill_color_int(char **color, int *color_tab)
 {
- 	int	i;
+	int	i;
 
 	i = 0;
 	while (i < 4)
@@ -71,46 +71,45 @@ int	*fill_color_int(char **color, int *color_tab)
 	return (color_tab);
 }
 
-t_map *fill_color(char *line, char *path, t_map *map)
+t_map	*fill_color(char *line, char *path, t_map *map)
 {
-    char **color;
+	char	**color;
 
-    if (ft_strncmp("F ", line, 2) == 0)
-    {
-        color = ft_split(path, ',');
-        if (!color)
-            return (NULL);
-        map->floor_c = fill_color_int(color, map->floor_c);
-    }
-    else if (ft_strncmp("C ", line, 2) == 0)
-    {
-        color = ft_split(path, ',');
-        if (!color)
-            return (NULL);
-       map->ceiling_c = fill_color_int(color, map->ceiling_c);
-    }
-    return (map);
+	if (ft_strncmp("F ", line, 2) == 0)
+	{
+		color = ft_split(path, ',');
+		if (!color)
+			return (NULL);
+		map->floor_c = fill_color_int(color, map->floor_c);
+	}
+	else if (ft_strncmp("C ", line, 2) == 0)
+	{
+		color = ft_split(path, ',');
+		if (!color)
+			return (NULL);
+		map->ceiling_c = fill_color_int(color, map->ceiling_c);
+	}
+	return (map);
 }
-
 
 t_map	*found_one_color(char *line, t_map *map)
 {
-	char *path;
-    char *trimmed_path;
+	char	*path;
+	char	*trimmed_path;
 
 	path = NULL;
-    if (ft_strncmp("F ", line, 2) == 0 || ft_strncmp("C ", line, 2) == 0)
-    {
-        trimmed_path = ft_strtrim(line + 2, " \t\n\r");
-        if (trimmed_path)
-        {
-            path = ft_strdup(trimmed_path);
-            free(trimmed_path);
-            if (path)
+	if (ft_strncmp("F ", line, 2) == 0 || ft_strncmp("C ", line, 2) == 0)
+	{
+		trimmed_path = ft_strtrim(line + 2, " \t\n\r");
+		if (trimmed_path)
+		{
+			path = ft_strdup(trimmed_path);
+			free(trimmed_path);
+			if (path)
 				map = fill_color(line, path, map);
-        }
-    }
-    return (map);
+		}
+	}
+	return (map);
 }
 
 /* bool	found_all_color(t_map *map)
@@ -118,30 +117,31 @@ t_map	*found_one_color(char *line, t_map *map)
 	
 } */
 
-int color_check(int fd, t_map **map)
+int	color_check(int fd, t_map **map)
 {
-    char *line;
-    bool all_color_found = false;
+	char	*line;
+	bool	all_color_found;
 
-    if (!map || !*map)
+	all_color_found = false;
+	*map = init_map();
+ 	if (!map || !*map)
 		return (1);
-    while (!all_color_found)
-    {
-        line = get_next_line(fd);
-	    if (!line)
-            return (1);
-        if (map_started(line))
-            return (free(line), 1);
-        line = format_line(line);
-        *map = found_one_color(line, *map);
-        if (!*map)
-            return (free(line), 1);
-        //all_color_found = found_all_color(*map);
-        free(line);
+	while (!all_color_found)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			return (1);
+		if (map_started(line))
+			return (free(line), 1);
+		line = format_line(line);
+		*map = found_one_color(line, *map);
+		if (!*map)
+			return (free(line), 1);
+		//all_color_found = found_all_color(*map);
+		free(line);
 	}
-    return (0);
+	return (0);
 }
-
 
 int	file_check(char *file, t_map **map)
 {
@@ -152,9 +152,9 @@ int	file_check(char *file, t_map **map)
 	fd = file_access(file);
 	if (fd == -1)
 		return (1);
- 	if (cardinal_check(fd, map))
+	 if (cardinal_check(fd, map))
 		return (1);
-	if (color_check(fd, map))
-		return (1);
+	/* if (color_check(fd, map))
+		return (1); */
 	return (0);
 }

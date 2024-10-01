@@ -6,14 +6,14 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:26:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/30 15:50:27 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:16:39 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
 //TODO add error message when return NULL
-t_map *init_map(void)
+t_map	*init_map(void)
 {
 	t_map	*map;
 	int		i;
@@ -33,10 +33,11 @@ t_map *init_map(void)
 		free(map);
 		return (NULL);
 	}
-	for (i = 0; i < 4; i++)
+	while (i < 4)
 	{
 		map->ceiling_c[i] = 0;
 		map->floor_c[i] = 0;
+		i++;
 	}
 	return (map);
 }

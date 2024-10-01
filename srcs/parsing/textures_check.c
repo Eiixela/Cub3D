@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:22:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/27 14:23:07 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:20:15 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,28 @@ int	check_extention_textures(char *file)
 int	check_access_textures(t_map *map)
 {
 	if (map->north)
-	{	
-		if (access(map->north, O_RDONLY) == -1 || check_extention_textures(map->north))
-			return (1);	
+	{
+		if (access(map->north, O_RDONLY) == -1
+			|| check_extention_textures(map->north))
+			return (1);
 	}
 	if (map->south)
 	{
-		
-		if (access(map->south, O_RDONLY) == -1 || check_extention_textures(map->south))
-			return (1);	
+		if (access(map->south, O_RDONLY) == -1
+			|| check_extention_textures(map->south))
+			return (1);
 	}
 	if (map->west)
 	{
-		if (access(map->west, O_RDONLY) == -1 || check_extention_textures(map->west))
-			return (1);	
+		if (access(map->west, O_RDONLY) == -1
+			|| check_extention_textures(map->west))
+			return (1);
 	}
 	if (map->east)
-	{	
-		if (access(map->east, O_RDONLY) == -1 || check_extention_textures(map->east))
-			return (1);	
+	{
+		if (access(map->east, O_RDONLY) == -1
+			|| check_extention_textures(map->east))
+			return (1);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/27 12:05:25 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:27:13 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@
 	return (0);
 } */
 
-void free_map(t_map *map)
+void	free_map(t_map *map)
 {
-    if (map)
-    {
-        free(map->north);
-        free(map->south);
-        free(map->east);
-        free(map->west);
-        free(map->map);
-        free(map);
-    }
+	if (map)
+	{
+		free(map->north);
+		free(map->south);
+		free(map->east);
+		free(map->west);
+		free(map->map);
+		free(map);
+	}
 }
 
 int	main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:25:00 by aljulien          #+#    #+#             */
-/*   Updated: 2024/09/30 10:44:05 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:18:31 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,37 @@ int	map_started(char *line)
 		return (0);
 }
 
-char *format_line(const char *line)
+char	*format_line(const char *line)
 {
-    int i, j;
-    bool space_added = false;
-    char *line_formatted;
+	int		i;
+	int		j;
+	bool	space_added;
+	char	*line_formatted;
 
-    line_formatted = malloc((ft_strlen(line) + 1) * sizeof(char));
-    if (!line_formatted)
-        return NULL;
-    i = 0;
-    j = 0;
-    while (line[i] == ' ' || line[i] == '\t')
-        i++;
-    while (line[i] != '\0')
-    {
-        if (line[i] != ' ' && line[i] != '\t')
-        {
-            line_formatted[j++] = line[i];
-            space_added = false;
-        }
-        else if (!space_added)
-        {
-            line_formatted[j++] = ' ';
-            space_added = true;
-        }
-        i++;
-    }
-    if (j > 0 && line_formatted[j-1] == ' ')
-        j--;
-    line_formatted[j] = '\0';
-    return line_formatted;
+	space_added = false;
+	line_formatted = malloc((ft_strlen(line) + 1) * sizeof(char));
+	if (!line_formatted)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	while (line[i] != '\0')
+	{
+		if (line[i] != ' ' && line[i] != '\t')
+		{
+			line_formatted[j++] = line[i];
+			space_added = false;
+		}
+		else if (!space_added)
+		{
+			line_formatted[j++] = ' ';
+			space_added = true;
+		}
+		i++;
+	}
+	if (j > 0 && line_formatted[j - 1] == ' ')
+		j--;
+	line_formatted[j] = '\0';
+	return (line_formatted);
 }
