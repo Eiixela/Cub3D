@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 09:27:13 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:54:52 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	free_map(t_map *map)
 		free(map->east);
 		free(map->west);
 		free(map->map);
+		free(map->ceiling_c);
+		free(map->floor_c);
 		free(map);
 	}
 }
@@ -39,7 +41,9 @@ int	main(int ac, char **av)
 {
 	t_map	*map;
 
-	map = NULL;
+	map = init_map();
+	if (!map)
+		return (1);
 	if (!parsing(ac, av, &map))
 	{
 		printf("ok!\n");

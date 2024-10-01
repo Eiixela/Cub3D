@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:26:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 09:16:39 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 10:54:13 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_map	*init_map(void)
 	t_map	*map;
 	int		i;
 
+	i = 0;
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
@@ -26,14 +27,14 @@ t_map	*init_map(void)
 	map->east = NULL;
 	map->west = NULL;
 	map->map = NULL;
-	map->ceiling_c = malloc(sizeof(int *) * 4);
-	map->floor_c = malloc(sizeof(int *) * 4);
+	map->ceiling_c = malloc(sizeof(int *) * 3);
+	map->floor_c = malloc(sizeof(int *) * 3);
 	if (!map->ceiling_c || !map->floor_c)
 	{
 		free(map);
 		return (NULL);
 	}
-	while (i < 4)
+	while (i < 3)
 	{
 		map->ceiling_c[i] = 0;
 		map->floor_c[i] = 0;

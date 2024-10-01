@@ -6,13 +6,13 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 09:14:06 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 10:54:51 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-t_map	*fill_cardinal(char *line, char *path, t_map *map)
+static t_map	*fill_cardinal(char *line, char *path, t_map *map)
 {
 	if (ft_strncmp("NO ", line, 3) == 0)
 		map->north = path;
@@ -25,7 +25,7 @@ t_map	*fill_cardinal(char *line, char *path, t_map *map)
 	return (map);
 }
 
-t_map	*found_one_cardinal(char *line, t_map *map)
+static t_map	*found_one_cardinal(char *line, t_map *map)
 {
 	char	*path;
 	char	*trimmed_path;
@@ -46,7 +46,7 @@ t_map	*found_one_cardinal(char *line, t_map *map)
 	return (map);
 }
 
-bool	found_all_cardinal(t_map *map)
+static bool	found_all_cardinal(t_map *map)
 {
 	if (map->north == NULL)
 		return (false);
@@ -66,26 +66,23 @@ int	cardinal_check(int fd, t_map **map)
 	bool	all_cardinal_found;
 
 	all_cardinal_found = false;
-	*map = init_map();
-	if (!*map)
-		return (1);
 	while (!all_cardinal_found)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			return (1);
 		if (map_started(line))
-			return (free(line), 1);
+			return (free(line), close(fd), 1);
 		line = format_line(line);
 		found_one_cardinal(line, *map);
 		all_cardinal_found = found_all_cardinal(*map);
 		free(line);
 	}
-	printf("%s\n", (*map)->north);
-	printf("%s\n", (*map)->south);
-	printf("%s\n", (*map)->east);
-	printf("%s\n", (*map)->west);
+/* 	printf("north = %s\n", (*map)->north);
+	printf("south = %s\n", (*map)->south);
+	printf("east = %s\n", (*map)->east);
+	printf("west = %s\n", (*map)->west); */
 	if (check_access_textures(*map))
-		return (1);
-	return (0);
+		return (close(fd), 1);
+	return (close(fd), 0);
 }

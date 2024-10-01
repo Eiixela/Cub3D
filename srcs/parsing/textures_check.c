@@ -6,13 +6,13 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:22:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 09:20:15 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 10:03:22 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	check_extention_textures(char *file)
+static int	check_extention_textures(char *file)
 {
 	char	*db_ext;
 
