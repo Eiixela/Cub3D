@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 11:27:27 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:41:40 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_map
 	int		*ceiling_c;
 	int		*floor_c;
 	char	**map;
+	int		map_height;
 	
 }	t_map;
 
@@ -71,6 +72,10 @@ int		cardinal_check(int fd, t_map **map);
 
 //color_check
 int		color_check(int fd, t_map **map);
+
+//map_check
+int		map_check(int fd, t_map **map, int number_line_map);
+int		count_line(int fd);
 
 //textures_check
 int		check_access_textures(t_map *map);

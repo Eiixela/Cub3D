@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 10:54:51 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:36:41 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,6 @@ int	cardinal_check(int fd, t_map **map)
 		all_cardinal_found = found_all_cardinal(*map);
 		free(line);
 	}
-/* 	printf("north = %s\n", (*map)->north);
-	printf("south = %s\n", (*map)->south);
-	printf("east = %s\n", (*map)->east);
-	printf("west = %s\n", (*map)->west); */
 	if (check_access_textures(*map))
 		return (close(fd), 1);
 	return (close(fd), 0);

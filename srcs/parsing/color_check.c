@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:56:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 11:28:45 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:35:59 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,7 @@ int	color_check(int fd, t_map **map)
 	while (line) //for no leaks, please leave it there
 	{
 		line = get_next_line(fd);
-		free(line);	
+		free(line);
 	}
-/* 	printf("c = %i\n", (*map)->ceiling_c[0]);
-	printf("c = %i\n", (*map)->ceiling_c[1]);
-	printf("c = %i\n", (*map)->ceiling_c[2]);
-	printf("f = %i\n", (*map)->floor_c[0]);
-	printf("f = %i\n", (*map)->floor_c[1]);
-	printf("f = %i\n", (*map)->floor_c[2]); */
 	return (close(fd), 0);
 }
