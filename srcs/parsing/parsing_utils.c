@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:25:00 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 09:18:31 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 11:27:21 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	map_started(char *line)
 		return (0);
 }
 
-char	*format_line(const char *line)
+char	*format_line(char *line)
 {
 	int		i;
 	int		j;
@@ -54,5 +54,6 @@ char	*format_line(const char *line)
 	if (j > 0 && line_formatted[j - 1] == ' ')
 		j--;
 	line_formatted[j] = '\0';
+	free(line);
 	return (line_formatted);
 }

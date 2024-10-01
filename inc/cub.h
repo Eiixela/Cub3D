@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 10:01:43 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 11:27:27 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_map	*init_map(void);
 
 //parsing_utils
 int		map_started(char *line);
-char	*format_line(const char *line);
+char	*format_line(char *line);
 
 //cardinal_check
 int		cardinal_check(int fd, t_map **map);
