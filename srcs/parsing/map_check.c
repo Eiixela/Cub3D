@@ -6,13 +6,13 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 15:41:32 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:37:33 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static void	read_till_the_end(int fd)
+void	read_till_the_end(int fd)
 {
 	char	*line;
 

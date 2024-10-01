@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 15:37:38 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:41:32 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void	free_map(t_map *map)
 int	main(int ac, char **av)
 {
 	t_map	*map;
-	int i = 0;
+	//int i = 0;
 
 	map = init_map();
 	if (!map)
 		return (1);
 	if (!parsing(ac, av, &map))
 	{
-	 	printf("c = %i\n", map->ceiling_c[0]);
+	/*  	printf("c = %i\n", map->ceiling_c[0]);
 		printf("c = %i\n", map->ceiling_c[1]);
 		printf("c = %i\n", map->ceiling_c[2]);
 		printf("f = %i\n", map->floor_c[0]);
@@ -72,7 +72,7 @@ int	main(int ac, char **av)
 		{
 			printf("%s\n", map->map[i]);
 			i++;
-		}
+		} */
 		printf("ok!\n");
 		free_map(map);
 		return (0);

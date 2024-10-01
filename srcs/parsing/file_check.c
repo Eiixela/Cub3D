@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:36:17 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 15:27:10 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:54:31 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,17 @@ int	file_check(char *file, t_map **map)
 	if (fd == -1)
 		return (1);
 	if (cardinal_check(fd, map))
-		return (1);
+		return (close (fd), 1);
 	fd = file_access(file);
 	if (color_check(fd, map))
 		return (1);
 	fd = file_access(file);
 	number_line_map = count_line(fd);
 	if (!number_line_map)
-		return (1);
+		return (close(fd), 1);
+	close(fd);
 	fd = file_access(file);
 	if (map_check(fd, map, number_line_map))
-		return (1);
-	return (0);
+		return (close(fd), 1);
+	return (close(fd), 0);
 }

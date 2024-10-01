@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 15:36:41 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:00:09 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ int	cardinal_check(int fd, t_map **map)
 		line = format_line(line);
 		found_one_cardinal(line, *map);
 		all_cardinal_found = found_all_cardinal(*map);
+		free(line);
+	}
+	while (line) //for no leaks, please leave it there
+	{
+		line = get_next_line(fd);
 		free(line);
 	}
 	if (check_access_textures(*map))
