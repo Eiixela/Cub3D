@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/02 13:55:33 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:40:54 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,7 @@
 
 # define BUFFER_SIZE 1
 
-/* enum
-{
-	ESC = 27,
-}; */
-
-typedef struct	s_vars
+typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
@@ -48,7 +43,6 @@ typedef struct s_map
 	char	**map;
 	int		map_height;
 	char	player_way;
-	
 }	t_map;
 
 /* struct s_gc
@@ -56,7 +50,6 @@ typedef struct s_map
 	void	*ptr;
 	void	*next;
 } t_gc; */
-
 
 //PARING
 int		parsing(int ac, char **av, t_map **map);
@@ -67,7 +60,6 @@ t_map	*init_map(void);
 //parsing_utils
 int		map_started(char *line);
 char	*format_line(char *line);
-int		valid_char(char c);
 
 //cardinal_check
 int		cardinal_check(int fd, t_map **map);
@@ -82,10 +74,12 @@ void	read_till_the_end(int fd, char *line);
 
 //map_check
 int		map_good(t_map **map);
-int		player_way(t_map **map);
+bool	check_borders(char **map, int height);
+
+//map_check_utils
 int		find_player(char c);
 int		check_char_map(t_map **map);
-bool	check_borders(char **map, int height);
+int		valid_char(char c);
 
 //free
 void	free_map(t_map **map);

@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:25:00 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/02 14:02:06 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:40:42 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,30 @@ int	map_started(char *line)
 		return (0);
 }
 
-char	*format_line(char *line)
+void	finalize_formatted_line(char *line_formatted, int j)
+{
+	if (j > 0 && line_formatted[j - 1] == ' ')
+		j--;
+	line_formatted[j] = '\0';
+}
+
+char	*allocate_formatted_line(char *line)
+{
+	char	*line_formatted;
+
+	line_formatted = malloc((ft_strlen(line) + 1) * sizeof(char));
+	return (line_formatted);
+}
+
+void	copy_formatted_line(char *line, char *line_formatted)
 {
 	int		i;
 	int		j;
-	bool	space_added;
-	char	*line_formatted;
+	int		space_added;
 
-	space_added = false;
-	line_formatted = malloc((ft_strlen(line) + 1) * sizeof(char));
-	if (!line_formatted)
-		return (NULL);
 	i = 0;
 	j = 0;
+	space_added = 0;
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	while (line[i] != '\0')
@@ -42,26 +53,26 @@ char	*format_line(char *line)
 		if (line[i] != ' ' && line[i] != '\t')
 		{
 			line_formatted[j++] = line[i];
-			space_added = false;
+			space_added = 0;
 		}
 		else if (!space_added)
 		{
 			line_formatted[j++] = ' ';
-			space_added = true;
+			space_added = 1;
 		}
 		i++;
 	}
-	if (j > 0 && line_formatted[j - 1] == ' ')
-		j--;
-	line_formatted[j] = '\0';
-	free(line);
-	return (line_formatted);
+	finalize_formatted_line(line_formatted, j);
 }
 
-int	valid_char(char c)
+char	*format_line(char *line)
 {
-	if (c == '1' || c == '0' || c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W' || c == ' ')
-		return (0);
-	return (1);
+	char	*line_formatted;
+
+	line_formatted = allocate_formatted_line(line);
+	if (!line_formatted)
+		return (NULL);
+	copy_formatted_line(line, line_formatted);
+	free(line);
+	return (line_formatted);
 }

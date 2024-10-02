@@ -6,22 +6,20 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/02 13:59:11 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:38:34 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-bool	check_borders(char **map, int height)
+bool	check_horizontal_borders(char **map, int height)
 {
 	int	first_row_width;
-	int	j;
-	int	i;
 	int	last_row_width;
-	int	row_width;
+	int	j;
 
-	j = 0;
 	first_row_width = ft_strlen(map[0]);
+	j = 0;
 	while (j < first_row_width)
 	{
 		if (map[0][j] != '1')
@@ -36,6 +34,14 @@ bool	check_borders(char **map, int height)
 			return (true);
 		j++;
 	}
+	return (false);
+}
+
+bool	check_vertical_borders(char **map, int height)
+{
+	int	i;
+	int	row_width;
+
 	i = 0;
 	while (i < height)
 	{
@@ -47,34 +53,13 @@ bool	check_borders(char **map, int height)
 	return (false);
 }
 
-int	check_char_map(t_map **map)
+bool	check_borders(char **map, int height)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while ((*map)->map[i])
-	{
-		while ((*map)->map[i][j])
-		{
-			if (valid_char((*map)->map[i][j]))
-				return (1);
-			if ((*map)->map[i][j] == ' ')
-				(*map)->map[i][j] = '0';
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	return (0);
-}
-
-int	find_player(char c)
-{
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (0);
-	return (1);
+	if (check_horizontal_borders(map, height))
+		return (true);
+	if (check_vertical_borders(map, height))
+		return (true);
+	return (false);
 }
 
 int	player_way(t_map **map)
