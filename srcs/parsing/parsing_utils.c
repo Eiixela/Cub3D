@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:25:00 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 11:27:21 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:02:06 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,12 @@ char	*format_line(char *line)
 	line_formatted[j] = '\0';
 	free(line);
 	return (line_formatted);
+}
+
+int	valid_char(char c)
+{
+	if (c == '1' || c == '0' || c == 'N' || c == 'S'
+		|| c == 'E' || c == 'W' || c == ' ')
+		return (0);
+	return (1);
 }

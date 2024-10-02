@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 16:00:09 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:57:37 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static t_map	*fill_cardinal(char *line, char *path, t_map *map)
 {
 	if (ft_strncmp("NO ", line, 3) == 0)
-		map->north = path;
+		map->north = ft_strdup(path);
 	else if (ft_strncmp("SO ", line, 3) == 0)
-		map->south = path;
+		map->south = ft_strdup(path);
 	else if (ft_strncmp("WE ", line, 3) == 0)
-		map->west = path;
+		map->west = ft_strdup(path);
 	else if (ft_strncmp("EA ", line, 3) == 0)
-		map->east = path;
+		map->east = ft_strdup(path);
 	return (map);
 }
 
@@ -40,7 +40,10 @@ static t_map	*found_one_cardinal(char *line, t_map *map)
 			path = ft_strdup(trimmed_path);
 			free(trimmed_path);
 			if (path)
+			{
 				map = fill_cardinal(line, path, map);
+				free(path);
+			}
 		}
 	}
 	return (map);
@@ -72,7 +75,7 @@ int	cardinal_check(int fd, t_map **map)
 		if (!line)
 			return (1);
 		if (map_started(line))
-			return (free(line), close(fd), 1);
+			return (read_till_the_end(fd, line), close(fd), 1);
 		line = format_line(line);
 		found_one_cardinal(line, *map);
 		all_cardinal_found = found_all_cardinal(*map);

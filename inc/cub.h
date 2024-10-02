@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 15:56:16 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:55:33 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_map
 	int		*floor_c;
 	char	**map;
 	int		map_height;
+	char	player_way;
 	
 }	t_map;
 
@@ -66,6 +67,7 @@ t_map	*init_map(void);
 //parsing_utils
 int		map_started(char *line);
 char	*format_line(char *line);
+int		valid_char(char c);
 
 //cardinal_check
 int		cardinal_check(int fd, t_map **map);
@@ -73,10 +75,20 @@ int		cardinal_check(int fd, t_map **map);
 //color_check
 int		color_check(int fd, t_map **map);
 
-//map_check
+//fill_map
 int		map_check(int fd, t_map **map, int number_line_map);
 int		count_line(int fd);
-void	read_till_the_end(int fd);
+void	read_till_the_end(int fd, char *line);
+
+//map_check
+int		map_good(t_map **map);
+int		player_way(t_map **map);
+int		find_player(char c);
+int		check_char_map(t_map **map);
+bool	check_borders(char **map, int height);
+
+//free
+void	free_map(t_map **map);
 
 //textures_check
 int		check_access_textures(t_map *map);

@@ -7,7 +7,5 @@ DDA algorithm ---> https://www.geeksforgeeks.org/dda-line-generation-algorithm-c
 Garbage collector implemtation ---> https://dev.to/saviourcode/how-to-create-objects-and-write-it-s-garbage-collector-in-c-4p8e
 
 
-LEAKS HEREEEE ->	valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all ./cub maps/bad/map_first.cub
-					valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all ./cub maps/bad/map_only.cub
-					valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all ./cub maps/bad/textures_missing.cub
-					valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all ./cub maps/bad/textures_none.cub 
+LEAKS HEREEEE ->	valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_missing_floor_rgb.cub
+					valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_missing_ceiling_rgb.cub

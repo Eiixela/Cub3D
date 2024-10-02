@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 12:31:45 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 10:07:40 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:14:16 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,11 @@ char	*get_next_line(int fd)
 	char		*output_text;
 	static char	*text;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE != 1)
+	{
+		printf("Please check your file's access\n");
 		return (NULL);
+	}
 	text = read_first_line(fd, text);
 	if (!text)
 		return (NULL);

@@ -5,106 +5,122 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 16:37:33 by aljulien         ###   ########.fr       */
+/*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
+/*   Updated: 2024/10/02 13:59:11 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	read_till_the_end(int fd)
+bool	check_borders(char **map, int height)
 {
-	char	*line;
+	int	first_row_width;
+	int	j;
+	int	i;
+	int	last_row_width;
+	int	row_width;
 
-	line = get_next_line(fd);
-	while (line)
+	j = 0;
+	first_row_width = ft_strlen(map[0]);
+	while (j < first_row_width)
 	{
-		line = get_next_line(fd);
-		free(line);
+		if (map[0][j] != '1')
+			return (true);
+		j++;
 	}
-}
-
-int	count_line(int fd)
-{
-	char	*line;
-	int		i;
-	bool	map_begun;
-
-	map_begun = false;
+	last_row_width = ft_strlen(map[height - 1]);
+	j = 0;
+	while (j < last_row_width)
+	{
+		if (map[height - 1][j] != '1')
+			return (true);
+		j++;
+	}
 	i = 0;
-	line = NULL;
-	while (!map_begun)
+	while (i < height)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		map_begun = map_started(line);
-		if (map_begun == true)
-			break ;
-		free(line);
-	}
-	free(line);
-	while (line != NULL)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		free(line);
+		row_width = ft_strlen(map[i]);
+		if (map[i][0] != '1' || map[i][row_width - 1] != '1')
+			return (true);
 		i++;
 	}
-	return (free(line), i);
+	return (false);
 }
 
-static char	*fill_one_line(char *line)
+int	check_char_map(t_map **map)
 {
-	char	*one_line;
-
-	one_line = malloc(sizeof(char) * ft_strlen(line) + 1);
-	ft_strlcpy(one_line, line, ft_strlen(line));
-	return (one_line);
-}
-
-static t_map	*fill_map(int fd, t_map *map, int number_line_map, int i)
-{
-	char	*line;
-	char	*temp;
-
-	line = get_next_line(fd);
-	while (line)
-	{
-		temp = get_next_line(fd);
-		free(line);
-		line = temp;
-		if (!line)
-			break ;
-		if (map_started(line) == true)
-			break ;
-	}
-	while (i < number_line_map && line)
-	{
-		map->map[i] = fill_one_line(line);
-		free(line);
-		line = get_next_line(fd);
-		i++;
-	}
-	free(line);
-	read_till_the_end(fd);
-	return (map);
-}
-
-int	map_check(int fd, t_map **map, int number_line_map)
-{
-	int		i;
+	int	i;
+	int	j;
 
 	i = 0;
-	(*map)->map = malloc(sizeof(char *) * (number_line_map + 1));
-	if (!(*map)->map)
+	j = 0;
+	while ((*map)->map[i])
+	{
+		while ((*map)->map[i][j])
+		{
+			if (valid_char((*map)->map[i][j]))
+				return (1);
+			if ((*map)->map[i][j] == ' ')
+				(*map)->map[i][j] = '0';
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (0);
+}
+
+int	find_player(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (0);
+	return (1);
+}
+
+int	player_way(t_map **map)
+{
+	int	i;
+	int	j;
+	int	count_player;
+
+	i = 0;
+	j = 0;
+	count_player = 0;
+	while ((*map)->map[i])
+	{
+		while ((*map)->map[i][j])
+		{
+			if (!find_player((*map)->map[i][j]))
+			{
+				count_player++;
+				(*map)->player_way = (*map)->map[i][j];
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (count_player);
+}
+
+int	map_good(t_map **map)
+{
+	int	player;
+
+	if (check_borders((*map)->map, (*map)->map_height))
+	{
+		printf("Map invalid\n");
 		return (1);
-	(*map)->map_height = number_line_map;
-	(*map) = fill_map(fd, (*map), number_line_map, i);
-	if ((*map) == NULL)
+	}
+	if (check_char_map(map))
 	{
-		free((*map)->map);
+		printf("Invalid character in map\n");
+		return (1);
+	}
+	player = player_way(map);
+	if (!player || player > 1)
+	{
+		printf("Please make sure there's one player on the map\n");
 		return (1);
 	}
 	return (0);

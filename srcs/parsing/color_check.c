@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:56:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/01 15:35:59 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:01:56 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ static int	*fill_color_int(char **color, int *color_tab)
 	i = 0;
 	while (i < 3)
 	{
-		color_tab[i] = ft_atoi(color[i]);
+		if (color[i])
+			color_tab[i] = ft_atoi(color[i]);
+		else
+			return (NULL);
 		if (color_tab[i] < 0 || color_tab[i] > 255)
 		{
-			printf("Color not in 0-255 range\n");
+			printf("Please check the color of the ceiling and the floor\n");
 			return (NULL);
 		}
 		i++;
@@ -47,7 +50,9 @@ static t_map	*fill_color(char *line, char *path, t_map *map)
 		map->floor_c = fill_color_int(color, map->floor_c);
 		free_dtab(color);
 		if (!map->floor_c)
-			return (NULL);
+		{
+			return (free_map(&map), NULL);
+		}
 	}
 	else if (ft_strncmp("C ", line, 2) == 0)
 	{
@@ -57,7 +62,7 @@ static t_map	*fill_color(char *line, char *path, t_map *map)
 		map->ceiling_c = fill_color_int(color, map->ceiling_c);
 		free_dtab(color);
 		if (!map->ceiling_c)
-			return (NULL);
+			return (free_map(&map), NULL);
 	}
 	return (map);
 }
@@ -117,11 +122,11 @@ int	color_check(int fd, t_map **map)
 		if (!line)
 			return (1);
 		if (map_started(line))
-			return (free(line), close(fd), 1);
+			return (read_till_the_end(fd, line), close(fd), 1);
 		line = format_line(line);
 		*map = found_one_color(line, *map);
 		if (!*map)
-			return (free(line), close(fd), 1);
+			return (read_till_the_end(fd, line), close(fd), 1);
 		all_color_found = found_all_color(*map);
 		free(line);
 	}
