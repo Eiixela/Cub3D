@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/02 14:40:54 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:43:40 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,24 @@ typedef struct s_map
 //PARING
 int		parsing(int ac, char **av, t_map **map);
 
-//init
-t_map	*init_map(void);
-
 //parsing_utils
 int		map_started(char *line);
 char	*format_line(char *line);
 
+//init
+t_map	*init_map(void);
+
+//file_check
+int		file_check(char *file, t_map **map);
+
 //cardinal_check
 int		cardinal_check(int fd, t_map **map);
 
+//textures_check
+int		check_access_textures(t_map *map);
+
 //color_check
 int		color_check(int fd, t_map **map);
-
-//fill_map
-int		map_check(int fd, t_map **map, int number_line_map);
-int		count_line(int fd);
-void	read_till_the_end(int fd, char *line);
 
 //map_check
 int		map_good(t_map **map);
@@ -81,14 +82,13 @@ int		find_player(char c);
 int		check_char_map(t_map **map);
 int		valid_char(char c);
 
+//fill_map
+int		map_check(int fd, t_map **map, int number_line_map);
+int		count_line(int fd);
+void	read_till_the_end(int fd, char *line);
+
 //free
 void	free_map(t_map **map);
-
-//textures_check
-int		check_access_textures(t_map *map);
-
-//extension_check
-int		file_check(char *file, t_map **map);
 
 //GNL
 char	*get_next_line(int fd);
