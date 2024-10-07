@@ -6,6 +6,8 @@ DDA algorithm ---> https://www.geeksforgeeks.org/dda-line-generation-algorithm-c
 
 Garbage collector implemtation ---> https://dev.to/saviourcode/how-to-create-objects-and-write-it-s-garbage-collector-in-c-4p8e
 
+Redering videos --> https://www.youtube.com/@thehelloworldguyofficial/playlists
+
 
 LEAKS HEREEEE ->	valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_missing_floor_rgb.cub
 					valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_missing_ceiling_rgb.cub

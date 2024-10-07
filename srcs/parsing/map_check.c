@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/07 10:22:07 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:28:37 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	map_good(t_map **map)
 
 	if (check_borders((*map)->map, (*map)->map_height))
 	{
-		printf("Map invalid\n");
+		printf("Map invalid, please make sur the map in surrounded by walls only\n");
 		return (1);
 	}
 	if (check_char_map(map))

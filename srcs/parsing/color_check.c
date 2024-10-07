@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:56:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/07 10:46:03 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:02:48 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static int	*fill_color_int(char **color, int *color_tab)
 	i = count_array_size(color);		
 	if (i != 3)
 	{
+		printf("Please check the colors presence\n");
 		color_tab = fill_color_tab(color_tab);
 		return (color_tab);
 	}
@@ -54,7 +55,7 @@ static int	*fill_color_int(char **color, int *color_tab)
 			return (NULL);
 		if (color_tab[i] < 0 || color_tab[i] > 255)
 		{
-			printf("Please check the color of the ceiling and the floor\n");
+			printf("Please check the color values\n");
 			return (NULL);
 		}
 		i++;
@@ -105,13 +106,20 @@ static t_map	*check_for_color(t_map *map)
 	return (map);
 }
 
+static int color_cmp(char *line)
+{
+	if (line && (ft_strncmp("F ", line, 2) == 0 || ft_strncmp("C ", line, 2) == 0))
+		return (0);
+	return (1);
+}
+
 static t_map	*found_one_color(char *line, t_map *map)
 {
 	char	*path;
 	char	*trimmed_path;
 
 	path = NULL;
-	if (ft_strncmp("F ", line, 2) == 0 || ft_strncmp("C ", line, 2) == 0)
+	if (!color_cmp(line))
 	{
 		trimmed_path = ft_strtrim(line + 2, " \t\n\r");
 		if (trimmed_path)
@@ -163,18 +171,23 @@ int	color_check(int fd, t_map **map)
 		if (!line)
 			return (1);
 		if (map_started(line))
-			return (read_till_the_end(fd, line), close(fd), 1);
+			return ((void)read_till_the_end(fd, line), close(fd), printf("Missing colors\n"), 1);
 		line = format_line(line);
 		*map = found_one_color(line, *map);
 		if (!*map)
-			return (read_till_the_end(fd, line), close(fd), 1);
+			return ((void)read_till_the_end(fd, line), close(fd), 1);
 		all_color_found = found_all_color(*map);
 		free(line);
 	}
+	all_color_found = true;
 	while (line) //for no leaks, please leave it there
 	{
 		line = get_next_line(fd);
+		if (!color_cmp(line))
+			all_color_found = false;
 		free(line);
 	}
+	if (all_color_found == false)
+		return (printf("Multiple colors\n"), close(fd), 1);
 	return (close(fd), 0);
 }
