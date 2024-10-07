@@ -9,3 +9,10 @@ Garbage collector implemtation ---> https://dev.to/saviourcode/how-to-create-obj
 
 LEAKS HEREEEE ->	valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_missing_floor_rgb.cub
 					valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_missing_ceiling_rgb.cub
+
+
+
+TODO : 	Add correct error message
+		Fix leak on color_missing map
+		Appeler UGC
+		Train exam aprem 
