@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/02 14:38:34 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/07 10:22:07 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ bool	check_horizontal_borders(char **map, int height)
 	j = 0;
 	while (j < last_row_width)
 	{
+		//printf("map[%i - 1][%i] == %c\n", (height - 1) ,j, map[height - 1][j]);
 		if (map[height - 1][j] != '1')
 			return (true);
 		j++;

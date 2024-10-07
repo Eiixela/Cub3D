@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/02 14:04:48 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/07 10:31:34 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,17 @@ int	count_line(int fd)
 		if (!line)
 			break ;
 		if (map_started(line) == true)
+		{
+			i++;
 			break ;
+		}
 		free(line);
 	}
 	while (line != NULL)
 	{
 		free(line);
 		line = get_next_line(fd);
-		if (!line)
+		if (!line || line[0] != '1')
 			break ;
 		i++;
 	}

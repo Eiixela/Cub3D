@@ -6,16 +6,45 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:56:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/02 14:01:56 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/07 10:46:03 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
+static int	count_array_size(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+static int	*fill_color_tab(int	*color_tab)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		color_tab[i] = -1;
+		i++;
+	}
+	return (color_tab);
+}
+
 static int	*fill_color_int(char **color, int *color_tab)
 {
 	int	i;
 
+	i = count_array_size(color);		
+	if (i != 3)
+	{
+		color_tab = fill_color_tab(color_tab);
+		return (color_tab);
+	}
 	i = 0;
 	while (i < 3)
 	{
@@ -29,11 +58,6 @@ static int	*fill_color_int(char **color, int *color_tab)
 			return (NULL);
 		}
 		i++;
-	}
-	if (i != 3)
-	{
-		printf("Invalid number of color components\n");
-		return (NULL);
 	}
 	return (color_tab);
 }
@@ -67,6 +91,20 @@ static t_map	*fill_color(char *line, char *path, t_map *map)
 	return (map);
 }
 
+static t_map	*check_for_color(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (map->ceiling_c[i] == -1 || map->floor_c[i] == -1)
+			return (free_map(&map), NULL);
+		i++;
+	}
+	return (map);
+}
+
 static t_map	*found_one_color(char *line, t_map *map)
 {
 	char	*path;
@@ -84,6 +122,9 @@ static t_map	*found_one_color(char *line, t_map *map)
 			{
 				map = fill_color(line, path, map);
 				free(path);
+				if (!map)
+					return (NULL);
+				map = check_for_color(map);
 				if (!map)
 					return (NULL);
 			}
