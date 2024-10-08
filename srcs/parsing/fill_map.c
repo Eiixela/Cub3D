@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/07 17:18:23 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:24:33 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	read_till_the_end(int fd, char *line)
 	while (line)
 	{
 		if (line != NULL && (ft_strcmp(line, "\n") != 0))
+		{
 			return (1);
+		}
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -52,7 +54,7 @@ int	count_line(int fd)
 	{
 		free(line);
 		line = get_next_line(fd);
-		if (!line || line[0] != '1')
+		if (!line || map_started(line) == false)
 			break ;
 		i++;
 	}
@@ -97,7 +99,7 @@ static int	fill_map(int fd, t_map **map, int number_line_map, int i)
 	return (0);
 }
 
-int	map_check(int fd, t_map **map, int number_line_map)
+int	map_fill(int fd, t_map **map, int number_line_map)
 {
 	int		i;
 	

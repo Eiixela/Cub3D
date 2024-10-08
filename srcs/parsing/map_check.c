@@ -6,62 +6,51 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/07 15:28:37 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:09:08 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-bool	check_horizontal_borders(char **map, int height)
-{
-	int	first_row_width;
-	int	last_row_width;
-	int	j;
 
-	first_row_width = ft_strlen(map[0]);
-	j = 0;
-	while (j < first_row_width)
-	{
-		if (map[0][j] != '1')
-			return (true);
-		j++;
-	}
-	last_row_width = ft_strlen(map[height - 1]);
-	j = 0;
-	while (j < last_row_width)
-	{
-		//printf("map[%i - 1][%i] == %c\n", (height - 1) ,j, map[height - 1][j]);
-		if (map[height - 1][j] != '1')
-			return (true);
-		j++;
-	}
-	return (false);
-}
-
-bool	check_vertical_borders(char **map, int height)
+bool check_borders(char **map, int map_height)
 {
 	int	i;
-	int	row_width;
+	size_t	j;
+	size_t	new_j;
 
 	i = 0;
-	while (i < height)
+	j = 0;
+	new_j = 0;
+	printf("%s\n", map[3]);
+	while (map[i])
 	{
-		row_width = ft_strlen(map[i]);
-		if (map[i][0] != '1' || map[i][row_width - 1] != '1')
-			return (true);
+		while (map[i][j] == ' ' || map[i][j] == '\t')
+			j++;
+		new_j = j;
+		while (map[i][j])
+		{
+			if (map[i][j] == ' ')
+				j++;
+			if (i == 0 || !map[i - 1][j] || map[i - 1][j] == ' ')
+				if (map[i][j] != '1')
+					return (false);
+			if (i == map_height - 1 || !map[i + 1][j] || map[i + 1][j] == ' ')
+				if (map[i][j] != '1')
+					return (false);
+			if (j == ft_strlen(map[i]) || !map[i][j + 1] || map[i][j + 1] == ' ')
+				if (map[i][j] != '1')
+					return (false);
+			if (j == new_j || !map[i][j - 1] || map[i][j - 1] == ' ')
+				if (map[i][j] != '1')
+					return (false);
+			j++;
+		}
+		j = 0;
 		i++;
 	}
-	return (false);
-}
-
-bool	check_borders(char **map, int height)
-{
-	if (check_horizontal_borders(map, height))
-		return (true);
-	if (check_vertical_borders(map, height))
-		return (true);
-	return (false);
-}
+	return (true);
+} 
 
 int	player_way(t_map **map)
 {
@@ -93,7 +82,7 @@ int	map_good(t_map **map)
 {
 	int	player;
 
-	if (check_borders((*map)->map, (*map)->map_height))
+	if (!check_borders((*map)->map, (*map)->map_height))
 	{
 		printf("Map invalid, please make sur the map in surrounded by walls only\n");
 		return (1);

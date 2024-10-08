@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:25:00 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/02 14:40:42 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:24:53 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	map_started(char *line)
 {
+	while (*line == ' ' || *line == '\t')
+		line++;
 	if (ft_strncmp("1", line, 1) == 0)
 		return (1);
 	else if (ft_strncmp("0", line, 1) == 0)
