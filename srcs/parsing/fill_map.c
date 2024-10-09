@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/09 10:28:17 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/09 15:27:00 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,13 @@ int	map_fill(int fd, t_map **map, int number_line_map)
 	{
 		free((*map)->map);
 		return (1);
+	}
+	i = 0;
+	(*map)->map_max_lenght = ft_strlen((*map)->map[i]);
+	while ((*map)->map[i])
+	{
+		if (ft_strlen((*map)->map[i++]) > (*map)->map_max_lenght)
+			(*map)->map_max_lenght = ft_strlen((*map)->map[i]);
 	}
 	return (0);
 }
