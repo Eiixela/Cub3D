@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/08 14:24:33 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/09 10:28:17 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,30 @@ int	count_line(int fd)
 	return (free(line), i);
 }
 
+char *space_in_minus (char *line)
+{
+	int		i;
+	
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ' || line[i] == '\t')
+			line[i] = -line[i];
+		else
+			line[i] = line[i];
+		i++;
+	}
+	return (line);
+}
+
 static char	*fill_one_line(char *line)
 {
 	char	*one_line;
 
-	one_line = malloc(sizeof(char) * ft_strlen(line) + 1);
+	one_line = NULL;
+	one_line = malloc(sizeof(char) * (ft_strlen(line) + 1));
 	ft_strlcpy(one_line, line, ft_strlen(line));
+	one_line = space_in_minus(one_line);
 	return (one_line);
 }
 
@@ -90,6 +108,8 @@ static int	fill_map(int fd, t_map **map, int number_line_map, int i)
 	{
 		(*map)->map[i] = fill_one_line(line);
 		free(line);
+		if (!(*map)->map[i])
+			return (1);
 		line = get_next_line(fd);
 		i++;
 	}

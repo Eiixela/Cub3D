@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:38:01 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/08 15:29:25 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/09 10:58:48 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	valid_char(char c)
 {
 	if (c == '1' || c == '0' || c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W' || c == ' ' || c == '\t')
+		|| c == 'E' || c == 'W' || c == -32 || c == -9)
 		return (0);
 	return (1);
 }
@@ -39,7 +39,10 @@ int	check_char_map(t_map **map)
 		while ((*map)->map[i][j])
 		{
 			if (valid_char((*map)->map[i][j]))
+			{
+				printf("i = %i and j = %i and char = %c\n", i, j, (*map)->map[i][j]);
 				return (1);
+			}
 			if ((*map)->map[i][j] == ' ')
 				(*map)->map[i][j] = '0';
 			j++;
