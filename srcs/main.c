@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/08 13:11:37 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:34:56 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	free_map(t_map **map)
 		free((*map)->west);
 		if ((*map)->map)
 		{
-			free_map_array((*map)->map, (*map)->map_height);
+			free_map_array((*map)->map, (*map)->size->x);
 			free((*map)->map);
 		}
 		free((*map)->ceiling_c);
@@ -74,7 +74,7 @@ int	main(int ac, char **av)
 		printf("south = %s\n", map->south);
 		printf("east = %s\n", map->east);
 		printf("west = %s\n", map->west);
-		while (i < map->map_height)
+		while (i < map->size->x)
 		{
 			printf("%s\n", map->map[i]);
 			i++;

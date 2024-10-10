@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/09 15:27:00 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:44:32 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,26 +119,69 @@ static int	fill_map(int fd, t_map **map, int number_line_map, int i)
 	return (0);
 }
 
+void pimp_strlcpy(char *dst, const char *src, int size)
+{
+    int i;
+    int len;
+
+    len = ft_strlen(src);
+    i = 0;
+    while (i < len && i < size - 1)
+    {
+        dst[i] = src[i];
+        i++;
+    }
+    while (i < size - 1)
+        dst[i++] = -32;
+    dst[i] = '\0';
+}
+
+char **map_fill_square(t_map **map)
+{
+    char **map_square;
+    int i;
+
+    map_square = malloc(sizeof(char *) * ((*map)->size->x + 1));
+    if (!map_square)
+        return (NULL);
+    for (i = 0; i < (*map)->size->x; i++)
+    {
+        map_square[i] = malloc(sizeof(char) * ((*map)->size->y + 1));
+        if (!map_square[i])
+        {
+            while (--i >= 0)
+                free(map_square[i]);
+            free(map_square);
+            return (NULL);
+        }
+        pimp_strlcpy(map_square[i], (*map)->map[i], (*map)->size->y + 1);
+    }
+    map_square[i] = NULL;
+    return (map_square);
+}
+
 int	map_fill(int fd, t_map **map, int number_line_map)
 {
 	int		i;
 	
 	i = 0;
 	(*map)->map = malloc(sizeof(char *) * (number_line_map + 1));
-	if (!(*map)->map)
+	(*map)->size = malloc(sizeof(t_point));
+	if (!(*map)->map || !(*map)->size)
 		return (1);
-	(*map)->map_height = number_line_map;
+	(*map)->size->x = number_line_map;
 	if (fill_map(fd, map, number_line_map, i))
-	{
-		free((*map)->map);
-		return (1);
-	}
+		return (free((*map)->map), 1);
 	i = 0;
-	(*map)->map_max_lenght = ft_strlen((*map)->map[i]);
+	(*map)->size->y = ft_strlen((*map)->map[i]);
 	while ((*map)->map[i])
 	{
-		if (ft_strlen((*map)->map[i++]) > (*map)->map_max_lenght)
-			(*map)->map_max_lenght = ft_strlen((*map)->map[i]);
+		if (ft_strlen((*map)->map[i++]) > (*map)->size->y)
+			(*map)->size->y = ft_strlen((*map)->map[i]);
 	}
+	(*map)->size->y++;
+	(*map)->map = map_fill_square(map);
+	if (!(*map)->map)
+		return (1);
 	return (0);
 }

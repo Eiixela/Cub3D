@@ -8,6 +8,8 @@ Garbage collector implemtation ---> https://dev.to/saviourcode/how-to-create-obj
 
 Redering videos --> https://www.youtube.com/@thehelloworldguyofficial/playlists
 
+Get textures here ---> https://itch.io/
+
 
 LEAKS HEREEEE ->	valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_missing_floor_rgb.cub
 					valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_missing_ceiling_rgb.cub

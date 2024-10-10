@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:26:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/02 13:54:48 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:43:33 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_map	*init_map(void)
 	if (!map->ceiling_c || !map->floor_c)
 		return (free(map), NULL);
 	map->player_way = -1;
-	map->map_height = 0;
 	while (i < 3)
 	{
 		map->ceiling_c[i] = 0;

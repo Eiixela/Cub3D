@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/09 15:23:05 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:37:04 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 
 # define BUFFER_SIZE 1
 
+typedef struct	s_point
+{
+	int x;
+	int y;
+} t_point;
+
 typedef struct s_vars
 {
 	void	*mlx;
@@ -41,10 +47,9 @@ typedef struct s_map
 	int		*ceiling_c;
 	int		*floor_c;
 	char	**map;
-	int		map_height;
-	int		map_max_lenght;
 	char	player_way;
-	int		player_position[2];
+	t_point	*size;
+	t_point	*player_position;
 }	t_map;
 
 /* struct s_gc
