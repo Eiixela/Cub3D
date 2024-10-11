@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/10 13:37:04 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/11 13:22:47 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@
 # include <time.h>
 # include <stdbool.h>
 # include <math.h>
-# include "../mlx/mlx.h"
+# include "mlx.h"
+# include <X11/keysym.h>
 # include "libft.h"
 
 # define BUFFER_SIZE 1
+# define EXIT_CROSS 17
 
 typedef struct	s_point
 {
@@ -52,6 +54,25 @@ typedef struct s_map
 	t_point	*player_position;
 }	t_map;
 
+
+typedef struct s_img
+{
+	void	*ptr;
+	char	*addr;
+	int		line_len;
+	int		bit_per_pixel;
+	int		endian;
+}	t_img;
+
+typedef struct s_data
+{
+	int		width;
+	int		height;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_img	img;
+}	t_data;
+
 /* struct s_gc
 {
 	void	*ptr;
@@ -67,6 +88,9 @@ char	*format_line(char *line);
 
 //init
 t_map	*init_map(void);
+
+//mlx
+void	data_init(t_data *data);
 
 //file_check
 int		file_check(char *file, t_map **map);
