@@ -1,64 +1,57 @@
-==21212== Memcheck, a memory error detector
-==21212== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==21212== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==21212== Command: ./cub maps/good/cheese_maze.cub
-==21212== Parent PID: 9614
-==21212== 
-==21212== 
-==21212== FILE DESCRIPTORS: 7 open (3 std) at exit.
-==21212== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==21212==    <inherited from parent>
-==21212== 
-==21212== Open AF_UNIX socket 43: <unknown>
-==21212==    <inherited from parent>
-==21212== 
-==21212== Open file descriptor 42: /home/aljulien/.config/Code/logs/20241010T155544/ptyhost.log
-==21212==    <inherited from parent>
-==21212== 
-==21212== Open file descriptor 3: /home/aljulien/Documents/C/C4/Cub3D/valgrind_output.txt
-==21212==    <inherited from parent>
-==21212== 
-==21212== 
-==21212== HEAP SUMMARY:
-==21212==     in use at exit: 594 bytes in 17 blocks
-==21212==   total heap usage: 2,620 allocs, 2,603 frees, 41,196 bytes allocated
-==21212== 
-==21212== 8 bytes in 1 blocks are definitely lost in loss record 1 of 4
-==21212==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==21212==    by 0x4029F2: map_fill (fill_map.c:169)
-==21212==    by 0x40165E: file_check (file_check.c:72)
-==21212==    by 0x4013A3: parsing (parsing.c:21)
-==21212==    by 0x401305: main (main.c:64)
-==21212== 
-==21212== 8 bytes in 1 blocks are definitely lost in loss record 2 of 4
-==21212==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==21212==    by 0x4020EA: player_way (map_check.c:40)
-==21212==    by 0x402277: map_good (map_check.c:70)
-==21212==    by 0x4013C1: parsing (parsing.c:24)
-==21212==    by 0x401305: main (main.c:64)
-==21212== 
-==21212== 458 bytes in 14 blocks are indirectly lost in loss record 3 of 4
-==21212==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==21212==    by 0x402D0B: fill_one_line (fill_map.c:85)
-==21212==    by 0x402C2E: fill_map (fill_map.c:109)
-==21212==    by 0x402A52: map_fill (fill_map.c:173)
-==21212==    by 0x40165E: file_check (file_check.c:72)
-==21212==    by 0x4013A3: parsing (parsing.c:21)
-==21212==    by 0x401305: main (main.c:64)
-==21212== 
-==21212== 578 (120 direct, 458 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 4
-==21212==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==21212==    by 0x4029DA: map_fill (fill_map.c:168)
-==21212==    by 0x40165E: file_check (file_check.c:72)
-==21212==    by 0x4013A3: parsing (parsing.c:21)
-==21212==    by 0x401305: main (main.c:64)
-==21212== 
-==21212== LEAK SUMMARY:
-==21212==    definitely lost: 136 bytes in 3 blocks
-==21212==    indirectly lost: 458 bytes in 14 blocks
-==21212==      possibly lost: 0 bytes in 0 blocks
-==21212==    still reachable: 0 bytes in 0 blocks
-==21212==         suppressed: 0 bytes in 0 blocks
-==21212== 
-==21212== For lists of detected and suppressed errors, rerun with: -s
-==21212== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+==339024== Memcheck, a memory error detector
+==339024== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==339024== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==339024== Command: ./cub maps/good/cheese_maze.cub
+==339024== Parent PID: 289945
+==339024== 
+==339024== 
+==339024== FILE DESCRIPTORS: 7 open (3 std) at exit.
+==339024== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==339024==    <inherited from parent>
+==339024== 
+==339024== Open AF_UNIX socket 43: <unknown>
+==339024==    <inherited from parent>
+==339024== 
+==339024== Open file descriptor 42: /home/aljulien/.config/Code/logs/20241014T085253/ptyhost.log
+==339024==    <inherited from parent>
+==339024== 
+==339024== Open file descriptor 3: /home/aljulien/Documents/C/C4/Cub3D/valgrind_output.txt
+==339024==    <inherited from parent>
+==339024== 
+==339024== 
+==339024== HEAP SUMMARY:
+==339024==     in use at exit: 587 bytes in 16 blocks
+==339024==   total heap usage: 2,575 allocs, 2,559 frees, 41,237 bytes allocated
+==339024== 
+==339024== 8 bytes in 1 blocks are definitely lost in loss record 1 of 3
+==339024==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==339024==    by 0x4028F2: map_fill (fill_map.c:169)
+==339024==    by 0x40165E: file_check (file_check.c:72)
+==339024==    by 0x4013A3: parsing (parsing.c:21)
+==339024==    by 0x401305: main (main.c:64)
+==339024== 
+==339024== 459 bytes in 14 blocks are indirectly lost in loss record 2 of 3
+==339024==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==339024==    by 0x402C0B: fill_one_line (fill_map.c:85)
+==339024==    by 0x402B2E: fill_map (fill_map.c:109)
+==339024==    by 0x402952: map_fill (fill_map.c:173)
+==339024==    by 0x40165E: file_check (file_check.c:72)
+==339024==    by 0x4013A3: parsing (parsing.c:21)
+==339024==    by 0x401305: main (main.c:64)
+==339024== 
+==339024== 579 (120 direct, 459 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 3
+==339024==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==339024==    by 0x4028DA: map_fill (fill_map.c:168)
+==339024==    by 0x40165E: file_check (file_check.c:72)
+==339024==    by 0x4013A3: parsing (parsing.c:21)
+==339024==    by 0x401305: main (main.c:64)
+==339024== 
+==339024== LEAK SUMMARY:
+==339024==    definitely lost: 128 bytes in 2 blocks
+==339024==    indirectly lost: 459 bytes in 14 blocks
+==339024==      possibly lost: 0 bytes in 0 blocks
+==339024==    still reachable: 0 bytes in 0 blocks
+==339024==         suppressed: 0 bytes in 0 blocks
+==339024== 
+==339024== For lists of detected and suppressed errors, rerun with: -s
+==339024== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
