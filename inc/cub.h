@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/14 10:39:28 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/14 10:42:35 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include "libft.h"
 
 # define BUFFER_SIZE 1
-# define EXIT_CROSS 17
 
 typedef struct	s_point
 {
@@ -73,12 +72,6 @@ typedef struct s_data
 	t_img	img;
 }	t_data;
 
-/* struct s_gc
-{
-	void	*ptr;
-	void	*next;
-} t_gc; */
-
 //PARING
 int		parsing(int ac, char **av, t_map **map);
 
@@ -88,9 +81,6 @@ char	*format_line(char *line);
 
 //init
 t_map	*init_map(void);
-
-//mlx
-void	data_init(t_data *data);
 
 //file_check
 int		file_check(char *file, t_map **map);

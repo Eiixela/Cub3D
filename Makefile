@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+         #
+#    By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/10/08 17:37:23 by saperrie         ###   ########.fr        #
+#    Updated: 2024/10/14 10:42:40 by aljulien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ OBJECTS = $(patsubst srcs/%.c,$(OBJECT_DIR)%.o,\
 		srcs/parsing/color_check.c\
 		srcs/gnl/get_next_line.c\
 		srcs/gnl/get_next_line_utils.c\
-		srcs/mlx/mlx_init.c\
 							)
 
 OBJ_SUBDIRS = $(sort $(dir ${OBJECTS}))
