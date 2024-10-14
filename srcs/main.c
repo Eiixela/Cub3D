@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/10 13:34:56 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/11 13:23:24 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,22 @@ void	free_map(t_map **map)
 	}
 }
 
+int	big_init(t_data *data)
+{
+	data_init(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.ptr, 0, 0);
+	mlx_loop(data->mlx_ptr);
+	mlx_destroy_image(data->mlx_ptr, data->img.ptr);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_map	*map;
+	t_data	data;
 
 	map = init_map();
 	if (!map)
@@ -78,12 +91,14 @@ int	main(int ac, char **av)
 		{
 			printf("%s\n", map->map[i]);
 			i++;
-		} 
+		}
 	  	printf("c = %c\n", map->player_way);*/
 		printf("ok!\n");
 		free_map(&map);
 		return (0);
 	}
+	if (big_init(&data) == 1)
+		return (1);
 	printf("hmmm...\n");
 	free_map(&map);
 	return (1);
