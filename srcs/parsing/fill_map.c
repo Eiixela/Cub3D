@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/10 13:44:32 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:33:43 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ int	read_till_the_end(int fd, char *line)
 	while (line)
 	{
 		if (line != NULL && (ft_strcmp(line, "\n") != 0))
-		{
 			return (1);
-		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	return(0);
+	return (0);
 }
 
 int	count_line(int fd)
@@ -61,10 +59,10 @@ int	count_line(int fd)
 	return (free(line), i);
 }
 
-char *space_in_minus (char *line)
+char	*space_in_minus(char *line)
 {
-	int		i;
-	
+	int	i;
+
 	i = 0;
 	while (line[i])
 	{
@@ -114,56 +112,67 @@ static int	fill_map(int fd, t_map **map, int number_line_map, int i)
 		i++;
 	}
 	(*map)->map[i] = NULL;
- 	if (read_till_the_end(fd, line))
+	if (read_till_the_end(fd, line))
 		return (1);
 	return (0);
 }
 
-void pimp_strlcpy(char *dst, const char *src, int size)
+void	pimp_strlcpy(char *dst, const char *src, int size)
 {
-    int i;
-    int len;
+	int	i;
+	int	len;
 
-    len = ft_strlen(src);
-    i = 0;
-    while (i < len && i < size - 1)
-    {
-        dst[i] = src[i];
-        i++;
-    }
-    while (i < size - 1)
-        dst[i++] = -32;
-    dst[i] = '\0';
+	len = ft_strlen(src);
+	i = 0;
+	while (i < len && i < size - 1)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while (i < size - 1)
+		dst[i++] = -32;
+	dst[i] = '\0';
 }
 
-char **map_fill_square(t_map **map)
+char	**map_fill_square(t_map **map)
 {
-    char **map_square;
-    int i;
+	char	**map_square;
+	int		i;
+	int		j;
 
-    map_square = malloc(sizeof(char *) * ((*map)->size->x + 1));
-    if (!map_square)
-        return (NULL);
-    for (i = 0; i < (*map)->size->x; i++)
-    {
-        map_square[i] = malloc(sizeof(char) * ((*map)->size->y + 1));
-        if (!map_square[i])
-        {
-            while (--i >= 0)
-                free(map_square[i]);
-            free(map_square);
-            return (NULL);
-        }
-        pimp_strlcpy(map_square[i], (*map)->map[i], (*map)->size->y + 1);
-    }
-    map_square[i] = NULL;
-    return (map_square);
+	map_square = malloc(sizeof(char *) * ((*map)->size->x + 2));
+	if (!map_square)
+		return (NULL);
+	i = 0;
+	while (i <= (*map)->size->x)
+	{
+		map_square[i] = malloc(sizeof(char) * ((*map)->size->y + 1));
+		if (!map_square[i])
+		{
+			while (--i >= 0)
+				free(map_square[i]);
+			free(map_square);
+			return (NULL);
+		}
+		if (i < (*map)->size->x)
+			pimp_strlcpy(map_square[i], (*map)->map[i], (*map)->size->y + 1);
+		else
+		{
+			j = 0;
+			while (j < (*map)->size->y)
+				map_square[i][j++] = -32;
+			map_square[i][j] = '\0';
+		}
+		i++;
+	}
+	map_square[i] = NULL;
+	return (map_square);
 }
 
 int	map_fill(int fd, t_map **map, int number_line_map)
 {
-	int		i;
-	
+	int	i;
+
 	i = 0;
 	(*map)->map = malloc(sizeof(char *) * (number_line_map + 1));
 	(*map)->size = malloc(sizeof(t_point));

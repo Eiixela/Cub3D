@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/07 16:55:35 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:31:20 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ static t_map	*fill_cardinal(char *line, char *path, t_map *map)
 
 int	cardinal_cmp(char *line)
 {
-	if (line && (ft_strncmp("NO ", line, 3) == 0 || ft_strncmp("SO ", line, 3) == 0
-		|| ft_strncmp("WE ", line, 3) == 0 || ft_strncmp("EA ", line, 3) == 0))
+	if (line && (ft_strncmp("NO ", line, 3) == 0 \
+		|| ft_strncmp("SO ", line, 3) == 0 \
+			|| ft_strncmp("WE ", line, 3) == 0 \
+			|| ft_strncmp("EA ", line, 3) == 0))
 		return (0);
 	return (1);
-	
 }
 
 static t_map	*found_one_cardinal(char *line, t_map *map)
@@ -83,7 +84,8 @@ int	cardinal_check(int fd, t_map **map)
 		if (!line)
 			return (1);
 		if (map_started(line))
-			return ((void)read_till_the_end(fd, line), close(fd), printf("Textures missing\n"), 1);
+			return ((void)read_till_the_end(fd, line), close(fd), \
+				printf("Textures missing\n"), 1);
 		line = format_line(line);
 		found_one_cardinal(line, *map);
 		all_cardinal_found = found_all_cardinal(*map);

@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:22:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/02 13:53:58 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:43:57 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,4 @@ int	check_access_textures(t_map *map)
 	}
 	return (0);
 }
+git checkout -b

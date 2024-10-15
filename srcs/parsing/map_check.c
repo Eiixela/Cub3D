@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/14 10:36:36 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:35:47 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static int	player_where(t_map *map, int *player_x, int *player_y)
 
 static int	is_border(t_map *map, int x, int y)
 {
-	return (x == 0 || y == 0 || y == map->size->y - 1 || 
-			map->map[y][x + 1] == '\0');
+	return (x == 0 || y == 0 || y == map->size->y - 1 \
+		|| map->map[y][x + 1] == '\0');
 }
 
 static int	flood_fill(t_map *map, int x, int y)
@@ -51,8 +51,8 @@ static int	flood_fill(t_map *map, int x, int y)
 	if (is_border(map, x, y))
 		return (1);
 	map->map[y][x] = 'F';
-	if (flood_fill(map, x - 1, y) || flood_fill(map, x + 1, y) ||
-		flood_fill(map, x, y - 1) || flood_fill(map, x, y + 1))
+	if (flood_fill(map, x - 1, y) || flood_fill(map, x + 1, y) \
+		|| flood_fill(map, x, y - 1) || flood_fill(map, x, y + 1))
 		return (1);
 	return (0);
 }
@@ -68,5 +68,3 @@ int	map_good(t_map **map)
 		return (1);
 	return (0);
 }
-
-
