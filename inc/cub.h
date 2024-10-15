@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/14 13:01:24 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/15 18:45:05 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,30 @@
 # define BUFFER_SIZE 1
 # define EXIT_CROSS 17
 
-typedef struct	s_point
+typedef struct s_pplane
 {
-	int x;
-	int y;
-} t_point;
+	int		width;
+	int		height;
+	int		center_w;
+	int		center_h;
+	int		distance_from_player;
+	float	angle_between_rays;
+}	t_pplane;
 
-typedef struct s_vars
+typedef struct s_player
 {
-	void	*mlx;
-	void	*win;
-}				t_vars;
+	int	view_height;
+	int	fov;
+	int	x; // will become float at some point for sure
+	int	y; // will become float at some point for sure
+	int	view_angle; // x,y and view_angle is POV
+}	t_player;
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
 
 typedef struct s_map
 {
@@ -74,7 +87,7 @@ typedef struct s_data
 }	t_data;
 
 //PARSING
-int		parsing(int ac, char **av, t_map **map);
+int		parsing(int ac, char **av, t_map **map, t_player *player);
 
 //parsing_utils
 int		map_started(char *line);
@@ -85,6 +98,9 @@ t_map	*init_map(void);
 
 //mlx
 void	data_init(t_data *data);
+
+// init
+int		big_init(t_data *data, t_player *player, t_pplane *pplane);
 
 //file_check
 int		file_check(char *file, t_map **map);
@@ -99,7 +115,7 @@ int		check_access_textures(t_map *map);
 int		color_check(int fd, t_map **map);
 
 //map_check
-int		map_good(t_map **map);
+int		map_good(t_map **map, t_player *player);
 bool	check_borders(char **map, int height);
 
 //map_check_utils
