@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:07:23 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/16 17:47:56 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:47:48 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	draw_2d_map(t_map *map, t_data *data)
 	width = map->size->x;
 	height = map->size->y;
 	pixels = data->img.addr;
+	pixels += (data->width * 2048) + (data->width * 2); // offset to show in center of screen
 	y = 0.;
 	while (y < height)
 	{
@@ -31,11 +32,13 @@ int	draw_2d_map(t_map *map, t_data *data)
 		{
 			if (map->map[x][y] == '1')
 				((int *)pixels)[(int)x + width * (int)y] = (0xfff5ff);
+			else if ((x == 8 && y == 8) || \
+			(x == 9 && y == 8) || (x == 8 && y == 9) || \
+			(x == 9 && y == 9)) // THIS IS HARD CODED PLAYER COORDINATE IN 2x2
+				((int *)pixels)[(int)x + width * (int)y] = (0xf02d00);
 			else if (map->map[x][y] == 'F')
-				((int *)pixels)[(int)x + width * (int)y] = (0xff2d00);
-			else if (!find_player(map->map[x][y]))
-				((int *)pixels)[(int)x + width * (int)y] = (0x70ff00);
-
+				((int *)pixels)[(int)x + width * (int)y] = (0x003eff);
+			// else if (!find_player(map->map[x][y]))
 			x += 1;
 		}
 		pixels += (2500 - x) * 4;
