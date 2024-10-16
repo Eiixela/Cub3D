@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:07:36 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/15 18:47:08 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:02:59 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ int	projection_plane_init(t_pplane *pplane, t_player *player)
 	return (0);
 }
 
-int	big_init(t_data *data, t_player *player, t_pplane *pplane)
+int	big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map)
 {
 	data_init(data);
 	if (1 == player_init(player))
 		return (1);
 	if (1 == projection_plane_init(pplane, player))
 		return (1);
+	draw_2d_map(map, data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.ptr, 0, 0);
 	mlx_loop(data->mlx_ptr);
 	mlx_destroy_image(data->mlx_ptr, data->img.ptr);

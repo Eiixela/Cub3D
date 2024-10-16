@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/16 15:08:05 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:02:35 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,10 @@ bool	init_map(t_map *map);
 
 //mlx
 void	data_init(t_data *data);
+int		draw_2d_map(t_map *map, t_data *data);
 
 // init
-int		big_init(t_data *data, t_player *player, t_pplane *pplane);
+int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
 
 //file_check
 int	file_check(char *file, t_map *map);

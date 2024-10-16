@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 10:36:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/16 17:39:16 by saperrie         ###   ########.fr       */
+/*   Created: 2024/10/15 19:55:31 by saperrie          #+#    #+#             */
+/*   Updated: 2024/10/15 22:48:19 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	parsing(int ac, char **av, t_map *map, t_player *player)
+int	raycast(char **map, t_player *player, t_pplane *pplane)
 {
-	if (ac != 2)
-		return (1);
-	if (ac == 2)
-	{
-		if (file_check(av[1], map))
-			return (1);
-		if (map_good(map, player))
-			return (1);
-	}
-	return (0);
+	float	player_position;
+	float	ray;
+	int		columns;
+
+
+
 }
