@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/15 18:45:05 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:08:05 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,14 @@ typedef struct s_data
 }	t_data;
 
 //PARSING
-int		parsing(int ac, char **av, t_map **map, t_player *player);
+int	parsing(int ac, char **av, t_map *map, t_player *player);
 
 //parsing_utils
 int		map_started(char *line);
 char	*format_line(char *line);
 
 //init
-t_map	*init_map(void);
+bool	init_map(t_map *map);
 
 //mlx
 void	data_init(t_data *data);
@@ -103,20 +103,19 @@ void	data_init(t_data *data);
 int		big_init(t_data *data, t_player *player, t_pplane *pplane);
 
 //file_check
-int		file_check(char *file, t_map **map);
+int	file_check(char *file, t_map *map);
 
 //cardinal_check
-int		cardinal_check(int fd, t_map **map);
+int		cardinal_check(int fd, t_map *map);
 
 //textures_check
 int		check_access_textures(t_map *map);
 
 //color_check
-int		color_check(int fd, t_map **map);
+int		color_check(int fd, t_map *map);
 
 //map_check
-int		map_good(t_map **map, t_player *player);
-bool	check_borders(char **map, int height);
+int		map_good(t_map *map, t_player *player);
 
 //map_check_utils
 int		find_player(char c);
@@ -124,12 +123,13 @@ int		check_char_map(t_map **map);
 int		valid_char(char c);
 
 //fill_map
-int		map_fill(int fd, t_map **map, int number_line_map);
+int		map_fill(int fd, t_map *map, int number_line_map);
 int		count_line(int fd);
 int		read_till_the_end(int fd, char *line);
 
 //free
-void	free_map(t_map **map);
+void	free_map(t_map *map);
+
 
 //GNL
 char	*get_next_line(int fd);

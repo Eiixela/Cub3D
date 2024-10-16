@@ -1,84 +1,152 @@
-==149332== Memcheck, a memory error detector
-==149332== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==149332== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==149332== Command: ./cub maps/good/cheese_maze.cub
-==149332== Parent PID: 124069
-==149332== 
-==149332== Invalid read of size 8
-==149332==    at 0x4011BA: free_map_array (main.c:32)
-==149332==    by 0x401272: free_map (main.c:47)
-==149332==    by 0x40134E: main (main.c:88)
-==149332==  Address 0x4d665c0 is 0 bytes inside a block of size 120 free'd
-==149332==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x4029DB: map_fill (fill_map.c:183)
-==149332==    by 0x40165E: file_check (file_check.c:72)
-==149332==    by 0x4013A3: parsing (parsing.c:21)
-==149332==    by 0x401305: main (main.c:64)
-==149332==  Block was alloc'd at
-==149332==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x40294A: map_fill (fill_map.c:177)
-==149332==    by 0x40165E: file_check (file_check.c:72)
-==149332==    by 0x4013A3: parsing (parsing.c:21)
-==149332==    by 0x401305: main (main.c:64)
-==149332== 
-==149332== Invalid free() / delete / delete[] / realloc()
-==149332==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x401282: free_map (main.c:48)
-==149332==    by 0x40134E: main (main.c:88)
-==149332==  Address 0x4d665c0 is 0 bytes inside a block of size 120 free'd
-==149332==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x4029DB: map_fill (fill_map.c:183)
-==149332==    by 0x40165E: file_check (file_check.c:72)
-==149332==    by 0x4013A3: parsing (parsing.c:21)
-==149332==    by 0x401305: main (main.c:64)
-==149332==  Block was alloc'd at
-==149332==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x40294A: map_fill (fill_map.c:177)
-==149332==    by 0x40165E: file_check (file_check.c:72)
-==149332==    by 0x4013A3: parsing (parsing.c:21)
-==149332==    by 0x401305: main (main.c:64)
-==149332== 
-==149332== 
-==149332== FILE DESCRIPTORS: 6 open (3 std) at exit.
-==149332== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==149332==    <inherited from parent>
-==149332== 
-==149332== Open file descriptor 43: /home/aljulien/.config/Code/logs/20241015T155649/ptyhost.log
-==149332==    <inherited from parent>
-==149332== 
-==149332== Open file descriptor 3: /home/aljulien/Documents/C/C4/Cub3D/valgrind_output.txt
-==149332==    <inherited from parent>
-==149332== 
-==149332== 
-==149332== HEAP SUMMARY:
-==149332==     in use at exit: 14 bytes in 2 blocks
-==149332==   total heap usage: 2,581 allocs, 2,580 frees, 40,707 bytes allocated
-==149332== 
-==149332== 6 bytes in 1 blocks are definitely lost in loss record 1 of 2
-==149332==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x403B76: ft_calloc (get_next_line_utils.c:38)
-==149332==    by 0x403806: get_line_ (get_next_line.c:63)
-==149332==    by 0x403A83: get_next_line (get_next_line.c:113)
-==149332==    by 0x40249A: read_till_the_end (fill_map.c:19)
-==149332==    by 0x402C20: fill_map (fill_map.c:115)
-==149332==    by 0x4029C2: map_fill (fill_map.c:182)
-==149332==    by 0x40165E: file_check (file_check.c:72)
-==149332==    by 0x4013A3: parsing (parsing.c:21)
-==149332==    by 0x401305: main (main.c:64)
-==149332== 
-==149332== 8 bytes in 1 blocks are definitely lost in loss record 2 of 2
-==149332==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x402962: map_fill (fill_map.c:178)
-==149332==    by 0x40165E: file_check (file_check.c:72)
-==149332==    by 0x4013A3: parsing (parsing.c:21)
-==149332==    by 0x401305: main (main.c:64)
-==149332== 
-==149332== LEAK SUMMARY:
-==149332==    definitely lost: 14 bytes in 2 blocks
-==149332==    indirectly lost: 0 bytes in 0 blocks
-==149332==      possibly lost: 0 bytes in 0 blocks
-==149332==    still reachable: 0 bytes in 0 blocks
-==149332==         suppressed: 0 bytes in 0 blocks
-==149332== 
-==149332== For lists of detected and suppressed errors, rerun with: -s
-==149332== ERROR SUMMARY: 17 errors from 4 contexts (suppressed: 0 from 0)
+==6985== Memcheck, a memory error detector
+==6985== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6985== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==6985== Command: ./cub maps/good/cheese_maze.cub
+==6985== Parent PID: 5283
+==6985== 
+==6985== Invalid read of size 1
+==6985==    at 0x403304: map_good (map_check.c:72)
+==6985==    by 0x402719: parsing (parsing.c:23)
+==6985==    by 0x40262C: main (main.c:56)
+==6985==  Address 0x4d73c73 is 0 bytes after a block of size 35 alloc'd
+==6985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6985==    by 0x403BA4: map_fill_square (fill_map.c:149)
+==6985==    by 0x403EA6: map_fill (fill_map.c:199)
+==6985==    by 0x4029BE: file_check (file_check.c:72)
+==6985==    by 0x4026F7: parsing (parsing.c:21)
+==6985==    by 0x40262C: main (main.c:56)
+==6985== 
+==6985== Invalid read of size 1
+==6985==    at 0x403320: map_good (map_check.c:74)
+==6985==    by 0x402719: parsing (parsing.c:23)
+==6985==    by 0x40262C: main (main.c:56)
+==6985==  Address 0x4d73c73 is 0 bytes after a block of size 35 alloc'd
+==6985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6985==    by 0x403BA4: map_fill_square (fill_map.c:149)
+==6985==    by 0x403EA6: map_fill (fill_map.c:199)
+==6985==    by 0x4029BE: file_check (file_check.c:72)
+==6985==    by 0x4026F7: parsing (parsing.c:21)
+==6985==    by 0x40262C: main (main.c:56)
+==6985== 
+==6985== 
+==6985== Process terminating with default action of signal 2 (SIGINT)
+==6985==    at 0x4BC4885: write (write.c:26)
+==6985==    by 0x4B3AEEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==6985==    by 0x4B3C9E0: new_do_write (fileops.c:448)
+==6985==    by 0x4B3C9E0: _IO_new_do_write (fileops.c:425)
+==6985==    by 0x4B3C9E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==6985==    by 0x4B3CF4A: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:778)
+==6985==    by 0x4B273DB: __vfprintf_internal (vfprintf-internal.c:1517)
+==6985==    by 0x4B1079E: printf (printf.c:33)
+==6985==    by 0x403334: map_good (map_check.c:74)
+==6985==    by 0x402719: parsing (parsing.c:23)
+==6985==    by 0x40262C: main (main.c:56)
+==6985== 
+==6985== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==6985== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==6985==    <inherited from parent>
+==6985== 
+==6985== Open file descriptor 43: /home/aljulien/.config/Code/logs/20241016T153622/ptyhost.log
+==6985==    <inherited from parent>
+==6985== 
+==6985== Open file descriptor 3: /home/aljulien/Documents/C/C4/Cub3D/valgrind_output.txt
+==6985==    <inherited from parent>
+==6985== 
+==6985== 
+==6985== HEAP SUMMARY:
+==6985==     in use at exit: 1,801 bytes in 24 blocks
+==6985==   total heap usage: 2,571 allocs, 2,547 frees, 41,067 bytes allocated
+==6985== 
+==6985== 8 bytes in 1 blocks are still reachable in loss record 1 of 10
+==6985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6985==    by 0x403D7F: map_fill (fill_map.c:185)
+==6985==    by 0x4029BE: file_check (file_check.c:72)
+==6985==    by 0x4026F7: parsing (parsing.c:21)
+==6985==    by 0x40262C: main (main.c:56)
+==6985== 
+==6985== 17 bytes in 1 blocks are still reachable in loss record 2 of 10
+==6985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6985==    by 0x405CEC: ft_strdup (in /home/aljulien/Documents/C/C4/Cub3D/cub)
+==6985==    by 0x4031AD: fill_cardinal (cardinal_check.c:18)
+==6985==    by 0x4030B1: found_one_cardinal (cardinal_check.c:53)
+==6985==    by 0x402F54: cardinal_check (cardinal_check.c:90)
+==6985==    by 0x40290B: file_check (file_check.c:61)
+==6985==    by 0x4026F7: parsing (parsing.c:21)
+==6985==    by 0x40262C: main (main.c:56)
+==6985== 
+==6985== 17 bytes in 1 blocks are still reachable in loss record 3 of 10
+==6985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6985==    by 0x405CEC: ft_strdup (in /home/aljulien/Documents/C/C4/Cub3D/cub)
+==6985==    by 0x4031E6: fill_cardinal (cardinal_check.c:20)
+==6985==    by 0x4030B1: found_one_cardinal (cardinal_check.c:53)
+==6985==    by 0x402F54: cardinal_check (cardinal_check.c:90)
+==6985==    by 0x40290B: file_check (file_check.c:61)
+==6985==    by 0x4026F7: parsing (parsing.c:21)
+==6985==    by 0x40262C: main (main.c:56)
+==6985== 
+==6985== 17 bytes in 1 blocks are still reachable in loss record 4 of 10
+==6985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6985==    by 0x405CEC: ft_strdup (in /home/aljulien/Documents/C/C4/Cub3D/cub)
+==6985==    by 0x40325A: fill_cardinal (cardinal_check.c:24)
+==6985==    by 0x4030B1: found_one_cardinal (cardinal_check.c:53)
+==6985==    by 0x402F54: cardinal_check (cardinal_check.c:90)
+==6985==    by 0x40290B: file_check (file_check.c:61)
+==6985==    by 0x4026F7: parsing (parsing.c:21)
+==6985==    by 0x40262C: main (main.c:56)
+==6985== 
+==6985== 17 bytes in 1 blocks are still reachable in loss record 5 of 10
+==6985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6985==    by 0x405CEC: ft_strdup (in /home/aljulien/Documents/C/C4/Cub3D/cub)
+==6985==    by 0x403220: fill_cardinal (cardinal_check.c:22)
+==6985==    by 0x4030B1: found_one_cardinal (cardinal_check.c:53)
+==6985==    by 0x402F54: cardinal_check (cardinal_check.c:90)
+==6985==    by 0x40290B: file_check (file_check.c:61)
+==6985==    by 0x4026F7: parsing (parsing.c:21)
+==6985==    by 0x40262C: main (main.c:56)
+==6985== 
+==6985== 24 bytes in 1 blocks are still reachable in loss record 6 of 10
+==6985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6985==    by 0x402A57: init_map (init.c:26)
+==6985==    by 0x402601: main (main.c:54)
+==6985== 
+==6985== 24 bytes in 1 blocks are still reachable in loss record 7 of 10
+==6985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6985==    by 0x402A6C: init_map (init.c:27)
+==6985==    by 0x402601: main (main.c:54)
+==6985== 
+==6985== 128 bytes in 1 blocks are still reachable in loss record 8 of 10
+==6985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6985==    by 0x403B54: map_fill_square (fill_map.c:143)
+==6985==    by 0x403EA6: map_fill (fill_map.c:199)
+==6985==    by 0x4029BE: file_check (file_check.c:72)
+==6985==    by 0x4026F7: parsing (parsing.c:21)
+==6985==    by 0x40262C: main (main.c:56)
+==6985== 
+==6985== 525 bytes in 15 blocks are still reachable in loss record 9 of 10
+==6985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6985==    by 0x403BA4: map_fill_square (fill_map.c:149)
+==6985==    by 0x403EA6: map_fill (fill_map.c:199)
+==6985==    by 0x4029BE: file_check (file_check.c:72)
+==6985==    by 0x4026F7: parsing (parsing.c:21)
+==6985==    by 0x40262C: main (main.c:56)
+==6985== 
+==6985== 1,024 bytes in 1 blocks are still reachable in loss record 10 of 10
+==6985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6985==    by 0x4B2EBA3: _IO_file_doallocate (filedoalloc.c:101)
+==6985==    by 0x4B3DCDF: _IO_doallocbuf (genops.c:347)
+==6985==    by 0x4B3CF5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+==6985==    by 0x4B273DB: __vfprintf_internal (vfprintf-internal.c:1517)
+==6985==    by 0x4B1079E: printf (printf.c:33)
+==6985==    by 0x403334: map_good (map_check.c:74)
+==6985==    by 0x402719: parsing (parsing.c:23)
+==6985==    by 0x40262C: main (main.c:56)
+==6985== 
+==6985== LEAK SUMMARY:
+==6985==    definitely lost: 0 bytes in 0 blocks
+==6985==    indirectly lost: 0 bytes in 0 blocks
+==6985==      possibly lost: 0 bytes in 0 blocks
+==6985==    still reachable: 1,801 bytes in 24 blocks
+==6985==         suppressed: 0 bytes in 0 blocks
+==6985== 
+==6985== For lists of detected and suppressed errors, rerun with: -s
+==6985== ERROR SUMMARY: 2593768 errors from 2 contexts (suppressed: 0 from 0)

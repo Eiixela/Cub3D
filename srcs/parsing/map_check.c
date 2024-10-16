@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/15 18:10:15 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:39:57 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	player_where(t_map *map, int *player_x, int *player_y)
 		x = 0;
 		while (map->map[y][x])
 		{
-			if (map->map[y][x] == 'S')
+			if (!find_player(map->map[y][x]))
 			{
 				*player_x = x;
 				*player_y = y;
@@ -57,16 +57,16 @@ static int	flood_fill(t_map *map, int x, int y)
 	return (0);
 }
 
-int	map_good(t_map **map, t_player *player)
+int	map_good(t_map *map, t_player *player)
 {
 	int	player_x;
 	int	player_y;
 
-	if (!player_where(*map, &player_x, &player_y))
+	if (!player_where(map, &player_x, &player_y))
 		return (1);
 	player->x = player_x;
 	player->y = player_y;
-	if (flood_fill(*map, player_x, player_y))
+	if (flood_fill(map, player_x, player_y))
 		return (1);
 	return (0);
 }

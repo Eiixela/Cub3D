@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:36:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/15 18:09:11 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:03:04 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	parsing(int ac, char **av, t_map **map, t_player *player)
+int	parsing(int ac, char **av, t_map *map, t_player *player)
 {
 	if (ac != 2)
 		return (1);

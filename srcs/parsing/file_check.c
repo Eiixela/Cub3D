@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:36:17 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/15 16:32:28 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:06:19 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	file_extension_check(char *file)
 	return (1);
 }
 
-int	file_check(char *file, t_map **map)
+int	file_check(char *file, t_map *map)
 {
 	int	fd;
 	int	number_line_map;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/15 18:35:14 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:05:02 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,34 @@ void	free_map_array(char **map, int height)
 	}
 }
 
-void	free_map(t_map **map)
+void	free_map(t_map *map)
 {
-	if (map && *map)
+	if (map)
 	{
-		free((*map)->north);
-		free((*map)->south);
-		free((*map)->east);
-		free((*map)->west);
-		if ((*map)->map)
+		free(map->north);
+		free(map->south);
+		free(map->east);
+		free(map->west);
+		if (map->map)
 		{
-			free_map_array((*map)->map, (*map)->size->x);
-			free((*map)->map);
+			free_map_array(map->map, map->size->x + 1);
+			free(map->map);
 		}
-		free((*map)->ceiling_c);
-		free((*map)->floor_c);
-		free(*map);
-		*map = NULL;
+		free(map->ceiling_c);
+		free(map->floor_c);
+		free(map->size);
+		map = NULL;
 	}
 }
 
 int	main(int ac, char **av)
 {
-	t_map		*map;
+	t_map		map;
 	t_data		data;
 	t_player	player;
 	t_pplane	pplane;
 
-	map = init_map();
-	if (!map)
+	if (!init_map(&map))
 		return (1);
 	if (!parsing(ac, av, &map, &player))
 	{
@@ -63,6 +62,6 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	printf("hmmm...\n");
-	free_map(&map);
+	//free_map(&map);
 	return (1);
 }
