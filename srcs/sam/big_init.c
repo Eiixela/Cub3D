@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:07:36 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/16 17:02:59 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/18 00:22:44 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,17 @@ int	projection_plane_init(t_pplane *pplane, t_player *player)
 	pplane->center_h = (pplane->height >> 1);
 	pplane->distance_from_player = (pplane->center_w) / tan(player->fov >> 1);
 	pplane->angle_between_rays = (float)player->fov / pplane->width;
-	printf("%f\n", pplane->angle_between_rays);
+	// printf("%f\n", pplane->angle_between_rays);
 	return (0);
 }
 
 int	big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map)
 {
 	data_init(data);
+	data->map = map;
 	if (1 == player_init(player))
 		return (1);
 	if (1 == projection_plane_init(pplane, player))
 		return (1);
-	draw_2d_map(map, data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.ptr, 0, 0);
-	mlx_loop(data->mlx_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->img.ptr);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
 	return (0);
 }

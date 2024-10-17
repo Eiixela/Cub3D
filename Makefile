@@ -6,7 +6,7 @@
 #    By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/10/16 17:02:00 by saperrie         ###   ########.fr        #
+#    Updated: 2024/10/18 00:11:05 by saperrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ OBJECTS = $(patsubst srcs/%.c,$(OBJECT_DIR)%.o,\
 		srcs/gnl/get_next_line_utils.c\
 		srcs/sam/mlx_init.c\
 		srcs/sam/big_init.c\
+		srcs/sam/handle_input.c\
 		srcs/sam/draw.c\
 							)
 

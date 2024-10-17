@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/16 17:33:50 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/18 00:18:12 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	free_map(t_map *map)
 		free(map->ceiling_c);
 		free(map->floor_c);
 		free(map->size);
+		free(map->player_position);
+		// free(map);
 		map = NULL;
 	}
 }
@@ -58,6 +60,7 @@ int	main(int ac, char **av)
 		if (big_init(&data, &player, &pplane, &map) == 1)
 			return (1);
 		printf("ok!\n");
+		draw(&map, &data);
 		free_map(&map);
 		return (0);
 	}

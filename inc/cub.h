@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/17 13:20:38 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/18 00:11:30 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define EXIT_CROSS 17
 # define WIDTH 2500
 # define HEIGHT 1300
+# define PI	3.141592654
 
 //--------------------------------------------------|
 
@@ -96,6 +97,7 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_img	img;
+	t_map	*map;
 }	t_data;
 
 //PARSING
@@ -110,7 +112,11 @@ bool	init_map(t_map *map);
 
 //mlx
 void	data_init(t_data *data);
+int		draw(t_map *map, t_data *data);
 int		draw_2d_map(t_map *map, t_data *data);
+int		draw_new_2d(t_map *map, t_data *data);
+int		handle_keyboard(int keysym, t_data *data);
+int		handle_win_exit(t_data *data);
 
 // init
 int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
