@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/16 17:02:35 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/17 13:20:38 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@
 
 # define BUFFER_SIZE 1
 # define EXIT_CROSS 17
+# define WIDTH 2500
+# define HEIGHT 1300
+
+//--------------------------------------------------|
+
+//Define for colors
+# define LIME_GREEN 0xdaf7a6
+# define ORANGE 0xffc300
+# define BRIGHT_RED 0xff5733
+# define CRIMSON 0xc70039
+# define PINK 0xffa2cc
+# define PASTEL_PURPLE 0xb1a3ff
 
 typedef struct s_pplane
 {

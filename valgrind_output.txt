@@ -1,26 +1,26 @@
-==12875== Memcheck, a memory error detector
-==12875== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==12875== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==12875== Command: ./cub maps/good/cheese_maze.cub
-==12875== Parent PID: 8162
-==12875== 
-==12875== 
-==12875== FILE DESCRIPTORS: 6 open (3 std) at exit.
-==12875== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==12875==    <inherited from parent>
-==12875== 
-==12875== Open file descriptor 43: /home/aljulien/.config/Code/logs/20241017T130322/ptyhost.log
-==12875==    <inherited from parent>
-==12875== 
-==12875== Open file descriptor 3: /home/aljulien/Documents/C/C4/Cub3D/valgrind_output.txt
-==12875==    <inherited from parent>
-==12875== 
-==12875== 
-==12875== HEAP SUMMARY:
-==12875==     in use at exit: 0 bytes in 0 blocks
-==12875==   total heap usage: 3,302 allocs, 3,302 frees, 178,352 bytes allocated
-==12875== 
-==12875== All heap blocks were freed -- no leaks are possible
-==12875== 
-==12875== For lists of detected and suppressed errors, rerun with: -s
-==12875== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==19603== Memcheck, a memory error detector
+==19603== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==19603== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==19603== Command: ./cub maps/good/cheese_maze.cub
+==19603== Parent PID: 8162
+==19603== 
+==19603== 
+==19603== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==19603== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==19603==    <inherited from parent>
+==19603== 
+==19603== Open file descriptor 43: /home/aljulien/.config/Code/logs/20241017T130322/ptyhost.log
+==19603==    <inherited from parent>
+==19603== 
+==19603== Open file descriptor 3: /home/aljulien/Documents/C/C4/Cub3D/valgrind_output.txt
+==19603==    <inherited from parent>
+==19603== 
+==19603== 
+==19603== HEAP SUMMARY:
+==19603==     in use at exit: 0 bytes in 0 blocks
+==19603==   total heap usage: 3,296 allocs, 3,296 frees, 177,832 bytes allocated
+==19603== 
+==19603== All heap blocks were freed -- no leaks are possible
+==19603== 
+==19603== For lists of detected and suppressed errors, rerun with: -s
+==19603== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

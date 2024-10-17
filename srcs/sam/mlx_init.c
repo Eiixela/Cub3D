@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:15 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/16 17:05:58 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/17 13:11:38 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	handle_keyboard(int keysym, t_data *data)
 }
 void	data_init(t_data *data)
 {
-	data->width = 2500;
-	data->height = 1300;
+	data->width = WIDTH;
+	data->height = HEIGHT;
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, \
 	data->width, data->height, "smol wolf 3d");
