@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:07:23 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/17 11:48:47 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/17 13:09:55 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ int	draw_2d_map(t_map *map, t_data *data)
 	int		width;
 	int		height;
 
-	printf("x = %i & y = %i\n", map->size->x, map->size->y);
-	width = map->size->x;
-	height = map->size->y;
+	//printf("x = %i & y = %i\n", map->size->x, map->size->y);
+	width = map->size->y;
+	height = map->size->x;
 	pixels = data->img.addr;
 	//pixels += (data->width * 2048) + (data->width * 2); // offset to show in center of screen
 	y = 0.;
@@ -107,11 +107,11 @@ int	draw_2d_map(t_map *map, t_data *data)
 			new_x = x / 16;
 			if (new_x < width && new_y < height)
 			{
-				if (map->map[new_x][new_y] == '1')
+				if (map->map[new_y][new_x] == '1')
 					((int *)pixels)[draw_x + draw_y] = (0xfff5ff);
-				else if (!find_player(map->map[new_x][new_y]))
+				else if (!find_player(map->map[new_y][new_x]))
 					((int *)pixels)[draw_x + draw_y] = (0xf02d00);
-				else if (map->map[new_x][new_y] == 'F')
+				else if (map->map[new_y][new_x] == 'F' || map->map[new_y][new_x] == '0')
 					((int *)pixels)[draw_x + draw_y] = (0x003eff);
 			}
 			x += 1;
