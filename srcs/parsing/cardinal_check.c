@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/15 16:31:20 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:07:29 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static bool	found_all_cardinal(t_map *map)
 }
 
 //TODO leak of GNL cannot fine it tho
-int	cardinal_check(int fd, t_map **map)
+int	cardinal_check(int fd, t_map *map)
 {
 	char	*line;
 	bool	all_cardinal_found;
@@ -87,8 +87,8 @@ int	cardinal_check(int fd, t_map **map)
 			return ((void)read_till_the_end(fd, line), close(fd), \
 				printf("Textures missing\n"), 1);
 		line = format_line(line);
-		found_one_cardinal(line, *map);
-		all_cardinal_found = found_all_cardinal(*map);
+		found_one_cardinal(line, map);
+		all_cardinal_found = found_all_cardinal(map);
 		free(line);
 	}
 	all_cardinal_found = true;
@@ -101,7 +101,7 @@ int	cardinal_check(int fd, t_map **map)
 	}
 	if (all_cardinal_found == false)
 		return (printf("Multiple textures\n"), close(fd), 1);
-	if (check_access_textures(*map))
+	if (check_access_textures(map))
 		return (close(fd), 1);
 	return (close(fd), 0);
 }

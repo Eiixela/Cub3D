@@ -1,84 +1,26 @@
-==149332== Memcheck, a memory error detector
-==149332== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==149332== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==149332== Command: ./cub maps/good/cheese_maze.cub
-==149332== Parent PID: 124069
-==149332== 
-==149332== Invalid read of size 8
-==149332==    at 0x4011BA: free_map_array (main.c:32)
-==149332==    by 0x401272: free_map (main.c:47)
-==149332==    by 0x40134E: main (main.c:88)
-==149332==  Address 0x4d665c0 is 0 bytes inside a block of size 120 free'd
-==149332==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x4029DB: map_fill (fill_map.c:183)
-==149332==    by 0x40165E: file_check (file_check.c:72)
-==149332==    by 0x4013A3: parsing (parsing.c:21)
-==149332==    by 0x401305: main (main.c:64)
-==149332==  Block was alloc'd at
-==149332==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x40294A: map_fill (fill_map.c:177)
-==149332==    by 0x40165E: file_check (file_check.c:72)
-==149332==    by 0x4013A3: parsing (parsing.c:21)
-==149332==    by 0x401305: main (main.c:64)
-==149332== 
-==149332== Invalid free() / delete / delete[] / realloc()
-==149332==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x401282: free_map (main.c:48)
-==149332==    by 0x40134E: main (main.c:88)
-==149332==  Address 0x4d665c0 is 0 bytes inside a block of size 120 free'd
-==149332==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x4029DB: map_fill (fill_map.c:183)
-==149332==    by 0x40165E: file_check (file_check.c:72)
-==149332==    by 0x4013A3: parsing (parsing.c:21)
-==149332==    by 0x401305: main (main.c:64)
-==149332==  Block was alloc'd at
-==149332==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x40294A: map_fill (fill_map.c:177)
-==149332==    by 0x40165E: file_check (file_check.c:72)
-==149332==    by 0x4013A3: parsing (parsing.c:21)
-==149332==    by 0x401305: main (main.c:64)
-==149332== 
-==149332== 
-==149332== FILE DESCRIPTORS: 6 open (3 std) at exit.
-==149332== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==149332==    <inherited from parent>
-==149332== 
-==149332== Open file descriptor 43: /home/aljulien/.config/Code/logs/20241015T155649/ptyhost.log
-==149332==    <inherited from parent>
-==149332== 
-==149332== Open file descriptor 3: /home/aljulien/Documents/C/C4/Cub3D/valgrind_output.txt
-==149332==    <inherited from parent>
-==149332== 
-==149332== 
-==149332== HEAP SUMMARY:
-==149332==     in use at exit: 14 bytes in 2 blocks
-==149332==   total heap usage: 2,581 allocs, 2,580 frees, 40,707 bytes allocated
-==149332== 
-==149332== 6 bytes in 1 blocks are definitely lost in loss record 1 of 2
-==149332==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x403B76: ft_calloc (get_next_line_utils.c:38)
-==149332==    by 0x403806: get_line_ (get_next_line.c:63)
-==149332==    by 0x403A83: get_next_line (get_next_line.c:113)
-==149332==    by 0x40249A: read_till_the_end (fill_map.c:19)
-==149332==    by 0x402C20: fill_map (fill_map.c:115)
-==149332==    by 0x4029C2: map_fill (fill_map.c:182)
-==149332==    by 0x40165E: file_check (file_check.c:72)
-==149332==    by 0x4013A3: parsing (parsing.c:21)
-==149332==    by 0x401305: main (main.c:64)
-==149332== 
-==149332== 8 bytes in 1 blocks are definitely lost in loss record 2 of 2
-==149332==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==149332==    by 0x402962: map_fill (fill_map.c:178)
-==149332==    by 0x40165E: file_check (file_check.c:72)
-==149332==    by 0x4013A3: parsing (parsing.c:21)
-==149332==    by 0x401305: main (main.c:64)
-==149332== 
-==149332== LEAK SUMMARY:
-==149332==    definitely lost: 14 bytes in 2 blocks
-==149332==    indirectly lost: 0 bytes in 0 blocks
-==149332==      possibly lost: 0 bytes in 0 blocks
-==149332==    still reachable: 0 bytes in 0 blocks
-==149332==         suppressed: 0 bytes in 0 blocks
-==149332== 
-==149332== For lists of detected and suppressed errors, rerun with: -s
-==149332== ERROR SUMMARY: 17 errors from 4 contexts (suppressed: 0 from 0)
+==83528== Memcheck, a memory error detector
+==83528== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==83528== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==83528== Command: ./cub maps/good/good.cub
+==83528== Parent PID: 70518
+==83528== 
+==83528== 
+==83528== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==83528== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==83528==    <inherited from parent>
+==83528== 
+==83528== Open file descriptor 43: /home/aljulien/.config/Code/logs/20241017T093040/ptyhost.log
+==83528==    <inherited from parent>
+==83528== 
+==83528== Open file descriptor 3: /home/aljulien/Documents/C/C4/Cub3D/valgrind_output.txt
+==83528==    <inherited from parent>
+==83528== 
+==83528== 
+==83528== HEAP SUMMARY:
+==83528==     in use at exit: 0 bytes in 0 blocks
+==83528==   total heap usage: 3,000 allocs, 3,000 frees, 167,083 bytes allocated
+==83528== 
+==83528== All heap blocks were freed -- no leaks are possible
+==83528== 
+==83528== For lists of detected and suppressed errors, rerun with: -s
+==83528== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

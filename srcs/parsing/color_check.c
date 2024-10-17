@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:56:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/15 16:32:03 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:10:17 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,31 @@ static int	*fill_color_int(char **color, int *color_tab)
 	{
 		if (color[i])
 			color_tab[i] = ft_atoi(color[i]);
-		else
-			return (NULL);
-		if (color_tab[i] < 0 || color_tab[i] > 255)
-		{
-			printf("Please check the color values\n");
-			return (NULL);
-		}
 		i++;
 	}
 	return (color_tab);
+}
+
+bool	check_color_value(t_map *map)
+{
+	int  i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (256 < (map)->floor_c[i] || 0 > (map)->floor_c[i])
+		{
+			free_map(map);
+			return (false);
+		}
+		if (256 < (map)->ceiling_c[i] || 0 > (map)->ceiling_c[i])
+		{
+			free_map(map);
+			return (false);
+		}
+		i++;
+	}
+	return (true);
 }
 
 static t_map	*fill_color(char *line, char *path, t_map *map)
@@ -74,10 +89,10 @@ static t_map	*fill_color(char *line, char *path, t_map *map)
 			return (NULL);
 		map->floor_c = fill_color_int(color, map->floor_c);
 		free_dtab(color);
+		if (!check_color_value(map))
+			return (NULL);
 		if (!map->floor_c)
-		{
-			return (free_map(&map), NULL);
-		}
+			return (free_map(map), NULL);
 	}
 	else if (ft_strncmp("C ", line, 2) == 0)
 	{
@@ -87,7 +102,7 @@ static t_map	*fill_color(char *line, char *path, t_map *map)
 		map->ceiling_c = fill_color_int(color, map->ceiling_c);
 		free_dtab(color);
 		if (!map->ceiling_c)
-			return (free_map(&map), NULL);
+			return (free_map(map), NULL);
 	}
 	return (map);
 }
@@ -100,7 +115,7 @@ static t_map	*check_for_color(t_map *map)
 	while (i < 3)
 	{
 		if (map->ceiling_c[i] == -1 || map->floor_c[i] == -1)
-			return (free_map(&map), NULL);
+			return (free_map(map), NULL);
 		i++;
 	}
 	return (map);
@@ -160,7 +175,7 @@ bool	found_all_color(t_map *map)
 	return (false);
 }
 
-int	color_check(int fd, t_map **map)
+int	color_check(int fd, t_map *map)
 {
 	char	*line;
 	bool	all_color_found;
@@ -175,10 +190,10 @@ int	color_check(int fd, t_map **map)
 			return ((void)read_till_the_end(fd, line), \
 				close(fd), printf("Missing colors\n"), 1);
 		line = format_line(line);
-		*map = found_one_color(line, *map);
-		if (!*map)
+		map = found_one_color(line, map);
+		if (!map)
 			return ((void)read_till_the_end(fd, line), close(fd), 1);
-		all_color_found = found_all_color(*map);
+		all_color_found = found_all_color(map);
 		free(line);
 	}
 	all_color_found = true;

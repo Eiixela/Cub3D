@@ -6,34 +6,36 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/15 16:35:47 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/17 09:55:55 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static int	player_where(t_map *map, int *player_x, int *player_y)
+static int	player_where(t_map *map, int *player_y, int *player_x)
 {
-	int	y;
 	int	x;
+	int	y;
+	int count_player;
 
-	y = 0;
-	while (y < map->size->y)
+	count_player = 0;
+	x = 0;
+	while (x < map->size->x)
 	{
-		x = 0;
-		while (map->map[y][x])
+		y = 0;
+		while (map->map[x][y])
 		{
-			if (map->map[y][x] == 'S')
+			if (!find_player(map->map[x][y]))
 			{
-				*player_x = x;
 				*player_y = y;
-				return (1);
+				*player_x = x;
+				count_player++;
 			}
-			x++;
+			y++;
 		}
-		y++;
+		x++;
 	}
-	return (0);
+	return (count_player);
 }
 
 static int	is_border(t_map *map, int x, int y)
@@ -42,29 +44,33 @@ static int	is_border(t_map *map, int x, int y)
 		|| map->map[y][x + 1] == '\0');
 }
 
-static int	flood_fill(t_map *map, int x, int y)
+static int	flood_fill(t_map *map, int y, int x)
 {
-	if (y < 0 || y >= map->size->y || x < 0 || !map->map[y][x])
+	if (x < 0 || x >= map->size->x || y < 0 || !map->map[x][y])
 		return (0);
-	if (map->map[y][x] == '1' || map->map[y][x] == 'F')
+	if (map->map[x][y] == '1' || map->map[x][y] == 'F')
 		return (0);
-	if (is_border(map, x, y))
+	if (is_border(map, y, x))
 		return (1);
-	map->map[y][x] = 'F';
-	if (flood_fill(map, x - 1, y) || flood_fill(map, x + 1, y) \
-		|| flood_fill(map, x, y - 1) || flood_fill(map, x, y + 1))
+	if (!find_player(map->map[x][y]))
+		return (0);
+	map->map[x][y] = 'F';
+	if (flood_fill(map, y - 1, x) || flood_fill(map, y + 1, x) \
+		|| flood_fill(map, y, x - 1) || flood_fill(map, y, x + 1))
 		return (1);
 	return (0);
 }
 
-int	map_good(t_map **map)
+int	map_good(t_map *map, t_player *player)
 {
 	int	player_x;
 	int	player_y;
 
-	if (!player_where(*map, &player_x, &player_y))
+	if (player_where(map, &player_x, &player_y) != 1)
 		return (1);
-	if (flood_fill(*map, player_x, player_y))
+	player->x = player_x;
+	player->y = player_y;
+	if (flood_fill(map, player_y, player_x))
 		return (1);
 	return (0);
 }
