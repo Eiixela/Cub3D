@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:07:23 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/17 13:19:38 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/17 13:27:36 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,23 @@ int	draw_2d_map(t_map *map, t_data *data)
 	width = map->size->y;
 	height = map->size->x;
 	pixels = data->img.addr;
-	pixels += (data->width * 2048) + (data->width * 2); // offset to show in center of screen
+	pixels += (data->width * 1224) + (data->width); // offset to show in center of screen
 	y = 0.;
 	while (y < HEIGHT)
 	{
-		new_y = y / 16;
+		new_y = y / 40;
 		draw_y = y * WIDTH;
 		x = 0.;
 		while (x < WIDTH)
 		{
 			draw_x = x;
-			new_x = x / 16;
+			new_x = x / 40;
 			if (new_x < width && new_y < height)
 			{
 				if (map->map[new_y][new_x] == '1')
 					((int *)pixels)[draw_x + draw_y] = (PINK);
 				else if (!find_player(map->map[new_y][new_x]))
-					((int *)pixels)[draw_x + draw_y] = (ORANGE);
+					((int *)pixels)[draw_x + draw_y] = (PASTEL_PURPLE);
 				else if (map->map[new_y][new_x] == 'F' || map->map[new_y][new_x] == '0')
 					((int *)pixels)[draw_x + draw_y] = (LIME_GREEN);
 			}
