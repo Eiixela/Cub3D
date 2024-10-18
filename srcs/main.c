@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/18 00:18:12 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/18 02:12:17 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ int	main(int ac, char **av)
 	t_data		data;
 	t_player	player;
 	t_pplane	pplane;
+	t_keys		keys;
 
+	data.keys = &keys;
 	if (!init_map(&map))
 		return (1);
 	if (!parsing(ac, av, &map, &player))

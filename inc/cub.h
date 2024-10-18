@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/18 00:11:30 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/18 02:13:48 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@
 # define PINK 0xffa2cc
 # define PASTEL_PURPLE 0xb1a3ff
 
+typedef struct s_keys
+{
+	int	w;
+	int	s;
+	int	a;
+	int	d;
+	int	left;
+	int	right;
+}	t_keys;
+
 typedef struct s_pplane
 {
 	int		width;
@@ -53,11 +63,11 @@ typedef struct s_pplane
 
 typedef struct s_player
 {
-	int	view_height;
-	int	fov;
-	int	x; // will become float at some point for sure
-	int	y; // will become float at some point for sure
-	int	view_angle; // x,y and view_angle is POV
+	int		view_height;
+	int		fov;
+	float	x; // will become float at some point for sure
+	float	y; // will become float at some point for sure
+	float	view_angle; // x,y and view_angle is POV
 }	t_player;
 
 typedef struct s_point
@@ -92,16 +102,19 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	int		width;
-	int		height;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_img	img;
-	t_map	*map;
+	int			width;
+	int			height;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_img		img;
+	t_map		*map;
+	t_player	*player;
+	t_pplane	*pplane;
+	t_keys		*keys;
 }	t_data;
 
 //PARSING
-int	parsing(int ac, char **av, t_map *map, t_player *player);
+int		parsing(int ac, char **av, t_map *map, t_player *player);
 
 //parsing_utils
 int		map_started(char *line);
@@ -115,14 +128,17 @@ void	data_init(t_data *data);
 int		draw(t_map *map, t_data *data);
 int		draw_2d_map(t_map *map, t_data *data);
 int		draw_new_2d(t_map *map, t_data *data);
-int		handle_keyboard(int keysym, t_data *data);
+void	draw_new_image(t_data *data);
+int		key_press(int keysym, t_data *data);
+int		key_release(int keysym, t_data *data);
 int		handle_win_exit(t_data *data);
+int		key_loop(t_data *data);
 
 // init
 int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
 
 //file_check
-int	file_check(char *file, t_map *map);
+int		file_check(char *file, t_map *map);
 
 //cardinal_check
 int		cardinal_check(int fd, t_map *map);
