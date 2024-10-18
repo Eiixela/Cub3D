@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:07:23 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/18 02:07:18 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/18 03:40:37 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,10 +171,10 @@ int	draw_new_2d(t_map *map, t_data *data)
 					((int *)pixels)[draw_x + draw_y] = (PINK);
 				else if (player_position(new_x, new_y, map) == 0)
 					((int *)pixels)[draw_x + draw_y] = (PASTEL_PURPLE);
-				else if (map->map[new_y][new_x] == 'F' || map->map[new_y][new_x] == '0' || !find_player(map->map[new_y][new_x]))
+				else if (map->map[new_y][new_x] == 'F' || \
+					map->map[new_y][new_x] == '0' || \
+					!find_player(map->map[new_y][new_x]))
 					((int *)pixels)[draw_x + draw_y] = (LIME_GREEN);
-				// else if (map->map[new_y][new_x] != -32)
-				// 	((int *)pixels)[draw_x + draw_y] = (LIME_GREEN);
 			}
 			x += 1;
 		}
