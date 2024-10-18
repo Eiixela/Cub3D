@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:15 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/18 03:39:50 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/18 13:00:47 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ void	data_init(t_data *data)
 	data->img.ptr = mlx_new_image(data->mlx_ptr, data->width, data->height);
 	data->img.addr = mlx_get_data_addr(data->img.ptr, &data->img.bit_per_pixel, \
 		&data->img.line_len, &data->img.endian);
+	data->img_fov.ptr = mlx_new_image(data->mlx_ptr, data->width, data->height);
+	data->img_fov.addr = mlx_get_data_addr(data->img_fov.ptr, &data->img_fov.bit_per_pixel, \
+		&data->img_fov.line_len, &data->img_fov.endian);
 	data->keys->w = 0;
 	data->keys->s = 0;
 	data->keys->a = 0;

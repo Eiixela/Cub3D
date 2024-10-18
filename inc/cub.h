@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/18 02:13:48 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/18 16:51:18 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@
 # define CRIMSON 0xc70039
 # define PINK 0xffa2cc
 # define PASTEL_PURPLE 0xb1a3ff
+
+typedef struct {
+    double x;
+    double y;
+} t_vector2D;
+
+typedef struct {
+    t_vector2D origin;
+    t_vector2D direction;
+} t_ray;
 
 typedef struct s_keys
 {
@@ -107,6 +117,7 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		img;
+	t_img		img_fov;
 	t_map		*map;
 	t_player	*player;
 	t_pplane	*pplane;
