@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:15 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/21 14:30:05 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:29:02 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,52 +18,67 @@ int	handle_win_exit(t_data *data)
 	return (0);
 }
 
+int check_collision(t_map *map, double x, double y)
+{
+    int map_x = (int)(x / SQUARE_SIZE);
+    int map_y = (int)(y / SQUARE_SIZE);
+
+    if (map->map[map_y][map_x] == '1')
+        return (1);
+    return (0);
+}
+
+
 int	key_loop(t_data *data)
 {
 	int	moved;
+	//double move_speed = 2.0; // Adjust this value for desired movement speed
+    double new_x = data->map->player_position->x;
+    double new_y = data->map->player_position->y;
 
 	moved = 0;
 	if (data->keys->w == 1)
 	{
-		if (data->map->map[(int)(data->map->player_position->y - 1)]
+		if (data->map->map[(int)(data->map->player_position->y - 0.19)]
 			[(int)data->map->player_position->x] == '1')
 		{
-			printf("%d saras\n", (int)(data->map->player_position->x + 1));
 			printf("WALL: NORTH\nFACING: SOUTH\n\n");
 			return (0);
 		}
-		data->map->player_position->y -= 1;
+		data->map->player_position->y -= 0.064;
 	}
 	if (data->keys->s == 1)
 	{
-		if (data->map->map[(int)(data->map->player_position->y + 1)]
+		if (data->map->map[(int)(data->map->player_position->y + 0.19)]
 			[(int)data->map->player_position->x] == '1')
 		{
 			printf("WALL: SOUTH\nFACING: NORTH\n\n");
 			return (0);
 		}
-		data->map->player_position->y += 1;
+		data->map->player_position->y += 0.064;
 	}
 	if (data->keys->a == 1)
 	{
 		if (data->map->map[(int)data->map->player_position->y]
-			[(int)(data->map->player_position->x - 1)] == '1')
+			[(int)(data->map->player_position->x - 0.19)] == '1')
 		{
 			printf("WALL: WEST\nFACING: EAST\n\n");
 			return (0);
 		}
-		data->map->player_position->x -= 1;
+		data->map->player_position->x -= 0.064;
 	}
 	if (data->keys->d == 1)
 	{
 		if (data->map->map[(int)data->map->player_position->y]
-			[(int)(data->map->player_position->x + 1)] == '1')
+			[(int)(data->map->player_position->x + 0.19)] == '1')
 		{
 			printf("WALL: EAST\nFACING: WEST\n\n");
 			return (0);
 		}
-		data->map->player_position->x += 1;
+		data->map->player_position->x += 0.064;
 	}
+	new_x = data->map->player_position->x;
+    new_y = data->map->player_position->y;
 	draw_new_image(data);
 	return (0);
 }
