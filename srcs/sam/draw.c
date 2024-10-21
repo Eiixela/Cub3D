@@ -41,6 +41,63 @@ void draw_line(t_data *data, int x1, int y1, int x2, int y2, int color)
     }
 }
 
+/* void draw_rays(t_data *data)
+{
+	int ray_angle;
+	int rays;
+	int dof;
+	float angle_tan;
+	float rays_y;
+	float rays_x;
+	float offset_x;
+	float offset_y;
+	int mx;
+	int my;
+	int mp;
+ 
+	rays = 0;
+	ray_angle = data->map->player_position->angle;
+	while (rays < 1)
+	{
+		dof = 0;
+		angle_tan = -1 / tan(ray_angle);
+		if (ray_angle > PI)
+		{
+			rays_y = ((((int)(data->map->player_position->y)>>6) << 6) + 64);
+			rays_x = (data->map->player_position->y - rays_y) * angle_tan + data->map->player_position->x;
+			offset_y = -64;
+			offset_x = -offset_y * angle_tan;
+		}
+		if (ray_angle < PI)
+		{
+			rays_y = ((((int)(data->map->player_position->y)>>6) << 6) - 0.0001);
+			rays_x = (data->map->player_position->y - rays_y) * angle_tan + data->map->player_position->x;
+			offset_y = 64;
+			offset_x = -offset_y * angle_tan;
+		}
+		if (angle_tan == 0 || angle_tan == PI)
+		{
+			dof = 8;
+			rays_x = data->map->player_position->x;
+			rays_y = data->map->player_position->y;
+		}
+		rays++;
+	}
+	while (dof < 8)
+	{
+		mx = (int)(rays_x) >> 6;
+		my = (int)(rays_y) >> 6;
+		mp = my * data->map->size->x + my;
+		if (mp < data->map->size->x * data->map->size->y)
+			dof = 8;
+		else
+		{
+			rays_x += offset_x;
+			rays_y += offset_y;
+		}
+	}
+} */
+
 int	player_position(double new_x, double new_y, t_map *map)
 {
 	(void)map;
@@ -100,5 +157,6 @@ int draw_new_2d(t_map *map, t_data *data)
     int end_y = player_y + sin(map->player_position->angle) * line_length;
 
     draw_line(data, player_x, player_y, end_x, end_y, RED); // You can change RED to any color you prefer
+	//draw_rays(data);
 	return (0);
 }
