@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/21 16:34:02 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:08:26 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define PLAYER_SIZE 3
 # define SQUARE_SIZE 50
 
+
 //--------------------------------------------------|
 
 //Define for colors
@@ -42,7 +43,8 @@
 # define CRIMSON 0xc70039
 # define PINK 0xffa2cc
 # define PASTEL_PURPLE 0xb1a3ff
-#define GRID_COLOR 0x808080
+# define GRID_COLOR 0x808080
+# define RED 0xFF0000
 
 typedef struct {
     double x;
@@ -89,6 +91,9 @@ typedef struct s_point
 {
 	double	x;
 	double	y;
+	double	angle;
+	double dx;
+	double dy;
 }	t_point;
 
 typedef struct s_map

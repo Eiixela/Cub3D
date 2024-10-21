@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:15 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/21 16:29:02 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:09:41 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,26 @@ int check_collision(t_map *map, double x, double y)
 int	key_loop(t_data *data)
 {
 	int	moved;
-	//double move_speed = 2.0; // Adjust this value for desired movement speed
     double new_x = data->map->player_position->x;
     double new_y = data->map->player_position->y;
 
 	moved = 0;
+	if (data->keys->left == 1)
+	{
+  		data->map->player_position->angle -= 0.1;
+		if (data->map->player_position->angle < 0)
+        	data->map->player_position->angle += 2 * PI;
+    	data->map->player_position->dx = cos(data->map->player_position->angle) * 5;
+    	data->map->player_position->dy = sin(data->map->player_position->angle) * 5;
+	}
+	if (data->keys->right == 1)
+	{
+    	data->map->player_position->angle += 0.1;
+    	if (data->map->player_position->angle > 2 * PI)
+        	data->map->player_position->angle -= 2 * PI;
+    	data->map->player_position->dx = cos(data->map->player_position->angle) * 5;
+    	data->map->player_position->dy = sin(data->map->player_position->angle) * 5;
+	}
 	if (data->keys->w == 1)
 	{
 		if (data->map->map[(int)(data->map->player_position->y - 0.19)]

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 00:01:13 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/21 11:23:53 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:57:22 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ int	key_press(int keysym, t_data *data)
 		data->keys->a = 1;
 	else if (keysym == 'd')
 		data->keys->d = 1;
+	else if (keysym == XK_Left)
+		data->keys->left = 1;
+	else if (keysym == XK_Right)
+		data->keys->right = 1;
 	return (0);
 }
 
@@ -49,5 +53,9 @@ int	key_release(int keysym, t_data *data)
 		data->keys->a = 0;
 	else if (keysym == 'd')
 		data->keys->d = 0;
+	else if (keysym == XK_Left)
+		data->keys->left = 0;
+	else if (keysym == XK_Right)
+		data->keys->right = 0;
 	return (0);
 }

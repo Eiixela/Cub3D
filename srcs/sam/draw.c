@@ -12,6 +12,35 @@
 
 #include "cub.h"
 
+void draw_line(t_data *data, int x1, int y1, int x2, int y2, int color)
+{
+    int dx = abs(x2 - x1);
+    int dy = abs(y2 - y1);
+    int sx = x1 < x2 ? 1 : -1;
+    int sy = y1 < y2 ? 1 : -1;
+    int err = (dx > dy ? dx : -dy) / 2;
+    int e2;
+
+    while (1)
+    {
+        if (x1 >= 0 && x1 < WIDTH && y1 >= 0 && y1 < HEIGHT)
+            ((int *)data->img.addr)[y1 * WIDTH + x1] = color;
+        if (x1 == x2 && y1 == y2)
+            break;
+        e2 = err;
+        if (e2 > -dx)
+        {
+            err -= dy;
+            x1 += sx;
+        }
+        if (e2 < dy)
+        {
+            err += dx;
+            y1 += sy;
+        }
+    }
+}
+
 int	player_position(double new_x, double new_y, t_map *map)
 {
 	(void)map;
@@ -63,5 +92,13 @@ int draw_new_2d(t_map *map, t_data *data)
 		}
 		y++;
 	}
+
+	int player_x = map->player_position->x * SQUARE_SIZE;
+    int player_y = map->player_position->y * SQUARE_SIZE;
+    int line_length = 30; // Adjust this value to change the line length
+    int end_x = player_x + cos(map->player_position->angle) * line_length;
+    int end_y = player_y + sin(map->player_position->angle) * line_length;
+
+    draw_line(data, player_x, player_y, end_x, end_y, RED); // You can change RED to any color you prefer
 	return (0);
 }
