@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/18 16:51:18 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:24:50 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define EXIT_CROSS 17
 # define WIDTH 2500
 # define HEIGHT 1300
-# define PI	3.141592654
+# define PI	3.1415926535
 
 //--------------------------------------------------|
 
@@ -40,6 +40,7 @@
 # define CRIMSON 0xc70039
 # define PINK 0xffa2cc
 # define PASTEL_PURPLE 0xb1a3ff
+#define GRID_COLOR 0x808080
 
 typedef struct {
     double x;
@@ -75,8 +76,10 @@ typedef struct s_player
 {
 	int		view_height;
 	int		fov;
-	float	x; // will become float at some point for sure
-	float	y; // will become float at some point for sure
+	float	x;
+	float	y;
+	//float	move_speed;
+    float	rotation_speed;
 	float	view_angle; // x,y and view_angle is POV
 }	t_player;
 
@@ -136,7 +139,6 @@ bool	init_map(t_map *map);
 
 //mlx
 void	data_init(t_data *data);
-int		draw(t_map *map, t_data *data);
 int		draw_2d_map(t_map *map, t_data *data);
 int		draw_new_2d(t_map *map, t_data *data);
 void	draw_new_image(t_data *data);

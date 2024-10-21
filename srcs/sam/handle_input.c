@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 00:01:13 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/18 16:46:24 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:23:53 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	draw_new_image(t_data *data)
 {
-	// mlx_destroy_image(data->mlx_ptr, data->img.ptr);
-	// data->img.ptr = mlx_new_image(data->mlx_ptr, data->width, data->height);
-	// data->img.addr = mlx_get_data_addr(data->img.ptr, \
-	// 	&data->img.bit_per_pixel, &data->img.line_len, &data->img.endian);
+	mlx_destroy_image(data->mlx_ptr, data->img.ptr);
+	data->img.ptr = mlx_new_image(data->mlx_ptr, data->width, data->height);
+	data->img.addr = mlx_get_data_addr(data->img.ptr, \
+		&data->img.bit_per_pixel, &data->img.line_len, &data->img.endian);
 	draw_new_2d(data->map, data);
+	//draw_player();
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.ptr, 0, 0);
-	// mlx_loop(data->mlx_ptr);
+	mlx_loop(data->mlx_ptr);
 }
 
 int	key_press(int keysym, t_data *data)
