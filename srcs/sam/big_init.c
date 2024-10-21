@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:07:36 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/18 02:22:08 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:22:27 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	projection_plane_init(t_pplane *pplane, t_player *player)
 	pplane->center_w = (pplane->width >> 1);
 	pplane->center_h = (pplane->height >> 1);
 	pplane->distance_from_player = (pplane->center_w) / tan(player->fov >> 1);
-	pplane->angle_between_rays = (float)player->fov / pplane->width;
+	pplane->angle_between_rays = (double)player->fov / pplane->width;
 	return (0);
 }
 

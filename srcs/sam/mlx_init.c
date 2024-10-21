@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:15 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/21 11:24:22 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:30:05 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ int	key_loop(t_data *data)
 	moved = 0;
 	if (data->keys->w == 1)
 	{
-		if (data->map->map[data->map->player_position->y - 1]
-			[data->map->player_position->x] == '1')
+		if (data->map->map[(int)(data->map->player_position->y - 1)]
+			[(int)data->map->player_position->x] == '1')
 		{
+			printf("%d saras\n", (int)(data->map->player_position->x + 1));
 			printf("WALL: NORTH\nFACING: SOUTH\n\n");
 			return (0);
 		}
@@ -35,8 +36,8 @@ int	key_loop(t_data *data)
 	}
 	if (data->keys->s == 1)
 	{
-		if (data->map->map[data->map->player_position->y + 1]
-			[data->map->player_position->x] == '1')
+		if (data->map->map[(int)(data->map->player_position->y + 1)]
+			[(int)data->map->player_position->x] == '1')
 		{
 			printf("WALL: SOUTH\nFACING: NORTH\n\n");
 			return (0);
@@ -45,8 +46,8 @@ int	key_loop(t_data *data)
 	}
 	if (data->keys->a == 1)
 	{
-		if (data->map->map[data->map->player_position->y]
-			[data->map->player_position->x - 1] == '1')
+		if (data->map->map[(int)data->map->player_position->y]
+			[(int)(data->map->player_position->x - 1)] == '1')
 		{
 			printf("WALL: WEST\nFACING: EAST\n\n");
 			return (0);
@@ -55,8 +56,8 @@ int	key_loop(t_data *data)
 	}
 	if (data->keys->d == 1)
 	{
-		if (data->map->map[data->map->player_position->y]
-			[data->map->player_position->x + 1] == '1')
+		if (data->map->map[(int)data->map->player_position->y]
+			[(int)(data->map->player_position->x + 1)] == '1')
 		{
 			printf("WALL: EAST\nFACING: WEST\n\n");
 			return (0);

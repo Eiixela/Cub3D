@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/21 11:24:50 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:22:27 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,24 @@ typedef struct s_pplane
 	int		center_w;
 	int		center_h;
 	int		distance_from_player;
-	float	angle_between_rays;
+	double	angle_between_rays;
 }	t_pplane;
 
 typedef struct s_player
 {
 	int		view_height;
 	int		fov;
-	float	x;
-	float	y;
-	//float	move_speed;
-    float	rotation_speed;
-	float	view_angle; // x,y and view_angle is POV
+	double	x;
+	double	y;
+	//double	move_speed;
+    double	rotation_speed;
+	double	view_angle; // x,y and view_angle is POV
 }	t_player;
 
 typedef struct s_point
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 }	t_point;
 
 typedef struct s_map
