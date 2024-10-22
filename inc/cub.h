@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 16:00:12 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:01:13 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,8 @@ int		draw_new_2d(t_map *map, t_data *data);
 void	draw_ceiling_and_floor(t_data *data);
 
 //big_init
-/*int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
-int		projection_plane_init(t_pplane *pplane, t_player *player);
+int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
+/*int		projection_plane_init(t_pplane *pplane, t_player *player);
 int		player_init(t_player *player);*/
 
 //---------------------------------------MLX_INIT-------------------------------------------------------
