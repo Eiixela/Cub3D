@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 11:56:11 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:20:47 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,15 @@
 # define ORANGE 0xffc300
 # define BRIGHT_RED 0xff5733
 # define CRIMSON 0xc70039
-# define PINK 0xffa2cc
+# define PINK 0xff5cbe
 # define PASTEL_PURPLE 0xb1a3ff
 # define GRID_COLOR 0x808080
 # define RED 0xFF0000
 # define YELLOW 0xFFFF00  
+# define BUBBLEGUM_PINK 0xFF9EE2
+# define DARK_PINK 0xFF36AF
+# define LIGHT_PINK 0xFFC4F3
+
 
 
 typedef struct {

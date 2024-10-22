@@ -52,11 +52,11 @@ int	draw_new_2d(t_map *map, t_data *data)
 			{
 				current_char = map->map[(int)new_y][(int)new_x];
 				if (current_char == '1')
-					color = PINK;
+					color = DARK_PINK;
 				else if (player_position(x, y, map) == 0)
 					color = PASTEL_PURPLE;
 				else if (current_char == '0')
-					color = LIME_GREEN;
+					color = LIGHT_PINK;
 				else
 					color = 0;
 				((int *)pixels)[(int)draw_x + (int)draw_y] = color;
@@ -74,7 +74,7 @@ int	draw_new_2d(t_map *map, t_data *data)
 	int i = 0;
 	while (i < 60)
 	{
-		draw_line(data, player_coor, &angle, RED);
+		draw_line(data, player_coor, &angle, PINK);
 		angle += 0.03;
 		i++;
 	}
