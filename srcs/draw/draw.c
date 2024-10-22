@@ -1,0 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/22 15:52:48 by aljulien          #+#    #+#             */
+/*   Updated: 2024/10/22 15:52:55 by aljulien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub.h"
+
+void	draw_new_image(t_data *data)
+{
+	mlx_destroy_image(data->mlx_ptr, data->img.ptr);
+	data->img.ptr = mlx_new_image(data->mlx_ptr, data->width, data->height);
+	data->img.addr = mlx_get_data_addr(data->img.ptr, \
+		&data->img.bit_per_pixel, &data->img.line_len, &data->img.endian);
+	draw_ceiling_and_floor(data);
+	draw_new_2d(data->map, data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.ptr, 0, 0);
+	mlx_loop(data->mlx_ptr);
+}

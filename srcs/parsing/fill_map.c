@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/16 17:16:08 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/18 09:49:43 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static char	*fill_one_line(char *line)
 
 	one_line = NULL;
 	one_line = malloc(sizeof(char) * (ft_strlen(line) + 1));
-	ft_strlcpy(one_line, line, ft_strlen(line));
+	ft_strlcpy(one_line, line, ft_strlen(line) + 1);
 	one_line = space_in_minus(one_line);
 	return (one_line);
 }
@@ -104,7 +104,7 @@ static int	fill_map(int fd, t_map *map, int number_line_map, int i)
 	}
 	while (i < number_line_map && line)
 	{
-		map->map[i] = fill_one_line(line);
+ 		map->map[i] = fill_one_line(line);
 		free(line);
 		if (!map->map[i])
 			return (1);
@@ -161,7 +161,7 @@ char	**map_fill_square(t_map *map)
 		else
 		{
 			j = 0;
-			while (j < map->size->y)
+			while (j <= map->size->y)
 				map_square[i][j++] = -32;
 			map_square[i][j] = '\0';
 		}

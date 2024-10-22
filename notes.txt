@@ -11,3 +11,9 @@ Redering videos --> https://www.youtube.com/@thehelloworldguyofficial/playlists
 Get textures here ---> https://itch.io/
 
 https://lodev.org/cgtutor/raycasting.html
+
+
+
+TODOOOOOOO :
+
+Makes minimap resquale, so when we have a very big map we still have the floor and the ceiling and not only the minimap on screen

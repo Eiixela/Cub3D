@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/16 17:33:50 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:51:10 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	free_map(t_map *map)
 		free(map->ceiling_c);
 		free(map->floor_c);
 		free(map->size);
+		free(map->player_position);
+		// free(map);
 		map = NULL;
 	}
 }
@@ -50,7 +52,9 @@ int	main(int ac, char **av)
 	t_data		data;
 	t_player	player;
 	t_pplane	pplane;
+	t_keys		keys;
 
+	data.keys = &keys;
 	if (!init_map(&map))
 		return (1);
 	if (!parsing(ac, av, &map, &player))
@@ -58,10 +62,11 @@ int	main(int ac, char **av)
 		if (big_init(&data, &player, &pplane, &map) == 1)
 			return (1);
 		printf("ok!\n");
+		draw_new_image(&data);
 		free_map(&map);
 		return (0);
 	}
 	printf("hmmm...\n");
-	//free_map(&map);
+	free_map(&map);
 	return (1);
 }
