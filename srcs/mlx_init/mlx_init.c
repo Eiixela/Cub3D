@@ -3,27 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:15 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/22 16:51:16 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/22 18:44:39 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static void cleanup(t_data *data)
+static void	cleanup(t_data *data)
 {
-    if (data->img.ptr)
-        mlx_destroy_image(data->mlx_ptr, data->img.ptr);
-    if (data->win_ptr)
-        mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-    if (data->mlx_ptr)
-    {
-        mlx_destroy_display(data->mlx_ptr);
-        free(data->mlx_ptr);
-		return ;
-    }
+	if (data->img.ptr)
+		mlx_destroy_image(data->mlx_ptr, data->img.ptr);
+	if (data->img_fov.ptr)
+		mlx_destroy_image(data->mlx_ptr, data->img_fov.ptr);
+	if (data->win_ptr)
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	if (data->mlx_ptr)
+	{
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+	}
+	return ;
 }
 
 int	handle_win_exit(t_data *data)
