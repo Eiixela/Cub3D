@@ -6,7 +6,7 @@
 #    By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/10/22 10:56:37 by aljulien         ###   ########.fr        #
+#    Updated: 2024/10/22 15:55:04 by aljulien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,13 +37,15 @@ OBJECTS = $(patsubst srcs/%.c,$(OBJECT_DIR)%.o,\
 		srcs/parsing/color_check.c\
 		srcs/gnl/get_next_line.c\
 		srcs/gnl/get_next_line_utils.c\
-		srcs/sam/mlx_init.c\
-		srcs/sam/big_init.c\
-		srcs/sam/handle_input.c\
-		srcs/sam/draw_2D_map.c\
-		srcs/sam/draw_rays.c\
-		srcs/sam/draw_rays_utils.c\
-		srcs/sam/key_hook_happening.c\
+		srcs/mlx_init/mlx_init.c\
+		srcs/mlx_init/handle_input.c\
+		srcs/mlx_init/key_hook_happening.c\
+		srcs/draw/big_init.c\
+		srcs/draw/draw_rays.c\
+		srcs/draw/draw_2D_map.c\
+		srcs/draw/draw_rays_utils.c\
+		srcs/draw/draw_ceiling_floor.c\
+		srcs/draw/draw.c\
 							)
 
 OBJ_SUBDIRS = $(sort $(dir ${OBJECTS}))

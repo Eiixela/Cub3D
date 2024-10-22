@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 15:39:41 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:00:12 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,15 +144,10 @@ typedef struct s_data
 	t_keys		*keys;
 }	t_data;
 
-//PARSING
-int		parsing(int ac, char **av, t_map *map, t_player *player);
+//---------------------------------------DRAW-------------------------------------------------------
 
-//parsing_utils
-int		map_started(char *line);
-char	*format_line(char *line);
-
-//init
-bool	init_map(t_map *map);
+//draw
+void	draw_new_image(t_data *data);
 
 //draw_rays
 double	draw_line(t_data *data, t_vector2D player_coor, double *angle,
@@ -167,6 +162,16 @@ int		max(int a, int b);
 //draw_2D_map
 int		draw_new_2d(t_map *map, t_data *data);
 
+//draw_ceiling_floor
+void	draw_ceiling_and_floor(t_data *data);
+
+//big_init
+/*int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
+int		projection_plane_init(t_pplane *pplane, t_player *player);
+int		player_init(t_player *player);*/
+
+//---------------------------------------MLX_INIT-------------------------------------------------------
+
 //mlx_init
 void	data_init(t_data *data);
 int		handle_win_exit(t_data *data);
@@ -179,19 +184,21 @@ void	w_key(t_data *data);
 void	a_key(t_data *data);
 void	d_key(t_data *data);
 
-
 //handle_input
 int		key_release(int keysym, t_data *data);
 int		key_press(int keysym, t_data *data);
-void	draw_new_image(t_data *data);
 
-//big_init
-/*int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
-int		projection_plane_init(t_pplane *pplane, t_player *player);
-int		player_init(t_player *player);*/
+//---------------------------------------PARSING-------------------------------------------------------
 
-// init
-int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
+//parsing
+int		parsing(int ac, char **av, t_map *map, t_player *player);
+
+//init
+bool	init_map(t_map *map);
+
+//parsing_utils
+int		map_started(char *line);
+char	*format_line(char *line);
 
 //file_check
 int		file_check(char *file, t_map *map);
