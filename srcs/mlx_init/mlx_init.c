@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:15 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/22 18:44:39 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/22 21:46:34 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	handle_win_exit(t_data *data)
 {
 	mlx_loop_end(data->mlx_ptr);
 	cleanup(data);
+	free_map(data->map);
 	exit(0);
 }
 

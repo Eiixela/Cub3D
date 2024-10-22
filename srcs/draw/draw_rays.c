@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 14:16:58 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/22 19:48:51 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-double	draw_line(t_data *data, t_vector2D player_coor, double *angle,
+double	draw_rays(t_data *data, t_vector2D player_coor, double *angle,
 		int color)
 {
 	t_vector2D	point;

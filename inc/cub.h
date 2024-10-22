@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 16:52:10 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/22 20:06:50 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define SQUARE_SIZE 64
 # define NUM_RAYS 320         // Number of rays to cast
 # define FOV (60 * PI / 180)  // 60 degree field of view
-#define P2 PI/2
-#define P3 3*PI/2
+# define P2 PI/2
+# define P3 3*PI/2
 
 //--------------------------------------------------|
 
@@ -48,10 +48,11 @@
 # define PASTEL_PURPLE 0xb1a3ff
 # define GRID_COLOR 0x808080
 # define RED 0xFF0000
-# define YELLOW 0xFFFF00  
+# define YELLOW 0xFFFF00
 # define BUBBLEGUM_PINK 0xFF9EE2
 # define DARK_PINK 0xFF36AF
 # define LIGHT_PINK 0xFFC4F3
+# define LIGHT_BLUE 0x5DADE2
 
 
 
@@ -150,7 +151,7 @@ typedef struct s_data
 void	draw_new_image(t_data *data);
 
 //draw_rays
-double	draw_line(t_data *data, t_vector2D player_coor, double *angle,
+double	draw_rays(t_data *data, t_vector2D player_coor, double *angle,
 		int color);
 
 //draw_rays_utils
