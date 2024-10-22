@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/21 17:40:46 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/22 11:56:11 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,12 @@
 # define WIDTH 2500
 # define HEIGHT 1300
 # define PI	3.1415926535
-# define PLAYER_SIZE 3
+# define PLAYER_SIZE 10
 # define SQUARE_SIZE 64
 # define NUM_RAYS 60         // Number of rays to cast
 # define FOV (60 * PI / 180)  // 60 degree field of view
 #define P2 PI/2
 #define P3 3*PI/2
-
-
 
 //--------------------------------------------------|
 
@@ -58,10 +56,11 @@ typedef struct {
     double y;
 } t_vector2D;
 
-typedef struct {
+//TODO not usefull yet, if we don't end up using we need to delete
+/* typedef struct {
     t_vector2D origin;
     t_vector2D direction;
-} t_ray;
+} t_ray; */
 
 typedef struct s_keys
 {
@@ -151,15 +150,41 @@ char	*format_line(char *line);
 //init
 bool	init_map(t_map *map);
 
-//mlx
-void	data_init(t_data *data);
-int		draw_2d_map(t_map *map, t_data *data);
+//draw_rays
+double	draw_line(t_data *data, t_vector2D player_coor, double *angle,
+		int color);
+
+//draw_rays_utils
+double	calculate_distance(double x, double y, int x1, int y1);
+void	draw_point(t_data *data, int x, int y, int color);
+int		is_out_of_bounds(t_map *map, int map_x, int map_y);
+int		max(int a, int b);
+
+//draw_2D_map
 int		draw_new_2d(t_map *map, t_data *data);
-void	draw_new_image(t_data *data);
-int		key_press(int keysym, t_data *data);
-int		key_release(int keysym, t_data *data);
+
+//mlx_init
+void	data_init(t_data *data);
 int		handle_win_exit(t_data *data);
-int		key_loop(t_data *data);
+
+//key_hook_happenning
+void	left_arrow(t_data *data);
+void	right_arrow(t_data *data);
+void	s_key(t_data *data);
+void	w_key(t_data *data);
+void	a_key(t_data *data);
+void	d_key(t_data *data);
+
+
+//handle_input
+int		key_release(int keysym, t_data *data);
+int		key_press(int keysym, t_data *data);
+void	draw_new_image(t_data *data);
+
+//big_init
+/*int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
+int		projection_plane_init(t_pplane *pplane, t_player *player);
+int		player_init(t_player *player);*/
 
 // init
 int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
@@ -191,7 +216,6 @@ int		read_till_the_end(int fd, char *line);
 
 //free
 void	free_map(t_map *map);
-
 
 //GNL
 char	*get_next_line(int fd);

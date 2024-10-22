@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:26:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/17 22:57:40 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/22 11:59:22 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+static void init_player(t_point *player)
+{
+	player->angle = 0;
+	player->dx = 0;
+	player->dy = 0;
+	player->x = 0;
+	player->y = 0;
+}
 
 //TODO add error message when return NULL
 bool	init_map(t_map *map)
@@ -29,6 +38,7 @@ bool	init_map(t_map *map)
 		return (free(map), false);
 	map->player_way = -1;
 	map->player_position = malloc(sizeof(t_point));
+	init_player(map->player_position);
 	if (!map->player_position)
 		return (false);
 	map->player_position->x = 0;

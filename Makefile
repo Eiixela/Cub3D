@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+         #
+#    By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/10/18 00:11:05 by saperrie         ###   ########.fr        #
+#    Updated: 2024/10/22 10:56:37 by aljulien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,10 @@ OBJECTS = $(patsubst srcs/%.c,$(OBJECT_DIR)%.o,\
 		srcs/sam/mlx_init.c\
 		srcs/sam/big_init.c\
 		srcs/sam/handle_input.c\
-		srcs/sam/draw.c\
+		srcs/sam/draw_2D_map.c\
+		srcs/sam/draw_rays.c\
+		srcs/sam/draw_rays_utils.c\
+		srcs/sam/key_hook_happening.c\
 							)
 
 OBJ_SUBDIRS = $(sort $(dir ${OBJECTS}))

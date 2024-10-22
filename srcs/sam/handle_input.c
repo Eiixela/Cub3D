@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 00:01:13 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/21 16:57:22 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:06:27 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	draw_new_image(t_data *data)
 	data->img.addr = mlx_get_data_addr(data->img.ptr, \
 		&data->img.bit_per_pixel, &data->img.line_len, &data->img.endian);
 	draw_new_2d(data->map, data);
-	//draw_player();
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.ptr, 0, 0);
 	mlx_loop(data->mlx_ptr);
 }
@@ -39,7 +38,7 @@ int	key_press(int keysym, t_data *data)
 	else if (keysym == XK_Left)
 		data->keys->left = 1;
 	else if (keysym == XK_Right)
-		data->keys->right = 1;
+		data->keys->right = 1;	
 	return (0);
 }
 
