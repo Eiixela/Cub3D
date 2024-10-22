@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 16:01:13 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:19:12 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define HEIGHT 1300
 # define PI	3.1415926535
 # define PLAYER_SIZE 10
-# define SQUARE_SIZE 20
-# define NUM_RAYS 60         // Number of rays to cast
+# define SQUARE_SIZE 10
+# define NUM_RAYS 320         // Number of rays to cast
 # define FOV (60 * PI / 180)  // 60 degree field of view
 #define P2 PI/2
 #define P3 3*PI/2

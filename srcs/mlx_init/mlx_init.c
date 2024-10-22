@@ -6,13 +6,13 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:15 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/22 16:01:20 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:37:57 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-/* static void cleanup(t_data *data)
+static void cleanup(t_data *data)
 {
     if (data->img.ptr)
         mlx_destroy_image(data->mlx_ptr, data->img.ptr);
@@ -24,12 +24,13 @@
         free(data->mlx_ptr);
 		return ;
     }
-} */
+}
 
 int	handle_win_exit(t_data *data)
 {
-	//cleanup(data);
 	mlx_loop_end(data->mlx_ptr);
+	cleanup(data);
+	exit(0);
 	return (0);
 }
 

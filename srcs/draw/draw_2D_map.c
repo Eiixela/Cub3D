@@ -39,12 +39,12 @@ int	draw_new_2d(t_map *map, t_data *data)
 	pixels = data->img.addr;
 	color = 0;
 	y = 0;
-	while (y < HEIGHT)
+	while (y < HEIGHT / 8)
 	{
 		new_y = y / SQUARE_SIZE;
 		draw_y = y * WIDTH;
 		x = 0;
-		while (x < WIDTH)
+		while (x < WIDTH / 8)
 		{
 			draw_x = x;
 			new_x = x / SQUARE_SIZE;
@@ -72,10 +72,10 @@ int	draw_new_2d(t_map *map, t_data *data)
 	player_coor.y = map->player_position->y * SQUARE_SIZE;
 	angle = map->player_position->angle;
 	int i = 0;
-	while (i < 60)
+	while (i < 320)
 	{
 		draw_line(data, player_coor, &angle, PINK);
-		angle += 0.03;
+		angle += 0.004;
 		i++;
 	}
 	//printf("%f\n", distance);
