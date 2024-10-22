@@ -2,3 +2,4 @@ TODO_Alex.txt
 .obj/
 cub
 valgrind_output.txt
+.vscode/
