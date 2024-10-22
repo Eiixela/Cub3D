@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:15 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/22 16:37:57 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:51:16 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,7 @@ int	handle_win_exit(t_data *data)
 	mlx_loop_end(data->mlx_ptr);
 	cleanup(data);
 	exit(0);
-	return (0);
 }
-
-//TODO Utils still or can delete ? 
-/* int check_collision(t_map *map, double x, double y)
-{
-    int map_x = (int)(x / SQUARE_SIZE);
-    int map_y = (int)(y / SQUARE_SIZE);
-
-    if (map->map[map_y][map_x] == '1')
-        return (1);
-    return (0);
-} */
 
 static int	key_loop(t_data *data)
 {
@@ -93,7 +81,7 @@ void	data_init(t_data *data)
 	data->keys->right = 0;
 	data->keys->left = 0;
 	mlx_hook(data->win_ptr, EXIT_CROSS, 0, &handle_win_exit, data);
-	mlx_hook(data->win_ptr, 2, 1L << 0, &key_press, data);//2 is key press code
-	mlx_hook(data->win_ptr, 3, 1L << 1, &key_release, data);//3 is key release
+	mlx_hook(data->win_ptr, 2, 1L << 0, &key_press, data); //2 is key press code
+	mlx_hook(data->win_ptr, 3, 1L << 1, &key_release, data); //3 is key release
 	mlx_loop_hook(data->mlx_ptr, &key_loop, data);
 }

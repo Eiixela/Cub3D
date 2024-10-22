@@ -39,12 +39,12 @@ int	draw_new_2d(t_map *map, t_data *data)
 	pixels = data->img.addr;
 	color = 0;
 	y = 0;
-	while (y < HEIGHT / 8)
+	while (y < HEIGHT)
 	{
 		new_y = y / SQUARE_SIZE;
 		draw_y = y * WIDTH;
 		x = 0;
-		while (x < WIDTH / 8)
+		while (x < WIDTH)
 		{
 			draw_x = x;
 			new_x = x / SQUARE_SIZE;
