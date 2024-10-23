@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/23 09:33:45 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:58:30 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,11 @@ int	map_good(t_map *map, t_player *player)
 	if (flood_fill(map, player_y, player_x))
 		return (1);
 	map->map[player_y][player_x] = '0';
+	int i = 0;
+	while (map->map[i])
+	{
+		printf("%s\n", map->map[i]);
+		i++;
+	}
 	return (0);
 }

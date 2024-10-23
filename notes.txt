@@ -17,4 +17,6 @@ https://lodev.org/cgtutor/raycasting.html
 TODOOOOOOO :
 Makes minimap resquale, so when we have a very big map we still have the floor and the ceiling and not only the minimap on screen
 Try to understand from witch ray the cast is happening depending on he direction the player spawn
-Rework the keyhook that allows the player to move around
+Draw more rays and have a more precise raycasting
+Fix fish eye
+Fix some minimap which are not colored entirely 

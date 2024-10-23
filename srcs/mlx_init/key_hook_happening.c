@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:56:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/23 13:10:18 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:56:25 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	left_arrow(t_data *data)
 {
-	data->map->player_position->angle -= 0.06;
+	data->map->player_position->angle -= 0.04;
 	if (data->map->player_position->angle < 0)
 		data->map->player_position->angle += 2 * PI;
 	data->map->player_position->dx = cos(data->map->player_position->angle) * 5;
@@ -23,7 +23,7 @@ void	left_arrow(t_data *data)
 
 void	right_arrow(t_data *data)
 {
-	data->map->player_position->angle += 0.06;
+	data->map->player_position->angle += 0.04;
 	if (data->map->player_position->angle > 2 * PI)
 		data->map->player_position->angle -= 2 * PI;
 	data->map->player_position->dx = cos(data->map->player_position->angle) * 5;

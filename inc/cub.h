@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/23 12:52:38 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:39:06 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define PLAYER_SIZE 5
 # define SQUARE_SIZE 15
 # define NUM_RAYS 320         // Number of rays to cast
-# define FOV (60 * PI / 180)  // 60 degree field of view
+# define FOV 1.0472  // 60 degree field of view
 # define P2 PI/2
 # define P3 3*PI/2
 
@@ -152,7 +152,7 @@ void	draw_new_image(t_data *data);
 void	draw_all_rays(t_data *data, t_map *map);
 
 //draw_rays_utils
-double	calculate_distance(double x, double y, int x1, int y1);
+double	calculate_distance(double x, double y, double x1, double y1);
 void	draw_point(t_data *data, int x, int y, int color);
 int		is_out_of_bounds(t_map *map, int map_x, int map_y);
 int		max(int a, int b);

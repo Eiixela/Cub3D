@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:39:12 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 10:50:09 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:38:40 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	draw_point(t_data *data, int x, int y, int color)
 		((int *)data->img.addr)[y * WIDTH + x] = color;
 }
 
-double	calculate_distance(double x, double y, int x1, int y1)
+double	calculate_distance(double x, double y, double x1, double y1)
 {
 	return (sqrt((x - x1) * (x - x1) + (y - y1) * (y - y1)));
 }

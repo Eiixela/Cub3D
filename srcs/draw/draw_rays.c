@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/23 12:39:52 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:02:14 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,25 @@ static double	draw_one_ray(t_data *data, t_vector2D player_coor, double *angle,
 	t_vector2D	point;
 	t_vector2D	diff;
 	t_vector2D	map_coor;
-	int			i;
+	double			i;
 	int			max_distance;
+	
+	/* t_vector2D point1;
+	t_vector2D point2;
+	double dy;
+	double dx;
+	double	nm_step;
+	double x_increment;
+	double y_increment;
+
+	dy = (point2.y - point1.y);
+	dx = (point2.x - point1.x);
+	if (dy < dx)
+		nm_step = dx;
+	else
+		nm_step = dy;
+	x_increment = dx / nm_step;
+	y_increment = dy / nm_step; */ //For DDA But not working so far because i don't understand what point2 is for fuck sake's
 
 	i = 0;
 	max_distance = max(data->map->size->x, data->map->size->y) * SQUARE_SIZE;
@@ -27,10 +44,10 @@ static double	draw_one_ray(t_data *data, t_vector2D player_coor, double *angle,
 	diff.y = sin(*angle);
 	while (i < max_distance)
 	{
-		point.x = (int)(player_coor.x) + i * diff.x;
-		point.y = (int)(player_coor.y) + i * diff.y;
-		map_coor.x = (int)(point.x / SQUARE_SIZE);
-		map_coor.y = (int)(point.y / SQUARE_SIZE);
+		point.x = (player_coor.x) + i * diff.x;
+		point.y = (player_coor.y) + i * diff.y;
+		map_coor.x = (point.x / SQUARE_SIZE);
+		map_coor.y = (point.y / SQUARE_SIZE);
 		if (is_out_of_bounds(data->map, (int)(map_coor.x), (int)(map_coor.y)))
 			break ;
 		if (data->map->map[(int)(map_coor.y)][(int)(map_coor.x)] == '1')
@@ -38,29 +55,31 @@ static double	draw_one_ray(t_data *data, t_vector2D player_coor, double *angle,
 		draw_point(data, (int)point.x, (int)point.y, color);
 		i++;
 	}
-	return (calculate_distance(point.x, point.y, (int)(player_coor.x),
-		(int)(player_coor.y)));
+	return (calculate_distance(point.x, point.y, (player_coor.x),
+		(player_coor.y)));
 }
 
-void draw_wall(t_data *data, double ray_distance, int n_ray)
+void draw_wall(t_data *data, double ray_distance, int n_ray, double angle)
 {
-	double	wall_height;
-	int		draw_start;
-	int		draw_end;
-	int 	i;
+	(void)angle;
+    double wall_height;
+    int draw_start;
+    int draw_end;
+    int i;
+   // double perpendicular_distance;
 
-	wall_height = (HEIGHT / ray_distance) * SQUARE_SIZE;
-	draw_start = - (wall_height / 2) + (HEIGHT / 2);
-	i = draw_start;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = (wall_height / 2) + (HEIGHT / 2);
-	if (draw_end >= HEIGHT)
-		draw_end = HEIGHT - 1;
+	//perpendicular_distance = ray_distance * cos(angle - data->map->player_position->angle); //fish eye mais pas sur mdrr
+    wall_height = (HEIGHT / ray_distance) * SQUARE_SIZE;
+    draw_start = -(wall_height / 2) + (HEIGHT / 2);
+    i = draw_start;
+    if (draw_start < 0)
+        draw_start = 0;
+    draw_end = (wall_height / 2) + (HEIGHT / 2);
+    if (draw_end >= HEIGHT)
+        draw_end = HEIGHT - 1;
     while (i++ <= draw_end)
-		draw_point(data, n_ray, i, LIME_GREEN);
+        draw_point(data, n_ray, i, LIME_GREEN);
 }
-
 
 void	draw_all_rays(t_data *data, t_map *map)
 {
@@ -76,12 +95,10 @@ void	draw_all_rays(t_data *data, t_map *map)
 	player_coor.x = map->player_position->x * SQUARE_SIZE;
 	player_coor.y = map->player_position->y * SQUARE_SIZE;
 	angle = map->player_position->angle - FOV / 2;
-	printf("%f\n", angle);
 	while (i++ < WIDTH)
 	{
 		ray_len = draw_one_ray(data, player_coor, &angle, PINK);
-		draw_wall(data, ray_len, i);
+		draw_wall(data, ray_len, i, angle);
 		angle += FOV / WIDTH;
 	}
 }
-
