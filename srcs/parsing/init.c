@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:26:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 16:59:12 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/23 09:18:10 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void init_player(t_point *player)
 {
-	player->angle = PI;
+	player->angle = 0;
 	player->dx = 0;
 	player->dy = 0;
 	player->x = 0;

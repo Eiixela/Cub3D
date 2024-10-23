@@ -17,6 +17,4 @@ https://lodev.org/cgtutor/raycasting.html
 TODOOOOOOO :
 
 Makes minimap resquale, so when we have a very big map we still have the floor and the ceiling and not only the minimap on screen
-Make the middle ray the 'directions we're lookin at' ray
-Make the player spawn with the right direction (aka N, E, W and S)
 Try to understand from witch ray the cast is happening depending on he direction the player spawn

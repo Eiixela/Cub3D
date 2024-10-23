@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 19:48:51 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/23 09:34:07 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-double	draw_rays(t_data *data, t_vector2D player_coor, double *angle,
+static double	draw_one_ray(t_data *data, t_vector2D player_coor, double *angle,
 		int color)
 {
 	t_vector2D	point;
@@ -41,3 +41,36 @@ double	draw_rays(t_data *data, t_vector2D player_coor, double *angle,
 	return (calculate_distance(point.x, point.y, (int)(player_coor.x),
 		(int)(player_coor.y)));
 }
+
+void	draw_all_rays(t_data *data, t_map *map)
+{
+	t_vector2D	player_coor;
+	t_vector2D	angle;
+	double		ray_len;
+	int			i;
+	int			j;
+
+	ray_len = 0;
+	i = 0;
+	j = 0;
+	player_coor.x = map->player_position->x * SQUARE_SIZE;
+	player_coor.y = map->player_position->y * SQUARE_SIZE;
+	angle.x = map->player_position->angle;
+	angle.y = map->player_position->angle;
+	while (i++ < 160)
+	{
+		ray_len = draw_one_ray(data, player_coor, &angle.x, PINK);
+		angle.x += 0.004;
+		// angle_i += 60 / 320;
+		// angle_i += data->pplane->angle_between_rays;
+	}
+	while (j++ < 160)
+	{
+		ray_len = draw_one_ray(data, player_coor, &angle.y, LIGHT_BLUE);
+		angle.y -= 0.004;
+		// angle_j -= 60 / 320;
+		// angle_j -= data->pplane->angle_between_rays;
+	}
+	//draw_rays(data);
+}
+

@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/18 09:49:43 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/23 09:09:30 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ char	**map_fill_square(t_map *map)
 	while (i <= map->size->x)
 	{
 		map_square[i] = malloc(sizeof(char) * (map->size->y + 2));
-		// map_square[i] = malloc(sizeof(char) * (map->size->y + 1));
 		if (!map_square[i])
 		{
 			while (--i >= 0)
@@ -157,7 +156,6 @@ char	**map_fill_square(t_map *map)
 		}
 		if (i < map->size->x)
 			pimp_strlcpy(map_square[i], map->map[i], map->size->y + 2);
-			// pimp_strlcpy(map_square[i], map->map[i], map->size->y + 1);
 		else
 		{
 			j = 0;
@@ -197,7 +195,6 @@ int	map_fill(int fd, t_map *map, int number_line_map)
 		if (ft_strlen(map->map[i++]) > map->size->y)
 			map->size->y = ft_strlen(map->map[i]);
 	}
-	// map->size->y++;
 	map->map = map_fill_square(map);
 	if (!map->map)
 		return (1);

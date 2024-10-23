@@ -31,15 +31,14 @@ int	draw_new_2d(t_map *map, t_data *data)
 {
 	int			color;
 	char		*pixels, current_char;
-	double		draw_x, draw_y, x, y, new_y, new_x, width, height, angle_i, angle_j, ray_len;
-	t_vector2D	player_coor;
+	double		draw_x, draw_y, x, y, new_y, new_x, width, height;
+	
 
 	width = map->size->y;
 	height = map->size->x;
 	pixels = data->img.addr;
 	color = 0;
 	y = 0;
-	ray_len = 0;
 	while (y < HEIGHT)
 	{
 		new_y = y / SQUARE_SIZE;
@@ -69,30 +68,6 @@ int	draw_new_2d(t_map *map, t_data *data)
 		}
 		y++;
 	}
-	player_coor.x = map->player_position->x * SQUARE_SIZE;
-	player_coor.y = map->player_position->y * SQUARE_SIZE;
-	// map->player_position->angle = PI;
-	angle_i = map->player_position->angle;
-	angle_j = map->player_position->angle;
-	int i = 0;
-	int j = 0;
-	while (i < 160)
-	{
-		ray_len = draw_rays(data, player_coor, &angle_i, PINK);
-		angle_i += 0.004;
-		// angle_i += 60 / 320;
-		// angle_i += data->pplane->angle_between_rays;
-		i++;
-	}
-	while (j < 160)
-	{
-		ray_len = draw_rays(data, player_coor, &angle_j, LIGHT_BLUE);
-		angle_j -= 0.004;
-		// angle_j -= 60 / 320;
-		// angle_j -= data->pplane->angle_between_rays;
-		j++;
-	}
-	//printf("%f\n", distance);
-	//draw_rays(data);
+	draw_all_rays(data, map);
 	return (0);
 }
