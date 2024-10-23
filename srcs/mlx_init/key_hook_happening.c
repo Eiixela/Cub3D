@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:56:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 11:10:02 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:10:18 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,44 +32,71 @@ void	right_arrow(t_data *data)
 
 void	s_key(t_data *data)
 {
-	if (data->map->map[(int)(data->map->player_position->y + 0.19)]
-		[(int)data->map->player_position->x] == '1')
+	float move_speed;
+	float new_x;
+	float new_y;
+
+	move_speed = 0.064;
+	new_y = data->map->player_position->y + -sin(data->map->player_position->angle) * move_speed;
+	new_x = data->map->player_position->x + -cos(data->map->player_position->angle) * move_speed;
+	if (data->map->map[(int)new_y][(int)data->map->player_position->x] != '1' &&
+		data->map->map[(int)data->map->player_position->y][(int)new_x] != '1')
 	{
-		printf("WALL: SOUTH\nFACING: NORTH\n\n");
-		return ;
+		data->map->player_position->x = new_x;
+		data->map->player_position->y = new_y;
 	}
-	data->map->player_position->y += 0.064;
+	else
+		printf("WALL: NORTH\nFACING: SOUTH\n\n");
 }
 
-void	w_key(t_data *data)
+void w_key(t_data *data)
 {
-	if (data->map->map[(int)(data->map->player_position->y - 0.19)]
-		[(int)data->map->player_position->x] == '1')
+	float move_speed;
+	float new_x;
+	float new_y;
+
+	move_speed = 0.064;
+	new_y = data->map->player_position->y + sin(data->map->player_position->angle) * move_speed;
+	new_x = data->map->player_position->x + cos(data->map->player_position->angle) * move_speed;
+	if (data->map->map[(int)new_y][(int)data->map->player_position->x] != '1' &&
+		data->map->map[(int)data->map->player_position->y][(int)new_x] != '1')
 	{
-		printf("WALL: NORTH\nFACING: SOUTH\n\n");
-		return ;
+		data->map->player_position->x = new_x;
+		data->map->player_position->y = new_y;
 	}
-	data->map->player_position->y -= 0.064;
+	else
+		printf("WALL: NORTH\nFACING: SOUTH\n\n");
 }
+
 
 void	a_key(t_data *data)
 {
-	if (data->map->map[(int)data->map->player_position->y]
-		[(int)(data->map->player_position->x - 0.19)] == '1')
+	float move_speed = 0.064;
+	float new_x = data->map->player_position->x + sin(data->map->player_position->angle) * move_speed;
+	float new_y = data->map->player_position->y - cos(data->map->player_position->angle) * move_speed;
+
+	if (data->map->map[(int)new_y][(int)data->map->player_position->x] != '1' &&
+		data->map->map[(int)data->map->player_position->y][(int)new_x] != '1')
 	{
-		printf("WALL: WEST\nFACING: EAST\n\n");
-		return ;
+		data->map->player_position->x = new_x;
+		data->map->player_position->y = new_y;
 	}
-	data->map->player_position->x -= 0.064;
+	else
+		printf("WALL: COLLISION (RIGHT)\n\n");
 }
 
 void	d_key(t_data *data)
 {
-	if (data->map->map[(int)data->map->player_position->y]
-		[(int)(data->map->player_position->x + 0.19)] == '1')
+	float move_speed = 0.064;
+	float new_x = data->map->player_position->x - sin(data->map->player_position->angle) * move_speed;
+	float new_y = data->map->player_position->y + cos(data->map->player_position->angle) * move_speed;
+
+	if (data->map->map[(int)new_y][(int)data->map->player_position->x] != '1' &&
+		data->map->map[(int)data->map->player_position->y][(int)new_x] != '1')
 	{
-		printf("WALL: EAST\nFACING: WEST\n\n");
-		return ;
+		data->map->player_position->x = new_x;
+		data->map->player_position->y = new_y;
 	}
-	data->map->player_position->x += 0.064;
+	else
+		printf("WALL: COLLISION (LEFT)\n\n");
 }

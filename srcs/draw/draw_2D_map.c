@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*	*/
-/*	:::	  ::::::::   */
-/*   draw.c	 :+:	  :+:	:+:   */
-/*	+:+ +:+	 +:+	 */
-/*   By: saperrie <saperrie@student.42.fr>	  +#+  +:+	   +#+	*/
-/*	+#+#+#+#+#+   +#+	   */
-/*   Created: 2024/10/16 16:07:23 by saperrie	  #+#	#+#	 */
-/*   Updated: 2024/10/21 11:22:48 by saperrie	 ###   ########.fr	   */
-/*	*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_2D_map.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/23 12:34:35 by aljulien          #+#    #+#             */
+/*   Updated: 2024/10/23 12:34:39 by aljulien         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
@@ -39,6 +39,7 @@ int	draw_new_2d(t_map *map, t_data *data)
 	pixels = data->img.addr;
 	color = 0;
 	y = 0;
+	draw_all_rays(data, map);
 	while (y < HEIGHT)
 	{
 		new_y = y / SQUARE_SIZE;
@@ -68,6 +69,5 @@ int	draw_new_2d(t_map *map, t_data *data)
 		}
 		y++;
 	}
-	draw_all_rays(data, map);
 	return (0);
 }

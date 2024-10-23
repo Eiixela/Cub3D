@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/23 09:34:07 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:39:52 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,35 +42,46 @@ static double	draw_one_ray(t_data *data, t_vector2D player_coor, double *angle,
 		(int)(player_coor.y)));
 }
 
+void draw_wall(t_data *data, double ray_distance, int n_ray)
+{
+	double	wall_height;
+	int		draw_start;
+	int		draw_end;
+	int 	i;
+
+	wall_height = (HEIGHT / ray_distance) * SQUARE_SIZE;
+	draw_start = - (wall_height / 2) + (HEIGHT / 2);
+	i = draw_start;
+	if (draw_start < 0)
+		draw_start = 0;
+	draw_end = (wall_height / 2) + (HEIGHT / 2);
+	if (draw_end >= HEIGHT)
+		draw_end = HEIGHT - 1;
+    while (i++ <= draw_end)
+		draw_point(data, n_ray, i, LIME_GREEN);
+}
+
+
 void	draw_all_rays(t_data *data, t_map *map)
 {
 	t_vector2D	player_coor;
-	t_vector2D	angle;
 	double		ray_len;
 	int			i;
 	int			j;
+	double angle;
 
 	ray_len = 0;
 	i = 0;
 	j = 0;
 	player_coor.x = map->player_position->x * SQUARE_SIZE;
 	player_coor.y = map->player_position->y * SQUARE_SIZE;
-	angle.x = map->player_position->angle;
-	angle.y = map->player_position->angle;
-	while (i++ < 160)
+	angle = map->player_position->angle - FOV / 2;
+	printf("%f\n", angle);
+	while (i++ < WIDTH)
 	{
-		ray_len = draw_one_ray(data, player_coor, &angle.x, PINK);
-		angle.x += 0.004;
-		// angle_i += 60 / 320;
-		// angle_i += data->pplane->angle_between_rays;
+		ray_len = draw_one_ray(data, player_coor, &angle, PINK);
+		draw_wall(data, ray_len, i);
+		angle += FOV / WIDTH;
 	}
-	while (j++ < 160)
-	{
-		ray_len = draw_one_ray(data, player_coor, &angle.y, LIGHT_BLUE);
-		angle.y -= 0.004;
-		// angle_j -= 60 / 320;
-		// angle_j -= data->pplane->angle_between_rays;
-	}
-	//draw_rays(data);
 }
 

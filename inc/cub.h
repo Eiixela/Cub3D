@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/23 10:00:10 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:52:38 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@
 # define WIDTH 2500
 # define HEIGHT 1300
 # define PI	3.1415926535
-# define PLAYER_SIZE 10
-
-# define SQUARE_SIZE 64
+# define PLAYER_SIZE 5
+# define SQUARE_SIZE 15
 # define NUM_RAYS 320         // Number of rays to cast
 # define FOV (60 * PI / 180)  // 60 degree field of view
 # define P2 PI/2
@@ -54,8 +53,6 @@
 # define DARK_PINK 0xFF36AF
 # define LIGHT_PINK 0xFFC4F3
 # define LIGHT_BLUE 0x5DADE2
-
-
 
 typedef struct {
     double x;
