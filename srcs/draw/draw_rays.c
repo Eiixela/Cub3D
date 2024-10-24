@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/24 14:11:46 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:01:19 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static double	calculate_final_distance(t_ray_data *ray, t_vector2D player_coor)
 
 	if (ray->side == 0)
 		wall_dist = (ray->map_pos.x - player_coor.x / SQUARE_SIZE
-			+ (1 - ray->step.x) / 2) / ray->ray_dir.x;
+				+ (1 - ray->step.x) / 2) / ray->ray_dir.x;
 	else
 		wall_dist = (ray->map_pos.y - player_coor.y / SQUARE_SIZE
-			+ (1 - ray->step.y) / 2) / ray->ray_dir.y;
+				+ (1 - ray->step.y) / 2) / ray->ray_dir.y;
 	return (wall_dist * SQUARE_SIZE);
 }
 
@@ -42,7 +42,7 @@ static double	perform_dda(t_data *data, t_ray_data *ray)
 			ray->side = 1;
 		}
 		if (is_out_of_bounds(data->map, (int)ray->map_pos.x,
-			(int)ray->map_pos.y))
+				(int)ray->map_pos.y))
 			break ;
 		if (data->map->map[(int)ray->map_pos.y][(int)ray->map_pos.x] == '1')
 			break ;
@@ -51,7 +51,7 @@ static double	perform_dda(t_data *data, t_ray_data *ray)
 }
 
 static void	calculate_step_and_side_dist(t_ray_data *ray,
-    t_vector2D player_coor)
+	t_vector2D player_coor)
 {
 	if (ray->ray_dir.x < 0)
 	{
@@ -80,7 +80,7 @@ static void	calculate_step_and_side_dist(t_ray_data *ray,
 }
 
 static void	initialize_ray_variables(t_ray_data *ray, double *angle,
-    t_vector2D player_coor)
+	t_vector2D player_coor)
 {
 	ray->ray_dir.x = cos(*angle);
 	ray->ray_dir.y = sin(*angle);
@@ -91,7 +91,7 @@ static void	initialize_ray_variables(t_ray_data *ray, double *angle,
 }
 
 static double	calculate_wall_distance(t_data *data, t_vector2D player_coor,
-    double *angle)
+	double *angle)
 {
 	t_ray_data	ray;
 
@@ -101,19 +101,22 @@ static double	calculate_wall_distance(t_data *data, t_vector2D player_coor,
 	return (calculate_final_distance(&ray, player_coor));
 }
 
-static double	draw_one_ray(t_data *data, t_vector2D player_coor, double *angle)
+static double	draw_one_ray(t_data *data, t_vector2D player_coor,
+	double *angle)
 {
 	return (calculate_wall_distance(data, player_coor, angle));
 }
 
-void	draw_wall(t_data *data, double ray_distance, int n_ray, double angle)
+void	draw_wall(t_data *data, double ray_distance, int n_ray,
+	double angle)
 {
 	double perpendicular_distance;
 	double wall_height;
 	int draw_start;
 	int draw_end;
 
-	perpendicular_distance = ray_distance * cos(angle - data->map->player_position->angle);
+	perpendicular_distance = ray_distance * cos(angle - \
+			data->map->player_position->angle);
 	wall_height = (HEIGHT / perpendicular_distance) * SQUARE_SIZE;
 	draw_start = (int)(-(wall_height / 2) + (HEIGHT / 2));
 	draw_end = (int)((wall_height / 2) + (HEIGHT / 2));
@@ -131,7 +134,7 @@ void	draw_all_rays(t_data *data, t_map *map)
 	double		ray_len;
 	int			i;
 	int			j;
-	double angle;
+	double		angle;
 
 	ray_len = 0;
 	i = 0;

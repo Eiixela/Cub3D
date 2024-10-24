@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/24 14:03:33 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/24 19:57:05 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define PI	3.1415926535
 # define PLAYER_SIZE 5
 # define SQUARE_SIZE 15
+# define MOVE_SPEED 0.256 // 0.064 is 1 pixel
+# define ROTATION_ANGLE 0.05 // initial value is 0.04
 # define NUM_RAYS 320         // Number of rays to cast
 # define FOV 1.0472  // 60 degree field of view
 # define P2 PI/2
@@ -58,6 +60,14 @@ typedef struct {
     double x;
     double y;
 } t_vector2D;
+
+typedef struct s_draw_params
+{
+    int map_offset_x;
+    int map_offset_y;
+    int screen_x;
+    int screen_y;
+} t_draw_params;
 
 typedef struct s_keys
 {

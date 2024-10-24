@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 00:01:13 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/22 15:52:32 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/24 19:23:20 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	key_press(int keysym, t_data *data)
 	if (keysym == XK_Escape)
 		return (handle_win_exit(data));
 	else if (keysym == 'w')
+	{
+		printf("PRESS\n");
 		data->keys->w = 1;
+	}
 	else if (keysym == 's')
 		data->keys->s = 1;
 	else if (keysym == 'a')
@@ -27,14 +30,17 @@ int	key_press(int keysym, t_data *data)
 	else if (keysym == XK_Left)
 		data->keys->left = 1;
 	else if (keysym == XK_Right)
-		data->keys->right = 1;	
+		data->keys->right = 1;
 	return (0);
 }
 
 int	key_release(int keysym, t_data *data)
 {
 	if (keysym == 'w')
+	{
+		printf("RELEASE\n");
 		data->keys->w = 0;
+	}
 	else if (keysym == 's')
 		data->keys->s = 0;
 	else if (keysym == 'a')
