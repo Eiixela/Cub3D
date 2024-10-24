@@ -1,0 +1,26 @@
+✅ Missing a color
+✅ Missing one int for color
+✅ Color value too big
+✅ Color value too small
+✅ Spaces and tab in color
+✅ Color in the middle of map
+✅ Color after map
+✅ Test double definition of color 
+✅ More than 3 color elements
+✅ Letter in color
+
+✅ Missing a textures
+✅ Mising texture file
+✅ Not the right permissions for the texture file
+✅ Spaces and tab in textures
+✅ Textures in the middle of map
+✅ Textures after map
+✅ Test only the first letter of textures and add a second random letter 
+❌ Test double definition of textures 
+✅ Textures and color all mixed up
+
+✅ Map not close
+✅ Multiple players one the map --->leaks
+✅ Player not a N S E or W
+❌ Two map in row
+❌ Invalid char in map

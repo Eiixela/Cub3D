@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/23 14:39:06 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:03:33 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,6 @@ typedef struct {
     double x;
     double y;
 } t_vector2D;
-
-//TODO not usefull yet, if we don't end up using we need to delete
-/* typedef struct {
-    t_vector2D origin;
-    t_vector2D direction;
-} t_ray; */
 
 typedef struct s_keys
 {
@@ -128,6 +122,17 @@ typedef struct s_img
 	int		bit_per_pixel;
 	int		endian;
 }	t_img;
+
+typedef struct s_ray_data
+{
+    t_vector2D ray_dir;
+    t_vector2D side_dist;
+    t_vector2D delta_dist;
+    t_vector2D map_pos;
+    t_vector2D step;
+    double wall_dist;
+    int side;
+} t_ray_data;
 
 typedef struct s_data
 {

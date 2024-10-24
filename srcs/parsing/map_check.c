@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/23 15:58:30 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/24 13:57:32 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,17 @@ static int	is_border(t_map *map, int x, int y)
 		|| map->map[y][x + 1] == '\0');
 }
 
-static int	flood_fill(t_map *map, int y, int x)
+static int	flood_fill(t_map *map, int x, int y)
 {
-	if (x < 0 || x >= map->size->x || y < 0 || !map->map[x][y])
+	if (y < 0 || y >= map->size->y || x < 0 || !map->map[y][x])
 		return (0);
-	if (map->map[x][y] == '1' || map->map[x][y] == 'F')
+	if (map->map[y][x] == '1' || map->map[y][x] == 'F')
 		return (0);
-	if (is_border(map, y, x))
+	if (is_border(map, x, y))
 		return (1);
- 	if (!find_player(map->map[x][y]))
-		return (0);
-	map->map[x][y] = 'F';
-	if (flood_fill(map, y - 1, x) || flood_fill(map, y + 1, x) \
-		|| flood_fill(map, y, x - 1) || flood_fill(map, y, x + 1))
+	map->map[y][x] = 'F';
+	if (flood_fill(map, x - 1, y) || flood_fill(map, x + 1, y) \
+		|| flood_fill(map, x, y - 1) || flood_fill(map, x, y + 1))
 		return (1);
 	return (0);
 }
@@ -79,21 +77,20 @@ int	map_good(t_map *map, t_player *player)
 	int	player_x;
 	int	player_y;
 
+/* 	if (check_char_map(&map))
+	{
+		printf("HERE!\n");
+		return (1);
+	} */
 	if (player_where(map, &player_x, &player_y) != 1)
 		return (1);
 	player->x = player_x;
 	player->y = player_y;
 	map->player_position->x = player_x;
 	map->player_position->y = player_y;
-	set_angle_view(map);
-	if (flood_fill(map, player_y, player_x))
+	if (flood_fill(map, player_x, player_y))
 		return (1);
+	set_angle_view(map);
 	map->map[player_y][player_x] = '0';
-	int i = 0;
-	while (map->map[i])
-	{
-		printf("%s\n", map->map[i]);
-		i++;
-	}
 	return (0);
 }

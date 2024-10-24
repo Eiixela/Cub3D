@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 12:34:35 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/23 15:07:18 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:02:53 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	draw_new_2d(t_map *map, t_data *data)
 					color = DARK_PINK;
 				else if (player_position(x, y, map) == 0)
 					color = PASTEL_PURPLE;
-				else if (current_char == '0')
+				else if (current_char == 'F' || current_char == 'N' || current_char == 'S' || current_char == 'W' || current_char == 'E')
 					color = LIGHT_PINK;
 				else
 					color = 0;

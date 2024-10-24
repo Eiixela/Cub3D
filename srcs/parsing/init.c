@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:26:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/23 09:18:10 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:17:19 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ bool	init_map(t_map *map)
 	map->east = NULL;
 	map->west = NULL;
 	map->map = NULL;
+	map->size = NULL;
 	map->floor_c = malloc(sizeof(int *) * 3);
 	map->ceiling_c = malloc(sizeof(int *) * 3);
 	if (!map->ceiling_c || !map->floor_c)

@@ -1,26 +1,41 @@
-==59281== Memcheck, a memory error detector
-==59281== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==59281== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==59281== Command: ./cub maps/good/cheese_maze.cub
-==59281== Parent PID: 6242
-==59281== 
-==59281== 
-==59281== FILE DESCRIPTORS: 6 open (3 std) at exit.
-==59281== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==59281==    <inherited from parent>
-==59281== 
-==59281== Open file descriptor 43: /home/aljulien/.config/Code/logs/20241023T123404/ptyhost.log
-==59281==    <inherited from parent>
-==59281== 
-==59281== Open file descriptor 3: /home/aljulien/Documents/C/C4/Cub3D/valgrind_output.txt
-==59281==    <inherited from parent>
-==59281== 
-==59281== 
-==59281== HEAP SUMMARY:
-==59281==     in use at exit: 0 bytes in 0 blocks
-==59281==   total heap usage: 3,320 allocs, 3,320 frees, 175,730 bytes allocated
-==59281== 
-==59281== All heap blocks were freed -- no leaks are possible
-==59281== 
-==59281== For lists of detected and suppressed errors, rerun with: -s
-==59281== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==301502== Memcheck, a memory error detector
+==301502== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==301502== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==301502== Command: ./cub maps/bad/color_invalid_rgb.cub
+==301502== Parent PID: 199404
+==301502== 
+==301502== 
+==301502== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==301502== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==301502==    <inherited from parent>
+==301502== 
+==301502== Open file descriptor 43: /home/aljulien/.config/Code/logs/20241024T092931/ptyhost.log
+==301502==    <inherited from parent>
+==301502== 
+==301502== Open file descriptor 3: /home/aljulien/Documents/C/C4/Cub3D/valgrind_output.txt
+==301502==    <inherited from parent>
+==301502== 
+==301502== 
+==301502== HEAP SUMMARY:
+==301502==     in use at exit: 17 bytes in 1 blocks
+==301502==   total heap usage: 2,469 allocs, 2,468 frees, 148,617 bytes allocated
+==301502== 
+==301502== 17 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==301502==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==301502==    by 0x40789C: ft_strdup (in /home/aljulien/Documents/C/C4/Cub3D/cub)
+==301502==    by 0x40337A: fill_cardinal (cardinal_check.c:24)
+==301502==    by 0x4031D1: found_one_cardinal (cardinal_check.c:53)
+==301502==    by 0x403074: cardinal_check (cardinal_check.c:90)
+==301502==    by 0x40297B: file_check (file_check.c:61)
+==301502==    by 0x402767: parsing (parsing.c:21)
+==301502==    by 0x402677: main (main.c:60)
+==301502== 
+==301502== LEAK SUMMARY:
+==301502==    definitely lost: 17 bytes in 1 blocks
+==301502==    indirectly lost: 0 bytes in 0 blocks
+==301502==      possibly lost: 0 bytes in 0 blocks
+==301502==    still reachable: 0 bytes in 0 blocks
+==301502==         suppressed: 0 bytes in 0 blocks
+==301502== 
+==301502== For lists of detected and suppressed errors, rerun with: -s
+==301502== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 7 from 1)
