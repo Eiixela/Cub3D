@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/24 18:01:19 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/27 01:07:34 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,10 @@ static double	draw_one_ray(t_data *data, t_vector2D player_coor,
 void	draw_wall(t_data *data, double ray_distance, int n_ray,
 	double angle)
 {
-	double perpendicular_distance;
-	double wall_height;
-	int draw_start;
-	int draw_end;
+	double	perpendicular_distance;
+	double 	wall_height;
+	int 	draw_start;
+	int 	draw_end;
 
 	perpendicular_distance = ray_distance * cos(angle - \
 			data->map->player_position->angle);

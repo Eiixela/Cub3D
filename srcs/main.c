@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/24 11:43:33 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/27 00:36:49 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	free_map(t_map *map)
 		free(map->floor_c);
 		free(map->size);
 		free(map->player_position);
-		// free(map);
 		map = NULL;
 	}
 }
@@ -61,7 +60,6 @@ int	main(int ac, char **av)
 	{
 		if (big_init(&data, &player, &pplane, &map) == 1)
 			return (1);
-		printf("ok!\n");
 		draw_new_image(&data);
 		free_map(&map);
 		return (0);

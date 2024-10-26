@@ -1,6 +1,6 @@
 How to know the key value ----> showkey -a
 
-Mlx_getting_started ---> https://harm-smits.github.io/42docs/libs/minilibx/events.html 
+Mlx_getting_started ---> https://harm-smits.github.io/42docs/libs/minilibx/events.html
 
 DDA algorithm ---> https://www.geeksforgeeks.org/dda-line-generation-algorithm-computer-graphics/
 
@@ -15,8 +15,6 @@ https://lodev.org/cgtutor/raycasting.html
 
 
 TODOOOOOOO :
-Makes minimap resquale, so when we have a very big map we still have the floor and the ceiling and not only the minimap on screen
-Fix some minimap which are not colored entirely
 Do a full check for leaks in parsing
 Add error message in parsing
 Wtf map not close is working ???

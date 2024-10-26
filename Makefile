@@ -6,7 +6,7 @@
 #    By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/10/24 19:29:01 by saperrie         ###   ########.fr        #
+#    Updated: 2024/10/27 00:51:38 by saperrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ OBJECTS = $(patsubst srcs/%.c,$(OBJECT_DIR)%.o,\
 		srcs/mlx_init/key_hook_happening.c\
 		srcs/draw/big_init.c\
 		srcs/draw/draw_rays.c\
-		srcs/draw/draw_2D_map.c\
+		srcs/draw/draw_map2d.c\
 		srcs/draw/draw_rays_utils.c\
 		srcs/draw/draw_ceiling_floor.c\
 		srcs/draw/draw.c\

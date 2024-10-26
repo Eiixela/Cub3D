@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/24 19:57:05 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/27 00:51:38 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@
 # define WIDTH 2500
 # define HEIGHT 1300
 # define PI	3.1415926535
+# define VISIBLE_MAP_SIZE 200
 # define PLAYER_SIZE 5
 # define SQUARE_SIZE 15
-# define MOVE_SPEED 0.256 // 0.064 is 1 pixel
-# define ROTATION_ANGLE 0.05 // initial value is 0.04
+# define MOVE_SPEED 0.096 // 0.064 is 1 pixel
+# define ROTATION_ANGLE 0.04 // initial value is 0.04
 # define NUM_RAYS 320         // Number of rays to cast
 # define FOV 1.0472  // 60 degree field of view
 # define P2 PI/2
@@ -56,18 +57,19 @@
 # define LIGHT_PINK 0xFFC4F3
 # define LIGHT_BLUE 0x5DADE2
 
-typedef struct {
-    double x;
-    double y;
-} t_vector2D;
-
-typedef struct s_draw_params
+typedef struct s_vector2d
 {
-    int map_offset_x;
-    int map_offset_y;
-    int screen_x;
-    int screen_y;
-} t_draw_params;
+	double	x;
+	double	y;
+}	t_vector2D;
+
+typedef struct s_map2d
+{
+	int	map_offset_x;
+	int	map_offset_y;
+	int	screen_x;
+	int	screen_y;
+}	t_map2d;
 
 typedef struct s_keys
 {
@@ -105,8 +107,8 @@ typedef struct s_point
 	double	x;
 	double	y;
 	double	angle;
-	double dx;
-	double dy;
+	double	dx;
+	double	dy;
 }	t_point;
 
 typedef struct s_map
@@ -151,14 +153,13 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		img;
-	t_img		img_fov;
 	t_map		*map;
 	t_player	*player;
 	t_pplane	*pplane;
 	t_keys		*keys;
 }	t_data;
 
-//---------------------------------------DRAW-------------------------------------------------------
+//---------------------------------------DRAW-----------------------------------
 
 //draw
 void	draw_new_image(t_data *data);
@@ -172,8 +173,8 @@ void	draw_point(t_data *data, int x, int y, int color);
 int		is_out_of_bounds(t_map *map, int map_x, int map_y);
 int		max(int a, int b);
 
-//draw_2D_map
-int		draw_new_2d(t_map *map, t_data *data);
+//draw_map2d
+int		draw_map2d(t_map *map, t_data *data);
 
 //draw_ceiling_floor
 void	draw_ceiling_and_floor(t_data *data);
@@ -183,7 +184,7 @@ int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
 /*int		projection_plane_init(t_pplane *pplane, t_player *player);
 int		player_init(t_player *player);*/
 
-//---------------------------------------MLX_INIT-------------------------------------------------------
+//---------------------------------------MLX_INIT-------------------------------
 
 //mlx_init
 void	data_init(t_data *data);
@@ -198,10 +199,11 @@ void	a_key(t_data *data);
 void	d_key(t_data *data);
 
 //handle_input
-int		key_release(int keysym, t_data *data);
-int		key_press(int keysym, t_data *data);
+int		handle_key_release(int keysym, t_data *data);
+int		handle_key_press(int keysym, t_data *data);
+int		key_loop(t_data *data);
 
-//---------------------------------------PARSING-------------------------------------------------------
+//---------------------------------------PARSING--------------------------------
 
 //parsing
 int		parsing(int ac, char **av, t_map *map, t_player *player);
