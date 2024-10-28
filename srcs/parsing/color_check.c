@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:56:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/24 17:32:58 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/28 17:03:13 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ int	color_check(int fd, t_map *map)
 			all_color_found = false;
 		free(line);
 	}
-	/* if (all_color_found == false)
-		return (printf("Multiple colors\n"), close(fd), 1); */
+	if (all_color_found == false)
+		return (printf("Multiple colors\n"), close(fd), 1);
 	return (close(fd), 0);
 }

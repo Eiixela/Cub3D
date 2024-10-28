@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/27 21:33:47 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/28 16:54:51 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,8 @@ int	map_good(t_map *map, t_player *player)
 
 	player_x = 0;
 	player_y = 0;
-/* 	if (check_char_map(&map))
-	{
-		printf("HERE!\n");
+ 	if (check_char_map(&map))
 		return (1);
-	} */
 	if (player_where(map, &player_x, &player_y) != 1)
 		return (1);
 	player->x = player_x;

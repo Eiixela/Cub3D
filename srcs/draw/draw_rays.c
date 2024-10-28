@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/28 14:42:09 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/28 17:49:36 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,25 +113,24 @@ static double	draw_one_ray(t_data *data, t_vector2D player_coor,
 void	draw_wall(t_data *data, double ray_distance, int n_ray,
 	double angle)
 {
-	double	perpendicular_distance;
-	double 	wall_height;
-	int 	draw_start;
-	int 	draw_end;
+    double perpendicular_distance;
+    double wall_height;
+    int draw_start;
+    int draw_end;
 
-	perpendicular_distance = ray_distance * cos(angle - \
-			data->map->player_position->angle);
-	wall_height = (HEIGHT / perpendicular_distance) * 25;
-	draw_start = (int)(-(wall_height / 2) + (HEIGHT / 2));
-	draw_end = (int)((wall_height / 2) + (HEIGHT / 2));
-	if (draw_start < 0)
-		draw_start = 0;
-	if (draw_end >= HEIGHT)
+    perpendicular_distance = ray_distance * cos(angle - data->map->player_position->angle);
+	wall_height = (SQUARE_SIZE / perpendicular_distance) * data->pplane->distance_from_player;
+    draw_start = (int)(-(wall_height / 2) + (HEIGHT / 2));
+    draw_end = (int)((wall_height / 2) + (HEIGHT / 2));
+    if (draw_start < 0)
+        draw_start = 0;
+    if (draw_end >= HEIGHT)
 		draw_end = HEIGHT - 1;
 	while (draw_start <= draw_end)
 	{
-		if ((int)(data->ray->map_pos.x) % 2 == 0)
-			draw_texture(data, n_ray, draw_start++, draw_end);
-			//draw_point(data, n_ray, draw_start++, CRIMSON);
+		if ((int)(data->ray->map_pos.x) % 2 == 0 && (int)(data->ray->map_pos.y) % 2 == 0)
+			//draw_texture(data, n_ray, draw_start++, draw_end);
+			draw_point(data, n_ray, draw_start++, PASTEL_PURPLE);
 		else
 			draw_point(data, n_ray, draw_start++, LIME_GREEN);
 	}

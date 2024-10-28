@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:22:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/24 13:47:37 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/28 17:15:11 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,33 +37,43 @@ static int	check_extention_textures(char *file)
 
 int	check_access_textures(t_map *map)
 {
+	int fd;
+
 	if (map->north)
 	{
 		if (check_extention_textures(map->north))
 			return (1);
-		if (open(map->north, O_RDONLY) == -1)
+		fd = open(map->north, O_RDONLY);
+		if (fd == -1)
 			return (1);
+		close(fd);
 	}
 	if (map->south)
 	{
 		if (check_extention_textures(map->south))
 			return (1);
-		if (open(map->north, O_RDONLY) == -1)
+		fd = open(map->south, O_RDONLY);
+		if (fd == -1)
 			return (1);
+		close(fd);
 	}
 	if (map->west)
 	{
 		if (check_extention_textures(map->west))
 			return (1);
-		if (open(map->north, O_RDONLY) == -1)
+		fd = open(map->west, O_RDONLY);
+		if (fd == -1)
 			return (1);
+		close(fd);
 	}
 	if (map->east)
 	{
 		if (check_extention_textures(map->east))
 			return (1);
-		if (open(map->north, O_RDONLY) == -1)
+		fd = open(map->east, O_RDONLY);
+		if (fd == -1)
 			return (1);
+		close(fd);
 	}
 	return (0);
 }

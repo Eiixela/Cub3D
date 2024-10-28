@@ -1,7 +1,7 @@
 NO textures/try.xpm
+WE textures/try.xpm
 SO textures/try.xpm
 EA textures/try.xpm
-WE textures/try.xpm
 
 F 149,200,216
 C 14,77,146
@@ -20,3 +20,5 @@ C 14,77,146
 11000001110101011111011110011
 11110111 1110101 101011010001
 11111111 1111111 111111111111
+
+
