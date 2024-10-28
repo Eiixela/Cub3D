@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 00:01:13 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/27 00:27:39 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/27 23:23:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-static void	mlx_cleanup(t_data *data)
-{
-	if (data->img.ptr)
-		mlx_destroy_image(data->mlx_ptr, data->img.ptr);
-	if (data->win_ptr)
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	if (data->mlx_ptr)
-	{
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
-	}
-	return ;
-}
 
 int	handle_win_exit(t_data *data)
 {

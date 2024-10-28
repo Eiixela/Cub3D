@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:15 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/27 00:29:10 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/28 02:26:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+void	mlx_cleanup(t_data *data)
+{
+	if (data->img.ptr)
+		mlx_destroy_image(data->mlx_ptr, data->img.ptr);
+	if (data->tex->ptr)
+		mlx_destroy_image(data->mlx_ptr, data->tex->ptr);
+	if (data->tex)
+		free(data->tex);
+	if (data->win_ptr)
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	if (data->mlx_ptr)
+	{
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+	}
+	return ;
+}
 
 static void	keys_init(t_data *data)
 {
@@ -22,6 +40,8 @@ static void	keys_init(t_data *data)
 	data->keys->left = 0;
 }
 
+
+
 void	data_init(t_data *data)
 {
 	data->width = WIDTH;
@@ -32,6 +52,8 @@ void	data_init(t_data *data)
 	data->img.ptr = mlx_new_image(data->mlx_ptr, data->width, data->height);
 	data->img.addr = mlx_get_data_addr(data->img.ptr, &data->img.bit_per_pixel,
 			&data->img.line_len, &data->img.endian);
+	if (texture_init(data) == 1)
+		return ;
 	keys_init(data);
 	mlx_hook(data->win_ptr, EXIT_CROSS, 0, &handle_win_exit, data);
 	mlx_hook(data->win_ptr, 2, 1L << 0, &handle_key_press, data);

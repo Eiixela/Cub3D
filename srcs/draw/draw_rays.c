@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/27 01:07:34 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/28 02:18:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ static double	perform_dda(t_data *data, t_ray_data *ray)
 			ray->side_dist.x += ray->delta_dist.x;
 			ray->map_pos.x += ray->step.x;
 			ray->side = 0;
+			data->tex->side = 0;
 		}
 		else
 		{
 			ray->side_dist.y += ray->delta_dist.y;
 			ray->map_pos.y += ray->step.y;
 			ray->side = 1;
+			data->tex->side = 1;
 		}
 		if (is_out_of_bounds(data->map, (int)ray->map_pos.x,
 				(int)ray->map_pos.y))
@@ -125,7 +127,10 @@ void	draw_wall(t_data *data, double ray_distance, int n_ray,
 	if (draw_end >= HEIGHT)
 		draw_end = HEIGHT - 1;
 	while (draw_start <= draw_end)
-		draw_point(data, n_ray, draw_start++, LIME_GREEN);
+	{
+		draw_texture(data, n_ray, draw_start++);
+		// draw_point(data, n_ray, draw_start++, LIME_GREEN);
+	}
 }
 
 void	draw_all_rays(t_data *data, t_map *map)
@@ -133,12 +138,12 @@ void	draw_all_rays(t_data *data, t_map *map)
 	t_vector2D	player_coor;
 	double		ray_len;
 	int			i;
-	int			j;
+	// int			j;
 	double		angle;
 
 	ray_len = 0;
 	i = 0;
-	j = 0;
+	// j = 0;	
 	player_coor.x = map->player_position->x * SQUARE_SIZE;
 	player_coor.y = map->player_position->y * SQUARE_SIZE;
 	angle = map->player_position->angle - FOV / 2;

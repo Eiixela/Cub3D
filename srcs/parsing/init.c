@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:26:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/24 15:17:19 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/27 21:38:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,16 @@ bool	init_map(t_map *map)
 	map->map = NULL;
 	map->size = NULL;
 	map->floor_c = malloc(sizeof(int *) * 3);
+	if (!map->floor_c)
+		return (false);
 	map->ceiling_c = malloc(sizeof(int *) * 3);
-	if (!map->ceiling_c || !map->floor_c)
-		return (free(map), false);
+	if (!map->ceiling_c)
+		return (false);
 	map->player_way = -1;
 	map->player_position = malloc(sizeof(t_point));
-	init_player(map->player_position);
 	if (!map->player_position)
 		return (false);
+	init_player(map->player_position);
 	map->player_position->x = 0;
 	map->player_position->y = 0;
 	while (i < 3)
