@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/28 02:18:05 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/28 14:42:09 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static double	calculate_final_distance(t_ray_data *ray, t_vector2D player_coor)
+static double	final_distance(t_ray_data *ray, t_vector2D player_coor)
 {
 	double	wall_dist;
 
@@ -25,7 +25,7 @@ static double	calculate_final_distance(t_ray_data *ray, t_vector2D player_coor)
 	return (wall_dist * SQUARE_SIZE);
 }
 
-static double	perform_dda(t_data *data, t_ray_data *ray)
+static double	dda(t_data *data, t_ray_data *ray)
 {
 	while (1)
 	{
@@ -81,7 +81,7 @@ static void	calculate_step_and_side_dist(t_ray_data *ray,
 	}
 }
 
-static void	initialize_ray_variables(t_ray_data *ray, double *angle,
+static void	init_ray(t_ray_data *ray, double *angle,
 	t_vector2D player_coor)
 {
 	ray->ray_dir.x = cos(*angle);
@@ -97,10 +97,11 @@ static double	calculate_wall_distance(t_data *data, t_vector2D player_coor,
 {
 	t_ray_data	ray;
 
-	initialize_ray_variables(&ray, angle, player_coor);
+	data->ray = &ray;
+	init_ray(&ray, angle, player_coor);
 	calculate_step_and_side_dist(&ray, player_coor);
-	ray.wall_dist = perform_dda(data, &ray);
-	return (calculate_final_distance(&ray, player_coor));
+	ray.wall_dist = dda(data, &ray);
+	return (final_distance(&ray, player_coor));
 }
 
 static double	draw_one_ray(t_data *data, t_vector2D player_coor,
@@ -119,7 +120,7 @@ void	draw_wall(t_data *data, double ray_distance, int n_ray,
 
 	perpendicular_distance = ray_distance * cos(angle - \
 			data->map->player_position->angle);
-	wall_height = (HEIGHT / perpendicular_distance) * SQUARE_SIZE;
+	wall_height = (HEIGHT / perpendicular_distance) * 25;
 	draw_start = (int)(-(wall_height / 2) + (HEIGHT / 2));
 	draw_end = (int)((wall_height / 2) + (HEIGHT / 2));
 	if (draw_start < 0)
@@ -128,8 +129,11 @@ void	draw_wall(t_data *data, double ray_distance, int n_ray,
 		draw_end = HEIGHT - 1;
 	while (draw_start <= draw_end)
 	{
-		draw_texture(data, n_ray, draw_start++);
-		// draw_point(data, n_ray, draw_start++, LIME_GREEN);
+		if ((int)(data->ray->map_pos.x) % 2 == 0)
+			draw_texture(data, n_ray, draw_start++, draw_end);
+			//draw_point(data, n_ray, draw_start++, CRIMSON);
+		else
+			draw_point(data, n_ray, draw_start++, LIME_GREEN);
 	}
 }
 
@@ -138,12 +142,10 @@ void	draw_all_rays(t_data *data, t_map *map)
 	t_vector2D	player_coor;
 	double		ray_len;
 	int			i;
-	// int			j;
 	double		angle;
 
 	ray_len = 0;
 	i = 0;
-	// j = 0;	
 	player_coor.x = map->player_position->x * SQUARE_SIZE;
 	player_coor.y = map->player_position->y * SQUARE_SIZE;
 	angle = map->player_position->angle - FOV / 2;

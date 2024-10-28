@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:39:12 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/28 02:55:02 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/28 14:43:16 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int	is_out_of_bounds(t_map *map, int map_x, int map_y)
 		|| map_y >= map->size->x);
 }
 
-void	draw_texture(t_data *data, int x, int y)
+void	draw_texture(t_data *data, int x, int y, int draw_end)
 {
+	(void)draw_end;
 	int	tex_x;
 	int	tex_y;
 	int	screen_index;
@@ -46,6 +47,7 @@ void	draw_texture(t_data *data, int x, int y)
 		*(unsigned int *)(data->img.addr + screen_index) = *(unsigned int *)(data->tex->addr + tex_index);
 	}
 }
+
 
 // void	draw_texture(t_data *data, int x, int y)
 // {

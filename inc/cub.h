@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/28 02:41:56 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/28 14:36:24 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@
 # define VISIBLE_MAP_SIZE 200
 # define PLAYER_SIZE 5
 # define SQUARE_SIZE 15
-# define MOVE_SPEED 0.096 // 0.064 is 1 pixel
-# define ROTATION_ANGLE 0.04 // initial value is 0.04
-# define NUM_RAYS 320         // Number of rays to cast
+# define MOVE_SPEED 0.066 // 0.064 is 1 pixel
+# define ROTATION_ANGLE 0.02 // initial value is 0.04
 # define FOV 1.0472  // 60 degree field of view
 # define P2 PI/2
 # define P3 3*PI/2
@@ -171,6 +170,7 @@ typedef struct s_data
 	t_pplane	*pplane;
 	t_keys		*keys;
 	t_texture	*tex;
+	t_ray_data	*ray;
 }	t_data;
 
 //---------------------------------------DRAW-----------------------------------
@@ -184,7 +184,7 @@ void	draw_all_rays(t_data *data, t_map *map);
 //draw_rays_utils
 double	calculate_distance(double x, double y, double x1, double y1);
 void	draw_point(t_data *data, int x, int y, int color);
-void	draw_texture(t_data *data, int x, int y);
+void	draw_texture(t_data *data, int x, int y, int draw_end);
 int		is_out_of_bounds(t_map *map, int map_x, int map_y);
 int		max(int a, int b);
 
