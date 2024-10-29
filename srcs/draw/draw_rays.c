@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/28 17:49:36 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/29 11:04:28 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,11 @@ void	draw_wall(t_data *data, double ray_distance, int n_ray,
 	while (draw_start <= draw_end)
 	{
 		if ((int)(data->ray->map_pos.x) % 2 == 0 && (int)(data->ray->map_pos.y) % 2 == 0)
-			//draw_texture(data, n_ray, draw_start++, draw_end);
-			draw_point(data, n_ray, draw_start++, PASTEL_PURPLE);
+		{	
+			draw_texture(data, n_ray, draw_start, draw_end, wall_height);
+			break ;
+			//draw_point(data, n_ray, draw_start++, PASTEL_PURPLE);
+		}
 		else
 			draw_point(data, n_ray, draw_start++, LIME_GREEN);
 	}
