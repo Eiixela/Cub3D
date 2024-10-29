@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:39:12 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 11:40:27 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/29 13:53:35 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double 
 // 		((int *)data->img.addr)[y * WIDTH + x] = *((unsigned int *)data->tex->addr + (y * data->tex->line_len + x * (data->tex->bit_per_pixel / 8)));
 // }
 
-void	draw_point(t_data *data, int x, int y, int color)
+void	draw_point(t_data *data, int x, int y, int draw_end,int color)
 {
-	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-		((int *)data->img.addr)[y * WIDTH + x] = color;
+	while (y++ <= draw_end)
+		if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+			((int *)data->img.addr)[y * WIDTH + x] = color;
 }
 
 double	calculate_distance(double x, double y, double x1, double y1)

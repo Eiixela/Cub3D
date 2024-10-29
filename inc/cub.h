@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 11:04:26 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/29 13:54:30 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@
 # define P3 3*PI/2
 # define ISAAC 0
 # define MV 1
+# define NORTH 0
+# define SOUTH 1
+# define EAST  2
+# define WEST  3
+
 
 //--------------------------------------------------|
 
@@ -156,6 +161,7 @@ typedef struct s_ray_data
     t_vector2D	step;
     double		wall_dist;
     int			side;
+	int			wall_direction;
 } t_ray_data;
 
 typedef struct s_data
@@ -183,7 +189,7 @@ void	draw_all_rays(t_data *data, t_map *map);
 
 //draw_rays_utils
 double	calculate_distance(double x, double y, double x1, double y1);
-void	draw_point(t_data *data, int x, int y, int color);
+void	draw_point(t_data *data, int x, int y, int draw_end, int color);
 void	draw_texture(t_data *data, int x, int y, int draw_end, double wall_height);
 int		is_out_of_bounds(t_map *map, int map_x, int map_y);
 int		max(int a, int b);

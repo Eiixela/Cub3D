@@ -6,7 +6,7 @@
 #    By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/10/28 17:17:25 by aljulien         ###   ########.fr        #
+#    Updated: 2024/10/29 14:01:10 by aljulien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,7 @@ INCLUDE_DIR = inc/
 LIBFT_DIR = libft/
 MLX_DIR = mlx/
 
-CFLAGS = -Wall -Wextra -Werror -g3 
-#-Ofast -march=native -flto -pipe
+CFLAGS = -Wall -Wextra -Werror -g3 -Ofast -march=native -flto -pipe
 IFLAGS = -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 DFLAGS = -MMD -MP
 LFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm

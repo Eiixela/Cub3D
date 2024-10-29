@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 11:04:28 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:00:48 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static double	dda(t_data *data, t_ray_data *ray)
 			ray->map_pos.x += ray->step.x;
 			ray->side = 0;
 			data->tex->side = 0;
+			ray->wall_direction = (ray->step.x > 0) ? EAST : WEST;
 		}
 		else
 		{
@@ -42,6 +43,7 @@ static double	dda(t_data *data, t_ray_data *ray)
 			ray->map_pos.y += ray->step.y;
 			ray->side = 1;
 			data->tex->side = 1;
+			ray->wall_direction = (ray->step.y > 0) ? SOUTH : NORTH;
 		}
 		if (is_out_of_bounds(data->map, (int)ray->map_pos.x,
 				(int)ray->map_pos.y))
@@ -90,6 +92,7 @@ static void	init_ray(t_ray_data *ray, double *angle,
 	ray->map_pos.y = (int)(player_coor.y / SQUARE_SIZE);
 	ray->delta_dist.x = fabs(SQUARE_SIZE / ray->ray_dir.x);
 	ray->delta_dist.y = fabs(SQUARE_SIZE / ray->ray_dir.y);
+	ray->wall_direction = 0;
 }
 
 static double	calculate_wall_distance(t_data *data, t_vector2D player_coor,
@@ -128,16 +131,25 @@ void	draw_wall(t_data *data, double ray_distance, int n_ray,
 		draw_end = HEIGHT - 1;
 	while (draw_start <= draw_end)
 	{
-		if ((int)(data->ray->map_pos.x) % 2 == 0 && (int)(data->ray->map_pos.y) % 2 == 0)
-		{	
-			draw_texture(data, n_ray, draw_start, draw_end, wall_height);
-			break ;
-			//draw_point(data, n_ray, draw_start++, PASTEL_PURPLE);
-		}
+		if (data->ray->wall_direction == 0)
+			{draw_point(data, n_ray, draw_start, draw_end, PASTEL_PURPLE); 
+			break;}
+		if (data->ray->wall_direction == 1)
+			{draw_point(data, n_ray, draw_start, draw_end, ORANGE);
+			break;}
+		if (data->ray->wall_direction == 2)
+			{draw_point(data, n_ray, draw_start, draw_end,DARK_PINK);
+			break;}
+		if (data->ray->wall_direction == 3)
+			{draw_point(data, n_ray, draw_start, draw_end,RED);
+			break;}
 		else
-			draw_point(data, n_ray, draw_start++, LIME_GREEN);
+			{draw_point(data, n_ray, draw_start, draw_end, LIME_GREEN);
+			 break;}
 	}
 }
+
+//draw_texture(data, n_ray, draw_start, draw_end, wall_height);
 
 void	draw_all_rays(t_data *data, t_map *map)
 {
