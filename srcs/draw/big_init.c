@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:07:36 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/28 17:40:46 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/29 09:26:05 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	player_init(t_player *player)
 
 int	projection_plane_init(t_pplane *pplane, t_player *player)
 {
-	pplane->width = 2800;
-	pplane->height = 1400;
+	pplane->width = WIDTH;
+	pplane->height = HEIGHT;
 	pplane->center_w = (pplane->width >> 1);
 	pplane->center_h = (pplane->height >> 1);
 	pplane->distance_from_player = (pplane->center_w) / tan(player->fov / 2);
