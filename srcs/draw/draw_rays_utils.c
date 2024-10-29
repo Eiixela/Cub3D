@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:39:12 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 13:53:35 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:44:10 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double 
 
 	wall_top = draw_start;
 	//tex_x = (n_ray % 1) * data->tex->width;
-	tex_x = n_ray % data->tex->width;
+	tex_x = (n_ray % data->tex->width);
 	while (draw_start++ <= draw_end)
 	{
 		tex_y = (draw_start - wall_top) * (data->tex->height / wall_height);
@@ -48,7 +48,7 @@ void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double 
 			// 	texture_init(data);
 			// else
 			// 	texture_init(data);
-			*(unsigned int *)(data->img.addr + screen_index) = *(unsigned int *)(data->tex->addr + tex_index);
+			(*(unsigned int *)(data->img.addr + screen_index)) = (*(unsigned int *)(data->tex->addr + tex_index));
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 15:04:54 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:28:50 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ static double	dda(t_data *data, t_ray_data *ray)
 			ray->map_pos.x += ray->step.x;
 			ray->side = 0;
 			data->tex->side = 0;
-			ray->wall_direction = (ray->step.x > 0) ? EAST : WEST;
+			if (ray->step.x > 0)
+    			ray->wall_direction = EAST;
+			else
+			    ray->wall_direction = WEST;
 		}
 		else
 		{
@@ -43,7 +46,10 @@ static double	dda(t_data *data, t_ray_data *ray)
 			ray->map_pos.y += ray->step.y;
 			ray->side = 1;
 			data->tex->side = 1;
-			ray->wall_direction = (ray->step.y > 0) ? SOUTH : NORTH;
+			if (ray->step.y > 0)
+    			ray->wall_direction = SOUTH;
+			else
+			    ray->wall_direction = NORTH;
 		}
 		if (is_out_of_bounds(data->map, (int)ray->map_pos.x,
 				(int)ray->map_pos.y))
@@ -129,14 +135,14 @@ void	draw_wall(t_data *data, double ray_distance, int n_ray,
         draw_start = 0;
     if (draw_end >= HEIGHT)
 		draw_end = HEIGHT - 1;
-	if (data->ray->wall_direction == 0)
-		//draw_texture(data, n_ray, draw_start, draw_end, wall_height);
-		draw_point(data, n_ray, draw_start, draw_end, CITRON); 
-	else if (data->ray->wall_direction == 1)
+	if (data->ray->wall_direction == NORTH)
+		draw_texture(data, n_ray, draw_start, draw_end, wall_height);
+		//draw_point(data, n_ray, draw_start, draw_end, CITRON); 
+	else if (data->ray->wall_direction == SOUTH)
 		draw_point(data, n_ray, draw_start, draw_end, VIOLET);
-	else if (data->ray->wall_direction == 2)
+	else if (data->ray->wall_direction == EAST)
 		draw_point(data, n_ray, draw_start, draw_end, PURPLE_PIZZAZZ);
-	else if (data->ray->wall_direction == 3)
+	else if (data->ray->wall_direction == WEST)
 		draw_point(data, n_ray, draw_start, draw_end, MIMI_PINK);
 	else
 		draw_point(data, n_ray, draw_start, draw_end, LIME_GREEN);
