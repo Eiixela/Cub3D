@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/28 17:24:20 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:56:32 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,13 @@ int	count_line(int fd)
 	bool	map_begun;
 
 	map_begun = false;
-	i = 0;
+	i = 1;
 	line = NULL;
 	while (!map_begun)
 	{
 		line = get_next_line(fd);
-		if (!line)
+		if (!line || map_started(line) == true)
 			break ;
-		if (map_started(line) == true)
-		{
-			i++;
-			break ;
-		}
 		free(line);
 	}
 	while (line != NULL)
@@ -98,9 +93,7 @@ static int	fill_map(int fd, t_map *map, int number_line_map, int i)
 		temp = get_next_line(fd);
 		free(line);
 		line = temp;
-		if (!line)
-			break ;
-		if (map_started(line) == true)
+		if (!line || map_started(line) == true)
 			break ;
 	}
 	while (i < number_line_map && line)

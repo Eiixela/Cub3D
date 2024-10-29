@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:26:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/27 21:38:51 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/29 15:01:39 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,18 @@ static void init_player(t_point *player)
 	player->dy = 0;
 	player->x = 0;
 	player->y = 0;
+}
+
+static void	init_color(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		map->ceiling_c[i] = 0;
+		map->floor_c[i++] = 0;
+	}
 }
 
 //TODO add error message when return NULL
@@ -46,10 +58,6 @@ bool	init_map(t_map *map)
 	init_player(map->player_position);
 	map->player_position->x = 0;
 	map->player_position->y = 0;
-	while (i < 3)
-	{
-		map->ceiling_c[i] = 0;
-		map->floor_c[i++] = 0;
-	}
+	init_color(map);
 	return (true);
 }

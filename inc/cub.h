@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 13:54:30 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/29 15:04:25 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 //--------------------------------------------------|
 
 //Define for colors
+
+//basic colors
 # define LIME_GREEN 0xdaf7a6
 # define ORANGE 0xffc300
 # define BRIGHT_RED 0xff5733
@@ -58,10 +60,19 @@
 # define GRID_COLOR 0x808080
 # define RED 0xFF0000
 # define YELLOW 0xFFFF00
+
+//Barbie color palette
 # define BUBBLEGUM_PINK 0xFF9EE2
 # define DARK_PINK 0xFF36AF
 # define LIGHT_PINK 0xFFC4F3
 # define LIGHT_BLUE 0x5DADE2
+
+//pretty color palette
+# define RICH_BLACK 0x001514
+# define CITRON 0xC2D076
+# define VIOLET 0xFFE1EA
+# define PURPLE_PIZZAZZ 0xFFA0FD
+# define MIMI_PINK 0xE952DE
 
 typedef struct s_vector2d
 {

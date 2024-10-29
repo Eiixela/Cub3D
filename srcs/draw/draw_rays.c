@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 14:00:48 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/29 15:04:54 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,27 +129,18 @@ void	draw_wall(t_data *data, double ray_distance, int n_ray,
         draw_start = 0;
     if (draw_end >= HEIGHT)
 		draw_end = HEIGHT - 1;
-	while (draw_start <= draw_end)
-	{
-		if (data->ray->wall_direction == 0)
-			{draw_point(data, n_ray, draw_start, draw_end, PASTEL_PURPLE); 
-			break;}
-		if (data->ray->wall_direction == 1)
-			{draw_point(data, n_ray, draw_start, draw_end, ORANGE);
-			break;}
-		if (data->ray->wall_direction == 2)
-			{draw_point(data, n_ray, draw_start, draw_end,DARK_PINK);
-			break;}
-		if (data->ray->wall_direction == 3)
-			{draw_point(data, n_ray, draw_start, draw_end,RED);
-			break;}
-		else
-			{draw_point(data, n_ray, draw_start, draw_end, LIME_GREEN);
-			 break;}
-	}
+	if (data->ray->wall_direction == 0)
+		//draw_texture(data, n_ray, draw_start, draw_end, wall_height);
+		draw_point(data, n_ray, draw_start, draw_end, CITRON); 
+	else if (data->ray->wall_direction == 1)
+		draw_point(data, n_ray, draw_start, draw_end, VIOLET);
+	else if (data->ray->wall_direction == 2)
+		draw_point(data, n_ray, draw_start, draw_end, PURPLE_PIZZAZZ);
+	else if (data->ray->wall_direction == 3)
+		draw_point(data, n_ray, draw_start, draw_end, MIMI_PINK);
+	else
+		draw_point(data, n_ray, draw_start, draw_end, LIME_GREEN);
 }
-
-//draw_texture(data, n_ray, draw_start, draw_end, wall_height);
 
 void	draw_all_rays(t_data *data, t_map *map)
 {

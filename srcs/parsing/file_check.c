@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:36:17 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/16 15:06:19 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:57:05 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	file_check(char *file, t_map *map)
 		return (1);
 	fd = file_access(file);
 	number_line_map = count_line(fd);
-	if (!number_line_map)
+	if (!number_line_map || number_line_map == 1)
 		return (close(fd), printf("No map in file bro\n"), 1);
 	close(fd);
 	fd = file_access(file);
