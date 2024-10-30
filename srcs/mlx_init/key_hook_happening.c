@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook_happening.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:56:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 16:44:37 by aljulien         ###   ########.fr       */
+/*   Updated: 2024 23:22:51 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	s_key(t_data *data)
 	move_speed = MOVE_SPEED;
 	new_y = data->map->player_position->y + -sin(data->map->player_position->angle) * move_speed;
 	new_x = data->map->player_position->x + -cos(data->map->player_position->angle) * move_speed;
-	if (data->map->map[(int)new_y][(int)data->map->player_position->x] != '1' &&
-		data->map->map[(int)data->map->player_position->y][(int)new_x] != '1')
+	if (data->map->map[(int)(new_y)][(int)data->map->player_position->x] != '1' &&
+	data->map->map[(int)data->map->player_position->y][(int)(new_x)] != '1')
 	{
 		data->map->player_position->x = new_x;
 		data->map->player_position->y = new_y;
@@ -58,8 +58,8 @@ void w_key(t_data *data)
 	move_speed = MOVE_SPEED;
 	new_y = data->map->player_position->y + sin(data->map->player_position->angle) * move_speed;
 	new_x = data->map->player_position->x + cos(data->map->player_position->angle) * move_speed;
-	if (data->map->map[(int)new_y][(int)data->map->player_position->x] != '1' &&
-		data->map->map[(int)data->map->player_position->y][(int)new_x] != '1')
+	if (data->map->map[(int)(new_y)][(int)data->map->player_position->x] != '1' &&
+		data->map->map[(int)data->map->player_position->y][(int)(new_x)] != '1')
 	{
 		data->map->player_position->x = new_x;
 		data->map->player_position->y = new_y;
@@ -75,8 +75,8 @@ void	a_key(t_data *data)
 	float new_x = data->map->player_position->x + sin(data->map->player_position->angle) * move_speed;
 	float new_y = data->map->player_position->y - cos(data->map->player_position->angle) * move_speed;
 
-	if (data->map->map[(int)new_y][(int)data->map->player_position->x] != '1' &&
-		data->map->map[(int)data->map->player_position->y][(int)new_x] != '1')
+	if (data->map->map[(int)(new_y)][(int)data->map->player_position->x] != '1' &&
+		data->map->map[(int)data->map->player_position->y][(int)(new_x)] != '1')
 	{
 		data->map->player_position->x = new_x;
 		data->map->player_position->y = new_y;
@@ -91,8 +91,8 @@ void	d_key(t_data *data)
 	float new_x = data->map->player_position->x - sin(data->map->player_position->angle) * move_speed;
 	float new_y = data->map->player_position->y + cos(data->map->player_position->angle) * move_speed;
 
-	if (data->map->map[(int)new_y][(int)data->map->player_position->x] != '1' &&
-		data->map->map[(int)data->map->player_position->y][(int)new_x] != '1')
+	if (data->map->map[(int)(new_y)][(int)data->map->player_position->x] != '1' &&
+		data->map->map[(int)data->map->player_position->y][(int)(new_x)] != '1')
 	{
 		data->map->player_position->x = new_x;
 		data->map->player_position->y = new_y;

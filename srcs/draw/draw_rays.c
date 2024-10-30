@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 16:28:50 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:56:33 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,15 +129,15 @@ void	draw_wall(t_data *data, double ray_distance, int n_ray,
 
     perpendicular_distance = ray_distance * cos(angle - data->map->player_position->angle);
 	wall_height = (SQUARE_SIZE / perpendicular_distance) * data->pplane->distance_from_player;
-    draw_start = (int)(-(wall_height / 2) + (HEIGHT / 2));
-    draw_end = (int)((wall_height / 2) + (HEIGHT / 2));
+    draw_start = (-((int)wall_height >> 1) + (HEIGHT >> 1));
+    draw_end = (((int)wall_height >> 1) + (HEIGHT >> 1));
     if (draw_start < 0)
         draw_start = 0;
     if (draw_end >= HEIGHT)
 		draw_end = HEIGHT - 1;
 	if (data->ray->wall_direction == NORTH)
 		draw_texture(data, n_ray, draw_start, draw_end, wall_height);
-		//draw_point(data, n_ray, draw_start, draw_end, CITRON); 
+		//draw_point(data, n_ray, draw_start, draw_end, CITRON);
 	else if (data->ray->wall_direction == SOUTH)
 		draw_point(data, n_ray, draw_start, draw_end, VIOLET);
 	else if (data->ray->wall_direction == EAST)
@@ -154,16 +154,18 @@ void	draw_all_rays(t_data *data, t_map *map)
 	double		ray_len;
 	int			i;
 	double		angle;
+	double		angle_step;
 
 	ray_len = 0;
 	i = 0;
 	player_coor.x = map->player_position->x * SQUARE_SIZE;
 	player_coor.y = map->player_position->y * SQUARE_SIZE;
-	angle = map->player_position->angle - FOV / 2;
-	while (i++ < WIDTH)
+	angle = map->player_position->angle - (FOV * 0.5);
+	angle_step = FOV / WIDTH;
+	while (i < WIDTH)
 	{
 		ray_len = draw_one_ray(data, player_coor, &angle);
-		draw_wall(data, ray_len, i, angle);
-		angle += FOV / WIDTH;
+		draw_wall(data, ray_len, i++, angle);
+		angle += angle_step;
 	}
 }

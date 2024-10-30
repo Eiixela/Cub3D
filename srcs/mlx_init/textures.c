@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 02:26:13 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/28 02:26:13 by marvin           ###   ########.fr       */
+/*   Created: 2024/10/29 21:55:55 by saperrie          #+#    #+#             */
+/*   Updated: 2024/10/28 02:26:13 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-// Change xpm_file path to absolute on your machine
 int	texture_init(t_data *data)
 {
 	char	*texture_path;
@@ -25,10 +24,11 @@ int	texture_init(t_data *data)
 	data->tex->bit_per_pixel = 0;
 	data->tex->line_len = 0;
 	data->tex->endian = 0;
-	if (data->tex->side == 0)
-	 	texture_path = "/home/aljulien/Documents/C/C4/Cub3D/textures/isaac64.xpm";
+	// if (data->tex->side == 0)
+	 	// texture_path = "/home/aljulien/Documents/C/C4/Cub3D/textures/isaac64.xpm";
 	// else // (data->tex->side == 1)
-	texture_path = "/home/aljulien/Documents/C/C4/Cub3D/textures/mv.xpm";
+	// texture_path = "/home/saperrie/cmor/WIP/cub3d/textures/isaac64.xpm";
+	texture_path = "/home/aljulien/Documents/C/C4/Cub3D/textures/isaac64.xpm";
 	data->tex->ptr = mlx_xpm_file_to_image(data->mlx_ptr, \
 		texture_path, \
 		&data->tex->width, &data->tex->height);
