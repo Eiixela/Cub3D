@@ -12,34 +12,40 @@
 
 #include "cub.h"
 
+double	get_x_pos_tex(t_data *data, double ray_distance)
+{
+	double	tex_x;
+
+	if (data->ray->wall_direction == EAST || data->ray->wall_direction == WEST)
+		tex_x = data->map->player_position->y + ray_distance * data->ray->ray_dir.y;
+	else    
+		tex_x = data->map->player_position->x + ray_distance * data->ray->ray_dir.x;
+	tex_x -= floor(tex_x);
+	tex_x = (int)(tex_x * data->tex->width);
+	return (tex_x);
+}
+
 void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double wall_height, t_texture *tex, double ray_distance)
 {
-	(void)tex;
-	double tex_x;
-    double step;
-    double tex_pos;
-    int tex_y;
-    int screen_index;
-    int tex_index;
+	t_vector2D tex_pos;
+	double	step;
+	double	tex_pos_win;
+	int		screen_index;
+	int		tex_index;
 
-    if (data->ray->wall_direction == EAST || data->ray->wall_direction == WEST)
-        tex_x = data->map->player_position->y + ray_distance * data->ray->ray_dir.y;
-    else    
-        tex_x = data->map->player_position->x + ray_distance * data->ray->ray_dir.x;
-    tex_x -= floor(tex_x);
-    tex_x = (int)(tex_x * data->tex->width);
-    step = 1.0 * data->tex->height / wall_height;
-    tex_pos = (draw_start - HEIGHT / 2 + wall_height / 2) * step;
-    for (int y = draw_start; y <= draw_end; y++)
-    {
-        tex_y = (int)tex_pos & (data->tex->height - 1);
-        tex_pos += step;
-        if (n_ray >= 0 && n_ray < WIDTH && y >= 0 && y < HEIGHT && 
-            tex_x >= 0 && tex_x < data->tex->width && tex_y >= 0 && tex_y < data->tex->height)
-        {
-            screen_index = y * data->img.line_len + n_ray * (data->img.bit_per_pixel / 8);
-            tex_index = tex_y * data->tex->line_len + tex_x * (data->tex->bit_per_pixel / 8);
-            (*(unsigned int *)(data->img.addr + screen_index)) = (*(unsigned int *)(tex->addr + tex_index));
+	tex_pos.x = get_x_pos_tex(data, ray_distance);
+	step = 1.0 * data->tex->height / wall_height;
+	tex_pos_win = (draw_start - HEIGHT / 2 + wall_height / 2) * step;
+	for (int y = draw_start; y <= draw_end; y++)
+	{
+		tex_pos.y = (int)tex_pos_win & (data->tex->height - 1);
+		tex_pos_win += step;
+		if (n_ray >= 0 && n_ray < WIDTH && y >= 0 && y < HEIGHT && 
+			tex_pos.x >= 0 && tex_pos.x < data->tex->width && tex_pos.y >= 0 && tex_pos.y < data->tex->height)
+		{
+			screen_index = y * data->img.line_len + n_ray * (data->img.bit_per_pixel / 8);
+			tex_index = tex_pos.y * data->tex->line_len + tex_pos.x * (data->tex->bit_per_pixel / 8);
+			(*(unsigned int *)(data->img.addr + screen_index)) = (*(unsigned int *)(tex->addr + tex_index));
 		}
 	}
 }

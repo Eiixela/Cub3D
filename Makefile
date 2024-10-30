@@ -6,7 +6,7 @@
 #    By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/10/30 09:24:21 by aljulien         ###   ########.fr        #
+#    Updated: 2024/10/30 13:12:57 by aljulien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ OBJECTS = $(patsubst srcs/%.c,$(OBJECT_DIR)%.o,\
 		srcs/draw/draw_rays_utils.c\
 		srcs/draw/draw_ceiling_floor.c\
 		srcs/draw/draw.c\
+		srcs/draw/ray_casting.c\
 							)
 
 OBJ_SUBDIRS = $(sort $(dir ${OBJECTS}))
