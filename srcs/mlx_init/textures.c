@@ -12,18 +12,24 @@
 
 #include "cub.h"
 
-void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double wall_height, t_texture *tex)
+void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double wall_height, t_texture *tex, double ray_distance)
 {
+	(void)ray_distance;
 	(void)draw_end;
-	int	tex_x;
+	double	tex_x;
 	int	tex_y;
 	int	screen_index;
 	int	tex_index;
 	int	wall_top;
 
 	wall_top = draw_start;
-	// tex_x = (n_ray % 1) * data->tex->width;
-	tex_x = ((n_ray) / ((int)data->ray->map_pos.x % data->tex->width)); // still makes no sense but it's the closest I got, need to calculate equivalent of wall_top but for x axis
+	if (data->ray->wall_direction == EAST || data->ray->wall_direction == WEST)
+		tex_x = data->map->player_position->y + ray_distance * data->ray->ray_dir.y;
+	else	
+		tex_x = data->map->player_position->x + ray_distance * data->ray->ray_dir.x;
+	tex_x -= floor(tex_x);
+	tex_x = (int)(tex_x * data->tex->width);
+
 	while (draw_start++ <= draw_end)
 	{
 		tex_y = (draw_start - wall_top) * (tex->height / wall_height);

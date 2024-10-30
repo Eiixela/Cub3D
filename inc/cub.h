@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/30 01:47:14 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:15:12 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define PI	3.1415926535
 # define VISIBLE_MAP_SIZE 200
 # define PLAYER_SIZE 5
-# define SQUARE_SIZE 15 // 15
+# define SQUARE_SIZE 1// 15
 # define MOVE_SPEED 0.1 // 0.064 is 1 pixel
 # define ROTATION_ANGLE 0.06 // initial value is 0.04
 # define FOV 1.0472  // 60 degree field of view
@@ -173,6 +173,7 @@ typedef struct s_ray_data
     double		wall_dist;
     int			side;
 	int			wall_direction;
+	int			wall_id;
 } t_ray_data;
 
 typedef struct s_data
@@ -201,7 +202,7 @@ void	draw_all_rays(t_data *data, t_map *map);
 //draw_rays_utils
 double	calculate_distance(double x, double y, double x1, double y1);
 void	draw_point(t_data *data, int x, int y, int draw_end, int color);
-void	draw_texture(t_data *data, int x, int y, int draw_end, double wall_height, t_texture *tex);
+void	draw_texture(t_data *data, int x, int y, int draw_end, double wall_height, t_texture *tex, double perpendicular_distance);
 int		is_out_of_bounds(t_map *map, int map_x, int map_y);
 int		max(int a, int b);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   big_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:07:36 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/30 02:32:30 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:24:35 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	player_init(t_player *player)
 	return (0);
 }
 
-int	projection_plane_init(t_pplane *pplane, t_player *player)
+int	projection_plane_init(t_pplane *pplane)
 {
 	pplane->width = WIDTH;
 	pplane->height = HEIGHT;
 	pplane->center_w = (pplane->width >> 1);
 	pplane->center_h = (pplane->height >> 1);
-	pplane->distance_from_player = (pplane->center_w) / tan(player->fov / 2);
-	pplane->angle_between_rays = (double)player->fov / pplane->width;
+	pplane->distance_from_player = (pplane->center_w) / tan(FOV / 2);
+	pplane->angle_between_rays = (double)FOV / pplane->width;
 	return (0);
 }
 
@@ -40,7 +40,7 @@ int	big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map)
 	if (1 == player_init(player))
 		return (1);
 	data->player = player;
-	if (1 == projection_plane_init(pplane, player))
+	if (1 == projection_plane_init(pplane))
 		return (1);
 	data->pplane = pplane;
 	return (0);
