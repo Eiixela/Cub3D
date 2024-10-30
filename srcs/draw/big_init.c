@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   big_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:07:36 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/29 16:27:14 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/30 02:32:30 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ int	projection_plane_init(t_pplane *pplane, t_player *player)
 
 int	big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map)
 {
-	data_init(data);
 	data->map = map;
+	data_init(data);
+	if (texture_init(data) == 1)
+		return (1);
 	if (1 == player_init(player))
 		return (1);
 	data->player = player;

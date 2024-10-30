@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/30 01:07:30 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/30 01:47:14 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ typedef struct s_data
 	t_player	*player;
 	t_pplane	*pplane;
 	t_keys		*keys;
-	t_texture	*tex;
+	t_texture	tex[4];
 	t_ray_data	*ray;
 }	t_data;
 
@@ -201,7 +201,7 @@ void	draw_all_rays(t_data *data, t_map *map);
 //draw_rays_utils
 double	calculate_distance(double x, double y, double x1, double y1);
 void	draw_point(t_data *data, int x, int y, int draw_end, int color);
-void	draw_texture(t_data *data, int x, int y, int draw_end, double wall_height);
+void	draw_texture(t_data *data, int x, int y, int draw_end, double wall_height, t_texture *tex);
 int		is_out_of_bounds(t_map *map, int map_x, int map_y);
 int		max(int a, int b);
 

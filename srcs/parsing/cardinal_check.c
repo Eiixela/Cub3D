@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cardinal_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/24 15:12:34 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/30 03:11:21 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 static t_map	*fill_cardinal(char *line, char *path, t_map *map)
 {
+	char	*s1;
+
+	// s1 = "/home/saperrie/cmor/WIP/cub3d/";
+	s1 = "/home/aljulien/Documents/C/C4/Cub3D/";
 	if (ft_strncmp("NO ", line, 3) == 0)
-		map->north = ft_strdup(path);
+		map->north = ft_strjoin(s1, path);
 	else if (ft_strncmp("SO ", line, 3) == 0)
-		map->south = ft_strdup(path);
+		map->south = ft_strjoin(s1, path);
 	else if (ft_strncmp("WE ", line, 3) == 0)
-		map->west = ft_strdup(path);
+		map->west = ft_strjoin(s1, path);
 	else if (ft_strncmp("EA ", line, 3) == 0)
-		map->east = ft_strdup(path);
+		map->east = ft_strjoin(s1, path);
 	return (map);
 }
 

@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 22:56:33 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/10/30 03:10:32 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,14 +136,17 @@ void	draw_wall(t_data *data, double ray_distance, int n_ray,
     if (draw_end >= HEIGHT)
 		draw_end = HEIGHT - 1;
 	if (data->ray->wall_direction == NORTH)
-		draw_texture(data, n_ray, draw_start, draw_end, wall_height);
-		//draw_point(data, n_ray, draw_start, draw_end, CITRON);
+		draw_point(data, n_ray, draw_start, draw_end, CITRON);
+		// draw_texture(data, n_ray, draw_start, draw_end, wall_height, data->tex + NORTH); // UNCOMMENT ME FOR A WILD RIDE
 	else if (data->ray->wall_direction == SOUTH)
 		draw_point(data, n_ray, draw_start, draw_end, VIOLET);
+		// draw_texture(data, n_ray, draw_start, draw_end, wall_height, data->tex + SOUTH); // UNCOMMENT ME FOR A WILD RIDE
 	else if (data->ray->wall_direction == EAST)
 		draw_point(data, n_ray, draw_start, draw_end, PURPLE_PIZZAZZ);
+		// draw_texture(data, n_ray, draw_start, draw_end, wall_height, data->tex + EAST); // UNCOMMENT ME FOR A WILD RIDE
 	else if (data->ray->wall_direction == WEST)
 		draw_point(data, n_ray, draw_start, draw_end, MIMI_PINK);
+		// draw_texture(data, n_ray, draw_start, draw_end, wall_height, data->tex + WEST); // UNCOMMENT ME FOR A WILD RIDE
 	else
 		draw_point(data, n_ray, draw_start, draw_end, LIME_GREEN);
 }

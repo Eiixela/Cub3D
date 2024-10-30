@@ -1,79 +1,15 @@
-==53352== Memcheck, a memory error detector
-==53352== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==53352== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==53352== Command: ./cub maps/good/cheese_maze.cub
-==53352== Parent PID: 43361
-==53352== 
-==53352== Conditional jump or move depends on uninitialised value(s)
-==53352==    at 0x406373: texture_init (textures.c:28)
-==53352==    by 0x4056EB: data_init (mlx_init.c:55)
-==53352==    by 0x406530: big_init (big_init.c:36)
-==53352==    by 0x4026FE: main (main.c:61)
-==53352==  Uninitialised value was created by a heap allocation
-==53352==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==53352==    by 0x4062F5: texture_init (textures.c:20)
-==53352==    by 0x4056EB: data_init (mlx_init.c:55)
-==53352==    by 0x406530: big_init (big_init.c:36)
-==53352==    by 0x4026FE: main (main.c:61)
-==53352== 
-==53352== Conditional jump or move depends on uninitialised value(s)
-==53352==    at 0x4066DA: draw_wall (draw_rays.c:131)
-==53352==    by 0x406807: draw_all_rays (draw_rays.c:154)
-==53352==    by 0x4075CB: draw_new_image (draw.c:22)
-==53352==    by 0x40271F: main (main.c:63)
-==53352==  Uninitialised value was created by a stack allocation
-==53352==    at 0x4065FE: draw_wall (draw_rays.c:121)
-==53352== 
-==53352== Conditional jump or move depends on uninitialised value(s)
-==53352==    at 0x4066F8: draw_wall (draw_rays.c:131)
-==53352==    by 0x406807: draw_all_rays (draw_rays.c:154)
-==53352==    by 0x4075CB: draw_new_image (draw.c:22)
-==53352==    by 0x40271F: main (main.c:63)
-==53352==  Uninitialised value was created by a stack allocation
-==53352==    at 0x4065FE: draw_wall (draw_rays.c:121)
-==53352== 
-==53352== Conditional jump or move depends on uninitialised value(s)
-==53352==    at 0x4066DA: draw_wall (draw_rays.c:131)
-==53352==    by 0x406807: draw_all_rays (draw_rays.c:154)
-==53352==    by 0x4075CB: draw_new_image (draw.c:22)
-==53352==    by 0x405AE5: key_loop (handle_input.c:73)
-==53352==    by 0x4087BC: mlx_loop (in /home/aljulien/Documents/C/C4/Cub3D/cub)
-==53352==    by 0x40760C: draw_new_image (draw.c:25)
-==53352==    by 0x40271F: main (main.c:63)
-==53352==  Uninitialised value was created by a stack allocation
-==53352==    at 0x4065FE: draw_wall (draw_rays.c:121)
-==53352== 
-==53352== Conditional jump or move depends on uninitialised value(s)
-==53352==    at 0x4066F8: draw_wall (draw_rays.c:131)
-==53352==    by 0x406807: draw_all_rays (draw_rays.c:154)
-==53352==    by 0x4075CB: draw_new_image (draw.c:22)
-==53352==    by 0x405AE5: key_loop (handle_input.c:73)
-==53352==    by 0x4087BC: mlx_loop (in /home/aljulien/Documents/C/C4/Cub3D/cub)
-==53352==    by 0x40760C: draw_new_image (draw.c:25)
-==53352==    by 0x40271F: main (main.c:63)
-==53352==  Uninitialised value was created by a stack allocation
-==53352==    at 0x4065FE: draw_wall (draw_rays.c:121)
-==53352== 
-==53352== 
-==53352== FILE DESCRIPTORS: 7 open (3 std) at exit.
-==53352== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==53352==    <inherited from parent>
-==53352== 
-==53352== Open AF_UNIX socket 43: <unknown>
-==53352==    <inherited from parent>
-==53352== 
-==53352== Open file descriptor 42: /home/aljulien/.config/Code/logs/20241028T170823/ptyhost.log
-==53352==    <inherited from parent>
-==53352== 
-==53352== Open file descriptor 3: /home/aljulien/Documents/C/C4/Cub3D/valgrind_output.txt
-==53352==    <inherited from parent>
-==53352== 
-==53352== 
-==53352== HEAP SUMMARY:
-==53352==     in use at exit: 0 bytes in 0 blocks
-==53352==   total heap usage: 3,634 allocs, 3,634 frees, 443,524 bytes allocated
-==53352== 
-==53352== All heap blocks were freed -- no leaks are possible
-==53352== 
-==53352== For lists of detected and suppressed errors, rerun with: -s
-==53352== ERROR SUMMARY: 2451741 errors from 5 contexts (suppressed: 9 from 1)
+==35052== Memcheck, a memory error detector
+==35052== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==35052== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==35052== Command: ./cub maps/good/isaac.cub
+==35052== Parent PID: 4426
+==35052== 
+==35052== 
+==35052== HEAP SUMMARY:
+==35052==     in use at exit: 0 bytes in 0 blocks
+==35052==   total heap usage: 6,176 allocs, 6,176 frees, 1,315,411 bytes allocated
+==35052== 
+==35052== All heap blocks were freed -- no leaks are possible
+==35052== 
+==35052== For lists of detected and suppressed errors, rerun with: -s
+==35052== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 21 from 1)
