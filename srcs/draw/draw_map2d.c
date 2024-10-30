@@ -27,7 +27,6 @@ static int	player_position(double new_x, double new_y, t_map *map)
 	return (1);
 }
 
-
 static void	init_map2d(t_map2d *map2d, t_map *map)
 {
 	map2d->map_offset_x = (map->player_position->x * SQUARE_SIZE) - \

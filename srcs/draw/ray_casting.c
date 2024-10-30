@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:11:48 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/30 13:12:08 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/30 16:41:01 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static double	dda(t_data *data, t_ray_data *ray)
 			ray->side = 0;
 			data->tex->side = 0;
 			if (ray->step.x > 0)
-    			ray->wall_direction = EAST;
+				ray->wall_direction = EAST;
 			else
-			    ray->wall_direction = WEST;
+				ray->wall_direction = WEST;
 		}
 		else
 		{
@@ -47,9 +47,9 @@ static double	dda(t_data *data, t_ray_data *ray)
 			ray->side = 1;
 			data->tex->side = 1;
 			if (ray->step.y > 0)
-    			ray->wall_direction = SOUTH;
+				ray->wall_direction = SOUTH;
 			else
-			    ray->wall_direction = NORTH;
+				ray->wall_direction = NORTH;
 		}
 		if (is_out_of_bounds(data->map, (int)ray->map_pos.x,
 				(int)ray->map_pos.y))

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+         #
+#    By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/10/30 13:12:57 by aljulien         ###   ########.fr        #
+#    Updated: 2024/10/30 23:21:57 by saperrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,9 @@ OBJECTS = $(patsubst srcs/%.c,$(OBJECT_DIR)%.o,\
 		srcs/gnl/get_next_line.c\
 		srcs/gnl/get_next_line_utils.c\
 		srcs/mlx_init/mlx_init.c\
-		srcs/mlx_init/handle_input.c\
-		srcs/mlx_init/key_hook_happening.c\
+		srcs/mlx_init/handle_events.c\
+		srcs/mlx_init/player_movement.c\
+		srcs/mlx_init/key_directions.c\
 		srcs/mlx_init/textures.c\
 		srcs/draw/big_init.c\
 		srcs/draw/draw_rays.c\

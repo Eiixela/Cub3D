@@ -17,36 +17,49 @@ double	get_x_pos_tex(t_data *data, double ray_distance)
 	double	tex_x;
 
 	if (data->ray->wall_direction == EAST || data->ray->wall_direction == WEST)
-		tex_x = data->map->player_position->y + ray_distance * data->ray->ray_dir.y;
-	else    
-		tex_x = data->map->player_position->x + ray_distance * data->ray->ray_dir.x;
+		tex_x = data->map->player_position->y + \
+			ray_distance * data->ray->ray_dir.y;
+	else
+		tex_x = data->map->player_position->x + \
+			ray_distance * data->ray->ray_dir.x;
 	tex_x -= floor(tex_x);
-	tex_x = (int)(tex_x * data->tex->width);
+	if (data->ray->wall_direction == SOUTH)
+		tex_x = 1.0 - tex_x;
+	tex_x = (int)(tex_x * (double)data->tex->width);
+	if (data->ray->wall_direction == WEST)
+		tex_x = data->tex->width - tex_x - 1;
 	return (tex_x);
 }
 
 void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double wall_height, t_texture *tex, double ray_distance)
 {
-	t_vector2D tex_pos;
-	double	step;
-	double	tex_pos_win;
-	int		screen_index;
-	int		tex_index;
+	t_vector2D 	tex_pos;
+	double		step;
+	double		tex_pos_win;
+	int			screen_index;
+	int			tex_index;
+	int			y;
 
 	tex_pos.x = get_x_pos_tex(data, ray_distance);
 	step = 1.0 * data->tex->height / wall_height;
 	tex_pos_win = (draw_start - HEIGHT / 2 + wall_height / 2) * step;
-	for (int y = draw_start; y <= draw_end; y++)
+	y = draw_start;
+	while (y <= draw_end)
 	{
 		tex_pos.y = (int)tex_pos_win & (data->tex->height - 1);
 		tex_pos_win += step;
-		if (n_ray >= 0 && n_ray < WIDTH && y >= 0 && y < HEIGHT && 
-			tex_pos.x >= 0 && tex_pos.x < data->tex->width && tex_pos.y >= 0 && tex_pos.y < data->tex->height)
+		if (n_ray >= 0 && n_ray < WIDTH && y >= 0 && y < HEIGHT &&
+			tex_pos.x >= 0 && tex_pos.x < data->tex->width && tex_pos.y >= 0 \
+				&& tex_pos.y < data->tex->height)
 		{
-			screen_index = y * data->img.line_len + n_ray * (data->img.bit_per_pixel / 8);
-			tex_index = tex_pos.y * data->tex->line_len + tex_pos.x * (data->tex->bit_per_pixel / 8);
-			(*(unsigned int *)(data->img.addr + screen_index)) = (*(unsigned int *)(tex->addr + tex_index));
+			screen_index = y * data->img.line_len + n_ray * \
+				(data->img.bit_per_pixel / 8);
+			tex_index = tex_pos.y * data->tex->line_len + tex_pos.x * \
+				(data->tex->bit_per_pixel / 8);
+			(*(unsigned int *)(data->img.addr + screen_index)) = \
+				(*(unsigned int *)(tex->addr + tex_index));
 		}
+		y++;
 	}
 }
 
@@ -67,7 +80,6 @@ int	texture_init(t_data *data)
 			texture_path = data->map->east;
 		else if (i == 3)
 			texture_path = data->map->west;
-		printf("%s\n", texture_path); // you can remove me
 		data->tex[i].ptr = mlx_xpm_file_to_image(data->mlx_ptr, \
 			texture_path, \
 			&data->tex[i].width, &data->tex[i].height);
