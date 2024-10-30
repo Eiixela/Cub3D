@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/30 11:15:12 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/30 12:47:55 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define PI	3.1415926535
 # define VISIBLE_MAP_SIZE 200
 # define PLAYER_SIZE 5
-# define SQUARE_SIZE 1// 15
+# define SQUARE_SIZE 15// 15
 # define MOVE_SPEED 0.1 // 0.064 is 1 pixel
 # define ROTATION_ANGLE 0.06 // initial value is 0.04
 # define FOV 1.0472  // 60 degree field of view

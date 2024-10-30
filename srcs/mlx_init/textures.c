@@ -14,30 +14,32 @@
 
 void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double wall_height, t_texture *tex, double ray_distance)
 {
-	(void)ray_distance;
-	(void)draw_end;
-	double	tex_x;
-	int	tex_y;
-	int	screen_index;
-	int	tex_index;
-	int	wall_top;
+	(void)tex;
+	double tex_x;
+    double step;
+    double tex_pos;
+    int tex_y;
+    int screen_index;
+    int tex_index;
 
-	wall_top = draw_start;
-	if (data->ray->wall_direction == EAST || data->ray->wall_direction == WEST)
-		tex_x = data->map->player_position->y + ray_distance * data->ray->ray_dir.y;
-	else	
-		tex_x = data->map->player_position->x + ray_distance * data->ray->ray_dir.x;
-	tex_x -= floor(tex_x);
-	tex_x = (int)(tex_x * data->tex->width);
-
-	while (draw_start++ <= draw_end)
-	{
-		tex_y = (draw_start - wall_top) * (tex->height / wall_height);
-		if (n_ray >= 0 && n_ray < WIDTH && draw_start >= 0 && draw_start < HEIGHT && tex_x >= 0 && tex_x < tex->width && tex_y >= 0 && tex_y < tex->height)
-		{
-			screen_index = draw_start * data->img.line_len + n_ray * (data->img.bit_per_pixel / 8);
-			tex_index = tex_y * tex->line_len + tex_x * (tex->bit_per_pixel / 8);
-			(*(unsigned int *)(data->img.addr + screen_index)) = (*(unsigned int *)(tex->addr + tex_index));
+    if (data->ray->wall_direction == EAST || data->ray->wall_direction == WEST)
+        tex_x = data->map->player_position->y + ray_distance * data->ray->ray_dir.y;
+    else    
+        tex_x = data->map->player_position->x + ray_distance * data->ray->ray_dir.x;
+    tex_x -= floor(tex_x);
+    tex_x = (int)(tex_x * data->tex->width);
+    step = 1.0 * data->tex->height / wall_height;
+    tex_pos = (draw_start - HEIGHT / 2 + wall_height / 2) * step;
+    for (int y = draw_start; y <= draw_end; y++)
+    {
+        tex_y = (int)tex_pos & (data->tex->height - 1);
+        tex_pos += step;
+        if (n_ray >= 0 && n_ray < WIDTH && y >= 0 && y < HEIGHT && 
+            tex_x >= 0 && tex_x < data->tex->width && tex_y >= 0 && tex_y < data->tex->height)
+        {
+            screen_index = y * data->img.line_len + n_ray * (data->img.bit_per_pixel / 8);
+            tex_index = tex_y * data->tex->line_len + tex_x * (data->tex->bit_per_pixel / 8);
+            (*(unsigned int *)(data->img.addr + screen_index)) = (*(unsigned int *)(tex->addr + tex_index));
 		}
 	}
 }

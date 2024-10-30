@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/30 11:25:44 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/30 12:47:58 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static double	final_distance(t_ray_data *ray, t_vector2D player_coor)
 	double	wall_dist;
 
 	if (ray->side == 0)
-		wall_dist = (ray->map_pos.x - player_coor.x / SQUARE_SIZE
+		wall_dist = (ray->map_pos.x - player_coor.x
 				+ (1 - ray->step.x) / 2) / ray->ray_dir.x;
 	else
-		wall_dist = (ray->map_pos.y - player_coor.y / SQUARE_SIZE
+		wall_dist = (ray->map_pos.y - player_coor.y
 				+ (1 - ray->step.y) / 2) / ray->ray_dir.y;
-	return (wall_dist * SQUARE_SIZE);
+	return (wall_dist);
 }
 
 static double	dda(t_data *data, t_ray_data *ray)
@@ -66,25 +66,25 @@ static void	calculate_step_and_side_dist(t_ray_data *ray,
 	if (ray->ray_dir.x < 0)
 	{
 		ray->step.x = -1;
-		ray->side_dist.x = (player_coor.x / SQUARE_SIZE - ray->map_pos.x)
+		ray->side_dist.x = (player_coor.x - ray->map_pos.x)
 			* ray->delta_dist.x;
 	}
 	else
 	{
 		ray->step.x = 1;
-		ray->side_dist.x = (ray->map_pos.x + 1.0 - player_coor.x / SQUARE_SIZE)
+		ray->side_dist.x = (ray->map_pos.x + 1.0 - player_coor.x)
 			* ray->delta_dist.x;
 	}
 	if (ray->ray_dir.y < 0)
 	{
 		ray->step.y = -1;
-		ray->side_dist.y = (player_coor.y / SQUARE_SIZE - ray->map_pos.y)
+		ray->side_dist.y = (player_coor.y - ray->map_pos.y)
 			* ray->delta_dist.y;
 	}
 	else
 	{
 		ray->step.y = 1;
-		ray->side_dist.y = (ray->map_pos.y + 1.0 - player_coor.y / SQUARE_SIZE)
+		ray->side_dist.y = (ray->map_pos.y + 1.0 - player_coor.y)
 			* ray->delta_dist.y;
 	}
 }
@@ -94,10 +94,10 @@ static void	init_ray(t_ray_data *ray, double *angle,
 {
 	ray->ray_dir.x = cos(*angle);
 	ray->ray_dir.y = sin(*angle);
-	ray->map_pos.x = (int)(player_coor.x / SQUARE_SIZE);
-	ray->map_pos.y = (int)(player_coor.y / SQUARE_SIZE);
-	ray->delta_dist.x = fabs(SQUARE_SIZE / ray->ray_dir.x);
-	ray->delta_dist.y = fabs(SQUARE_SIZE / ray->ray_dir.y);
+	ray->map_pos.x = (int)(player_coor.x );
+	ray->map_pos.y = (int)(player_coor.y );
+	ray->delta_dist.x = fabs(1 / ray->ray_dir.x);
+	ray->delta_dist.y = fabs(1 / ray->ray_dir.y);
 	ray->wall_direction = 0;
 }
 
@@ -128,7 +128,7 @@ void	draw_wall(t_data *data, double ray_distance, int n_ray,
     int draw_end;
 
     perpendicular_distance = ray_distance * cos(angle - data->map->player_position->angle);
-	wall_height = (SQUARE_SIZE / perpendicular_distance) * data->pplane->distance_from_player;
+	wall_height = (1 / perpendicular_distance) * data->pplane->distance_from_player;
     draw_start = (-((int)wall_height >> 1) + (HEIGHT >> 1));
     draw_end = (((int)wall_height >> 1) + (HEIGHT >> 1));
     if (draw_start < 0)
@@ -161,8 +161,8 @@ void	draw_all_rays(t_data *data, t_map *map)
 
 	ray_len = 0;
 	i = 0;
-	player_coor.x = map->player_position->x * SQUARE_SIZE;
-	player_coor.y = map->player_position->y * SQUARE_SIZE;
+	player_coor.x = map->player_position->x;
+	player_coor.y = map->player_position->y;
 	angle = map->player_position->angle - (FOV * 0.5);
 	angle_step = FOV / WIDTH;
 	while (i < WIDTH)
