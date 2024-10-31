@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:22:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 15:01:29 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/31 09:15:01 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	check_extention_textures(char *file)
 static int	check_access_textures_files(char *texture_file)
 {
 	int	fd;
+	printf("%s!\n", texture_file);
 
 	fd = open(texture_file, O_RDONLY);
 	if (fd == -1)

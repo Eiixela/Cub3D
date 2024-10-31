@@ -17,8 +17,8 @@ double	get_x_pos_tex(t_data *data, double ray_distance)
 	double	tex_x;
 
 	if (data->ray->wall_direction == EAST || data->ray->wall_direction == WEST)
-		tex_x = data->map->player_position->y + \
-			ray_distance * data->ray->ray_dir.y;
+		tex_x = (data->map->player_position->y + \
+			ray_distance * data->ray->ray_dir.y);
 	else
 		tex_x = data->map->player_position->x + \
 			ray_distance * data->ray->ray_dir.x;
@@ -40,13 +40,13 @@ void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double 
 	int			tex_index;
 	int			y;
 
-	tex_pos.x = get_x_pos_tex(data, ray_distance);
 	step = 1.0 * data->tex->height / wall_height;
 	tex_pos_win = (draw_start - HEIGHT / 2 + wall_height / 2) * step;
+	tex_pos.x = get_x_pos_tex(data, ray_distance);
 	y = draw_start;
 	while (y <= draw_end)
 	{
-		tex_pos.y = (int)tex_pos_win & (data->tex->height - 1);
+		tex_pos.y = (int)tex_pos_win % data->tex->height; //int cast might cause trouble
 		tex_pos_win += step;
 		if (n_ray >= 0 && n_ray < WIDTH && y >= 0 && y < HEIGHT &&
 			tex_pos.x >= 0 && tex_pos.x < data->tex->width && tex_pos.y >= 0 \
