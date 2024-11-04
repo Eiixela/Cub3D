@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/31 16:39:03 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:47:40 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,39 @@ static int	is_border(t_map *map, int x, int y)
 	return (x == 0 || y == 0 || y == map->size->y - 1 \
 		|| map->map[y][x + 1] == '\0');
 }
-
-/* //TODO work in progress
+/* 
+//TODO work in progress
 static	int	iter_flood_fill(t_map *map, int x, int y)
 {
 	t_queue queue;
 	
-	queue.point.x = x;
-	queue.point.y = y;
-	
-	while (1)
+	queue.point = malloc(sizeof(t_queue) * 8);
+	if (!queue.point)
+		return (1);
+	queue.point[0].x = x;
+	queue.point[0].y = y;
+	queue.reading_index = 0;
+	queue.writing_index = 0;
+	while (1) //while(reading_index == writing_index)
 	{
-		if (is_border(map, (int)queue.point.x, (int)queue.point.y))
+		printf("%f%f  ", queue.point[0].x, queue.point[0].y);
+		add_to_queue(map, queue);
+		/* 
+		resize si queue trop petite
+		 */
+
+		/* 
+		if indice valide, on ajoute les copains de l'indice dans la queue
+		 */
+
+		/* 
+		else indice pas bon donc on break le while (1)
+		 */
+	/* 	if (is_border(map, (int)queue.point.x, (int)queue.point.y))
 			return (1);
 		
 	}
-} */
+}*/
 
 static int	flood_fill(t_map *map, int x, int y)
 {

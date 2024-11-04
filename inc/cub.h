@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/04 17:34:40 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:48:06 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,11 +178,14 @@ typedef struct s_ray_data
 
 } t_ray_data;
 
-// typedef struct s_queue
-// {
-// 	t_vector2D 	point;
-// 	t_queue		*next;
-// }	t_queue;
+
+typedef struct s_queue
+{
+	t_vector2D 	*point;
+	int			size_queue;
+	int			writing_index;
+	int			reading_index;
+}	t_queue;
 
 typedef struct s_data
 {
