@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 13:47:40 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:49:51 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,21 @@ static int	player_where(t_map *map, int *player_y, int *player_x)
 	return (count_player);
 }
 
-static int	is_border(t_map *map, int x, int y)
+/* static int	is_border(t_map *map, int x, int y)
 {
 	return (x == 0 || y == 0 || y == map->size->y - 1 \
 		|| map->map[y][x + 1] == '\0');
+} */
+static void add_to_queue(t_queue *queue, int x, int y)
+{
+	queue->point[queue->writing_index].x = x;
+	queue->point[queue->writing_index].y = y;
 }
-/* 
+
 //TODO work in progress
 static	int	iter_flood_fill(t_map *map, int x, int y)
 {
+	(void)map;
 	t_queue queue;
 	
 	queue.point = malloc(sizeof(t_queue) * 8);
@@ -59,26 +65,43 @@ static	int	iter_flood_fill(t_map *map, int x, int y)
 	queue.writing_index = 0;
 	while (1) //while(reading_index == writing_index)
 	{
-		printf("%f%f  ", queue.point[0].x, queue.point[0].y);
-		add_to_queue(map, queue);
-		/* 
-		resize si queue trop petite
-		 */
+		printf("%f %f  and writing_index = %i\n", queue.point[0].x, queue.point[0].y, queue.writing_index);
+		queue.writing_index++;
+		
+		add_to_queue(&queue, queue.point[queue.writing_index - 1].x + 1, queue.point[queue.writing_index - 1].y);
+		printf("%f %f  and writing_index = %i\n", queue.point[queue.writing_index].x, queue.point[queue.writing_index].y, queue.writing_index);
+		queue.writing_index++;
+		
+		add_to_queue(&queue, (queue.point[queue.writing_index - 2].x - 1), queue.point[queue.writing_index - 2].y);
+		printf("%f %f  and writing_index = %i\n", queue.point[queue.writing_index].x, queue.point[queue.writing_index].y, queue.writing_index);
+		queue.writing_index++;
+		
+		add_to_queue(&queue, queue.point[queue.writing_index - 3].x, queue.point[queue.writing_index - 3].y + 1);
+		printf("%f %f  and writing_index = %i\n", queue.point[queue.writing_index].x, queue.point[queue.writing_index].y, queue.writing_index);
+		queue.writing_index++;
+		
+		add_to_queue(&queue, queue.point[queue.writing_index - 4].x, queue.point[queue.writing_index - 4].y - 1);
+		printf("%f %f  and writing_index = %i\n", queue.point[queue.writing_index].x, queue.point[queue.writing_index].y, queue.writing_index);
 
-		/* 
+		break ;
+		/* resize si queue trop petite
+	
+
+		
 		if indice valide, on ajoute les copains de l'indice dans la queue
-		 */
+		
 
-		/* 
+		
 		else indice pas bon donc on break le while (1)
-		 */
-	/* 	if (is_border(map, (int)queue.point.x, (int)queue.point.y))
-			return (1);
+		
+ 	if (is_border(map, (int)queue.point.x, (int)queue.point.y))
+			return (1); */
 		
 	}
-}*/
+	return (0);
+}
 
-static int	flood_fill(t_map *map, int x, int y)
+/* static int	flood_fill(t_map *map, int x, int y)
 {
 	if (y < 0 || y >= map->size->y || x < 0 || !map->map[y][x])
 		return (0);
@@ -91,7 +114,7 @@ static int	flood_fill(t_map *map, int x, int y)
 		|| flood_fill(map, x, y - 1) || flood_fill(map, x, y + 1))
 		return (1);
 	return (0);
-}
+} */
 
 static void	set_angle_view(t_map *map)
 {
@@ -113,15 +136,15 @@ int	map_good(t_map *map, t_player *player)
 	player_x = 0;
 	player_y = 0;
  	if (check_char_map(&map))
-		return (printf("Invalid char on map.\n"), 1);
+		return (1);
 	if (player_where(map, &player_x, &player_y) != 1)
-		return (printf("Only one player on the map is allowed.\n"), 1);
+		return (1);
 	player->x = player_x;
 	player->y = player_y;
 	map->player_position->x = player_x;
 	map->player_position->y = player_y;
-	if (flood_fill(map, player_x, player_y))
-		return (printf("Please make sure the map is fully closed.\n"), 1);
+	if (iter_flood_fill(map, player_x, player_y))
+		return (1);
 	set_angle_view(map);
 	map->map[player_y][player_x] = '0';
 	return (0);

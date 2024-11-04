@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 13:48:06 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:53:09 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,6 @@ typedef struct s_ray_data
 
 } t_ray_data;
 
-
 typedef struct s_queue
 {
 	t_vector2D 	*point;
@@ -201,6 +200,8 @@ typedef struct s_data
 	t_texture	tex[4];
 	t_ray_data	*ray;
 }	t_data;
+
+
 
 //---------------------------------------DRAW-----------------------------------
 
