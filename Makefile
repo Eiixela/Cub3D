@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+         #
+#    By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/10/31 10:01:05 by aljulien         ###   ########.fr        #
+#    Updated: 2024/11/04 18:38:28 by saperrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INCLUDE_DIR = inc/
 LIBFT_DIR = libft/
 MLX_DIR = mlx/
 
-CFLAGS = -Wall -Wextra -Werror -Ofast -march=native -flto -pipe
+CFLAGS = -Wall -Wextra -Werror -Ofast -march=native -flto -pipe -g3
 IFLAGS = -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 DFLAGS = -MMD -MP
 LFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
@@ -57,7 +57,7 @@ DEPENDENCIES = $(OBJECTS:.o=.d)
 
 LIBFT = $(LIBFT_DIR)libft.a
 MLX = $(MLX_DIR)libmlx.a
-NAME = cub
+NAME = cub3D
 
 .PHONY: all
 all: $(NAME)

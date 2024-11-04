@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:39:12 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/30 13:09:22 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:59:08 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_out_of_bounds(t_map *map, int map_x, int map_y)
 		|| map_y >= map->size->x);
 }
 
-void	draw_point(t_data *data, int x, int y, int draw_end,int color)
+void	draw_point(t_data *data, int x, int y, int draw_end, int color)
 {
 	while (y++ <= draw_end)
 		if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)

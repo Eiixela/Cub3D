@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/31 09:12:59 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:10:59 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ void	free_map_array(char **map, int height)
 	i = 0;
 	while (i < height)
 	{
-		free(map[i]);
+		if (map[i])
+		{
+			free(map[i]);
+			map[i] = NULL;
+		}
 		i++;
 	}
 }
@@ -28,19 +32,52 @@ void	free_map(t_map *map)
 {
 	if (map)
 	{
-		free(map->north);
-		free(map->south);
-		free(map->east);
-		free(map->west);
+		if (map->north)
+		{
+			free(map->north);
+			map->north = NULL;
+		}
+		if (map->east)
+		{
+			free(map->east);
+			map->east = NULL;
+		}
+		if (map->south)
+		{
+			free(map->south);
+			map->south = NULL;
+		}
+		if (map->west)
+		{
+			free(map->west);
+			map->west = NULL;
+		}
 		if (map->map)
 		{
 			free_map_array(map->map, map->size->x + 1);
 			free(map->map);
+			map->map = NULL;
 		}
-		free(map->ceiling_c);
-		free(map->floor_c);
-		free(map->size);
-		free(map->player_position);
+		if (map->ceiling_c)
+		{
+			free(map->ceiling_c);
+			map->ceiling_c = NULL;
+		}
+		if (map->floor_c)
+		{
+			free(map->floor_c);
+			map->floor_c = NULL;
+		}
+		if (map->size)
+		{
+			free(map->size);
+			map->size = NULL;
+		}
+		if (map->player_position)
+		{
+			free(map->player_position);
+			map->player_position = NULL;
+		}
 		map = NULL;
 	}
 }
@@ -64,6 +101,6 @@ int	main(int ac, char **av)
 		free_map(&map);
 	}
 	else
-		return (printf("hmmm...\n"), free_map(&map), 1);
+		return (printf("Error...\n"), free_map(&map), 1);
 	return (0);
 }

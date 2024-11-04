@@ -5,7 +5,6 @@
 ✅ Spaces and tab in color
 ✅ Color in the middle of map
 ✅ Color after map
-✅ Test double definition of color 
 ✅ More than 3 color elements
 ✅ Letter in color
 ✅ Test double definition of colors 
@@ -25,3 +24,59 @@
 ✅ Player not a N S E or W
 RED Two map in row
 ✅ Invalid char in map
+
+
+File extension is not .cub
+Missing required elements:
+
+    North texture (NO)
+    South texture (SO)
+    West texture (WE)
+    East texture (EA)
+    Floor color (F)
+    Ceiling color (C)
+    Map
+
+Invalid texture paths:
+
+    Empty path
+    Path to non-existent file
+
+Invalid color values:
+
+    Non-numeric values
+    Numbers outside 0-255 range
+    More or less than 3 values
+    Missing commas between values
+
+Map errors:
+
+    Map not surrounded by walls (1's)
+    Invalid characters (other than 0,1,N,S,E,W)
+    Multiple player start positions
+    Missing player start position
+    Empty map
+    Map not at end of file
+
+Formatting errors:
+
+    Invalid element identifiers
+    Extra data after valid element info
+    Missing spaces between identifier and data
+    Incorrect order of element data
+
+Empty lines:
+
+    Empty lines within map section
+
+Extra data:
+
+    Any text/data after the map section
+
+Duplicate elements:
+
+    Multiple definitions of same element type
+
+File access errors:
+
+    Unable to open or read file

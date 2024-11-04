@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/31 11:18:51 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:34:40 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,12 @@ typedef struct s_ray_data
 	int			wall_id;
 
 } t_ray_data;
+
+// typedef struct s_queue
+// {
+// 	t_vector2D 	point;
+// 	t_queue		*next;
+// }	t_queue;
 
 typedef struct s_data
 {

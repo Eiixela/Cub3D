@@ -92,5 +92,6 @@ int	draw_map2d(t_map *map, t_data *data)
 		}
 		map2d.screen_y++;
 	}
+
 	return (0);
 }

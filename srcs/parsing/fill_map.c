@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 14:56:32 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:34:34 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	read_till_the_end(int fd, char *line)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (line == NULL && (ft_strcmp(line, "\n") != 0))
+		if (line != NULL && (ft_strcmp(line, "\n") != 0))
 			return (free(line), 1);
 		free(line);
 		line = get_next_line(fd);
@@ -98,6 +98,7 @@ static int	fill_map(int fd, t_map *map, int number_line_map, int i)
 	}
 	while (i < number_line_map && line)
 	{
+
  		map->map[i] = fill_one_line(line);
 		free(line);
 		if (!map->map[i])
@@ -181,7 +182,7 @@ int	map_fill(int fd, t_map *map, int number_line_map)
 		return (1);
 	map->size->x = number_line_map;
 	if (fill_map(fd, map, number_line_map, i))
-		return (free(map->map), 1);
+		return (free_map(map), 1);
 	i = 0;
 	map->size->y = ft_strlen(map->map[i]);
 	while (map->map[i])

@@ -16,5 +16,17 @@ https://lodev.org/cgtutor/raycasting.html
 
 TODOOOOOOO :
 Do a full check for leaks in parsing
-Add error message in parsing
-Wtf map not close is working ???
+Fix leaks in the following list
+Change the flood_fill algorithm to iterative
+Fix parsing outcomes in the following list
+
+output issues :
+valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/map_double.cub
+valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_value_too_big.cub
+valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/tex_after_map.cub
+
+leaks :
+lil gnl	valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/color_more_than_three_values.cub
+		valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/color_value_too_big.cub +PROBLEMS IN OUTPUT
+		valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/color_value_too_small.cub
+		valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/tex_spaces_and_tabs.cub

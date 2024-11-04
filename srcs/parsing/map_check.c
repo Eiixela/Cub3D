@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/28 16:54:51 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:39:03 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ static int	is_border(t_map *map, int x, int y)
 		|| map->map[y][x + 1] == '\0');
 }
 
+/* //TODO work in progress
+static	int	iter_flood_fill(t_map *map, int x, int y)
+{
+	t_queue queue;
+	
+	queue.point.x = x;
+	queue.point.y = y;
+	
+	while (1)
+	{
+		if (is_border(map, (int)queue.point.x, (int)queue.point.y))
+			return (1);
+		
+	}
+} */
+
 static int	flood_fill(t_map *map, int x, int y)
 {
 	if (y < 0 || y >= map->size->y || x < 0 || !map->map[y][x])
@@ -80,15 +96,15 @@ int	map_good(t_map *map, t_player *player)
 	player_x = 0;
 	player_y = 0;
  	if (check_char_map(&map))
-		return (1);
+		return (printf("Invalid char on map.\n"), 1);
 	if (player_where(map, &player_x, &player_y) != 1)
-		return (1);
+		return (printf("Only one player on the map is allowed.\n"), 1);
 	player->x = player_x;
 	player->y = player_y;
 	map->player_position->x = player_x;
 	map->player_position->y = player_y;
 	if (flood_fill(map, player_x, player_y))
-		return (1);
+		return (printf("Please make sure the map is fully closed.\n"), 1);
 	set_angle_view(map);
 	map->map[player_y][player_x] = '0';
 	return (0);
