@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 15:03:13 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/05 23:50:59 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,23 @@ char	*space_in_minus(char *line)
 	return (line);
 }
 
-static char *fill_one_line(char *line)
+static char	*fill_one_line(char *line)
 {
-    char *one_line;
-    int len = ft_strlen(line);
-    if (len > 0 && line[len - 1] == '\n') {
-        line[len - 1] = '\0';
-        len--;
-    }
-    one_line = malloc(sizeof(char) * (len + 1));
-    if (!one_line)
-        return NULL;
-    ft_strlcpy(one_line, line, len + 1);
-    one_line = space_in_minus(one_line);
-    return one_line;
+	char	*one_line;
+	int		len;
+
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+	{
+		line[len - 1] = '\0';
+		len--;
+	}
+	one_line = malloc(sizeof(char) * (len + 1));
+	if (!one_line)
+		return (NULL);
+	ft_strlcpy(one_line, line, len + 1);
+	one_line = space_in_minus(one_line);
+	return (one_line);
 }
 
 static int	fill_map(int fd, t_map *map, int number_line_map, int i)
@@ -105,8 +108,7 @@ static int	fill_map(int fd, t_map *map, int number_line_map, int i)
 	}
 	while (i < number_line_map && line)
 	{
-
- 		map->map[i] = fill_one_line(line);
+		map->map[i] = fill_one_line(line);
 		free(line);
 		if (!map->map[i])
 			return (1);
@@ -116,7 +118,6 @@ static int	fill_map(int fd, t_map *map, int number_line_map, int i)
 	map->map[i] = NULL;
 	if (read_till_the_end(fd, line, 0))
 		return (1);
-	printf("here\n");
 	return (0);
 }
 
@@ -158,7 +159,7 @@ char	**map_fill_square(t_map *map)
 			return (NULL);
 		}
 		if (i < map->size->x)
-   		pimp_strlcpy(map_square[i], map->map[i], map->size->y + 1);
+			pimp_strlcpy(map_square[i], map->map[i], map->size->y + 1);
 		else
 		{
 			j = 0;
@@ -171,7 +172,7 @@ char	**map_fill_square(t_map *map)
 	map_square[i] = NULL;
 	if (map->map)
 	{
-		int i = 0;
+		i = 0;
 		while (map->map[i])
 			free(map->map[i++]);
 		free(map->map);
@@ -184,13 +185,13 @@ int	map_fill(int fd, t_map *map, int number_line_map)
 	int	i;
 
 	i = 0;
-	map->map = malloc(sizeof(char *) * (number_line_map + 1));
+	map->map = ft_calloc(number_line_map + 1, sizeof(char *));
 	map->size = malloc(sizeof(t_point));
 	if (!map->map || !map->size)
 		return (1);
 	map->size->x = number_line_map;
 	if (fill_map(fd, map, number_line_map, i))
-		return (free_map(map), 1);	
+		return (free_map(map), 1);
 	i = 0;
 	map->size->y = ft_strlen(map->map[i]);
 	while (map->map[i])

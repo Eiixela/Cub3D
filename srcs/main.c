@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 13:57:09 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/06 00:08:04 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,9 @@ int	main(int ac, char **av)
 	t_player	player;
 	t_pplane	pplane;
 	t_keys		keys;
+	t_ray_data	ray;
 
+	data.ray = &ray;
 	data.keys = &keys;
 	if (!init_map(&map))
 		return (1);

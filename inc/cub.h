@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 13:57:02 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/05 23:38:00 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ void	draw_new_image(t_data *data);
 void	draw_all_rays(t_data *data, t_map *map);
 
 //ray_casting
+void	init_ray(t_ray_data *ray, double *angle, t_vector2D player_coor);
 double	calculate_wall_distance(t_data *data, t_vector2D player_coor, double *angle);
 
 //draw_rays_utils
