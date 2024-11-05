@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 23:54:01 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/06 00:33:08 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ static void should_add_to_queue(char **map, t_queue *queue, t_vector2D current)
         add_to_queue(queue, (t_vector2D){current.x, current.y - 1});
 }
 
-static bool resize_of_queue(t_queue *queue)
+static bool	resize_of_queue(t_queue *queue)
 {
 	t_vector2D	*resize;
 
 	resize = queue->point;
-	queue->point = malloc((queue->size_queue * 2) * sizeof(t_vector2D));
+	queue->point = ft_calloc(queue->size_queue * 2, sizeof(t_vector2D));
 	if (!queue->point)
 		return (1);
 	ft_memmove(queue->point, resize, queue->writing_index);
@@ -82,11 +82,8 @@ static bool resize_of_queue(t_queue *queue)
 static	int	iter_flood_fill(t_map *map)
 {
 	t_queue		queue;
-	t_vector2D	*current;
+	t_vector2D	current;
 
-	current = ft_calloc(1, sizeof(t_vector2D));
-	if (!current)
-		return (1);
 	queue.size_queue = 4;
 	queue.point = malloc(sizeof(t_vector2D) * (queue.size_queue + 1));
 	if (!queue.point)
@@ -97,19 +94,19 @@ static	int	iter_flood_fill(t_map *map)
 		map->player_position->y});
 	while (queue.reading_index < queue.writing_index)
 	{
-		*current = queue.point[queue.reading_index++];
-		if (is_border(map, current->x, current->y))
-			if (map->map[(int)(current->y)][(int)(current->x)] == '0')
-				return (free(current), free(queue.point), 1);
-		if (map->map[(int)(current->y)][(int)(current->x)] != '0')
+		current = queue.point[queue.reading_index++];
+		if (is_border(map, current.x, current.y))
+			if (map->map[(int)(current.y)][(int)(current.x)] == '0')
+				return (free(queue.point), 1);
+		if (map->map[(int)(current.y)][(int)(current.x)] != '0')
 			continue ;
-		map->map[(int)(current->y)][(int)(current->x)] = 'F';
+		map->map[(int)(current.y)][(int)(current.x)] = 'F';
 		if ((queue.writing_index + 4) >= queue.size_queue)
 			if (resize_of_queue(&queue))
-				return (free(current), free(queue.point), 1);
-		should_add_to_queue(map->map, &queue, *current);
+				return (free(queue.point), 1);
+		should_add_to_queue(map->map, &queue, current);
 	}
-	return (free(current), free(queue.point), 0);
+	return (free(queue.point), 0);
 }
 
 static void	set_angle_view(t_map *map)
