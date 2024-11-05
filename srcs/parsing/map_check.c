@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 13:54:54 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:57:16 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ static int	player_where(t_map *map, int *player_y, int *player_x)
  
 static int is_border(t_map *map, int x, int y)
 {
-    return (x == 0 || y == 0 || y == map->size->y - 1 || map->map[y][x + 1] == '\0');
+	return (x == 0 || y == 0 || y == map->size->y - 1 || map->map[y][x + 1] == '\0');
 }
-
-
 
 static void	add_to_queue(t_queue *queue, t_vector2D current)
 {
@@ -64,7 +62,6 @@ static void should_add_to_queue(char **map, t_queue *queue, t_vector2D current)
     if (map[(int)(current.y - 1)][(int)(current.x)] == '0')
         add_to_queue(queue, (t_vector2D){current.x, current.y - 1});
 }
-
 
 static bool resize_of_queue(t_queue *queue)
 {
@@ -97,41 +94,18 @@ static	int	iter_flood_fill(t_map *map)
 	{
 		current = queue.point[queue.reading_index++];
 		if (is_border(map, current.x, current.y))
-		{
 			if (map->map[(int)(current.y)][(int)(current.x)] == '0')
-				return (1);	
-		}
+				return (free(queue.point), 1);	
 		if (map->map[(int)(current.y)][(int)(current.x)] != '0')
 			continue ;
-		map->map[(int)(current.y)][(int)(current.x)] = ' ';
+		map->map[(int)(current.y)][(int)(current.x)] = 'F';
 		if ((queue.writing_index + 4) >= queue.size_queue)
 			if(resize_of_queue(&queue))
-				return (1);
+				return (free(queue.point), 1);
 		should_add_to_queue(map->map, &queue, current);
 	}
- 	int i = 0;
-	while (map->map[i])
-	{
-		printf("%s\n", map->map[i]);
-		i++;
-	}
-	return (0);
+	return (free(queue.point), 0);
 }
-
-/* static int	flood_fill(t_map *map, int x, int y)
-{
-	if (y < 0 || y >= map->size->y || x < 0 || !map->map[y][x])
-		return (0);
-	if (map->map[y][x] == '1' || map->map[y][x] == 'F')
-		return (0);
-	if (is_border(map, x, y))
-		return (1);
-	map->map[y][x] = 'F';
-	if (flood_fill(map, x - 1, y) || flood_fill(map, x + 1, y) \
-		|| flood_fill(map, x, y - 1) || flood_fill(map, x, y + 1))
-		return (1);
-	return (0);
-} */
 
 static void	set_angle_view(t_map *map)
 {

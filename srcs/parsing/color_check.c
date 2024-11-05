@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:56:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/28 17:03:13 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:40:09 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ bool	check_color_value(t_map *map)
 	i = 0;
 	while (i < 3)
 	{
-		if (256 < (map)->floor_c[i] || 0 > (map)->floor_c[i])
+		if (255 < (map)->floor_c[i] || 0 > (map)->floor_c[i])
 		{
 			free_map(map);
 			return (false);
 		}
-		if (256 < (map)->ceiling_c[i] || 0 > (map)->ceiling_c[i])
+		if (255 < (map)->ceiling_c[i] || 0 > (map)->ceiling_c[i])
 		{
 			free_map(map);
 			return (false);
@@ -187,12 +187,12 @@ int	color_check(int fd, t_map *map)
 		if (!line)
 			return (1);
 		if (map_started(line))
-			return ((void)read_till_the_end(fd, line), \
+			return ((void)read_till_the_end(fd, line, 1), \
 				close(fd), printf("Missing colors\n"), 1);
 		line = format_line(line);
 		map = found_one_color(line, map);
 		if (!map)
-			return ((void)read_till_the_end(fd, line), close(fd), 1);
+			return ((void)read_till_the_end(fd, line, 1), close(fd), 1);
 		all_color_found = found_all_color(map);
 		free(line);
 	}

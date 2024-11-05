@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 13:46:03 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:55:52 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	cardinal_check(int fd, t_map *map)
 		if (!line)
 			return (1);
 		if (map_started(line))
-			return ((void)read_till_the_end(fd, line), close(fd), \
+			return ((void)read_till_the_end(fd, line, 1), close(fd), \
 				printf("Textures missing\n"), 1);
 		line = format_line(line);
 		found_one_cardinal(line, map);
