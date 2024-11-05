@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 13:49:51 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:54:54 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	player_where(t_map *map, int *player_y, int *player_x)
 			if (!find_player(map->map[x][y]))
 			{
 				map->player_way = map->map[x][y];
+				map->map[x][y] = '0';
 				*player_y = y;
 				*player_x = x;
 				count_player++;
@@ -38,65 +39,81 @@ static int	player_where(t_map *map, int *player_y, int *player_x)
 	}
 	return (count_player);
 }
+ 
+static int is_border(t_map *map, int x, int y)
+{
+    return (x == 0 || y == 0 || y == map->size->y - 1 || map->map[y][x + 1] == '\0');
+}
 
-/* static int	is_border(t_map *map, int x, int y)
+
+
+static void	add_to_queue(t_queue *queue, t_vector2D current)
 {
-	return (x == 0 || y == 0 || y == map->size->y - 1 \
-		|| map->map[y][x + 1] == '\0');
-} */
-static void add_to_queue(t_queue *queue, int x, int y)
+	queue->point[queue->writing_index] = current;
+	queue->writing_index++;
+}
+
+static void should_add_to_queue(char **map, t_queue *queue, t_vector2D current)
 {
-	queue->point[queue->writing_index].x = x;
-	queue->point[queue->writing_index].y = y;
+    if (map[(int)(current.y)][(int)(current.x + 1)] == '0')
+        add_to_queue(queue, (t_vector2D){current.x + 1, current.y});
+    if (map[(int)(current.y)][(int)(current.x - 1)] == '0')
+        add_to_queue(queue, (t_vector2D){current.x - 1, current.y});
+    if (map[(int)(current.y + 1)][(int)(current.x)] == '0')
+        add_to_queue(queue, (t_vector2D){current.x, current.y + 1});
+    if (map[(int)(current.y - 1)][(int)(current.x)] == '0')
+        add_to_queue(queue, (t_vector2D){current.x, current.y - 1});
+}
+
+
+static bool resize_of_queue(t_queue *queue)
+{
+	t_vector2D	*resize;
+
+	resize = queue->point;
+	queue->point = malloc((queue->size_queue * 2) * sizeof(t_vector2D));
+	if (!queue->point)
+		return (1);
+	ft_memmove(queue->point, resize, queue->writing_index);
+	free(resize);
+	queue->size_queue *= 2;
+	return (0);
 }
 
 //TODO work in progress
-static	int	iter_flood_fill(t_map *map, int x, int y)
+static	int	iter_flood_fill(t_map *map)
 {
-	(void)map;
 	t_queue queue;
+	t_vector2D current;
 	
-	queue.point = malloc(sizeof(t_queue) * 8);
+	queue.size_queue = 4;
+	queue.point = malloc(sizeof(t_vector2D) * (queue.size_queue + 1));
 	if (!queue.point)
 		return (1);
-	queue.point[0].x = x;
-	queue.point[0].y = y;
 	queue.reading_index = 0;
 	queue.writing_index = 0;
-	while (1) //while(reading_index == writing_index)
+	add_to_queue(&queue, (t_vector2D){map->player_position->x, map->player_position->y});
+	while (queue.reading_index < queue.writing_index)
 	{
-		printf("%f %f  and writing_index = %i\n", queue.point[0].x, queue.point[0].y, queue.writing_index);
-		queue.writing_index++;
-		
-		add_to_queue(&queue, queue.point[queue.writing_index - 1].x + 1, queue.point[queue.writing_index - 1].y);
-		printf("%f %f  and writing_index = %i\n", queue.point[queue.writing_index].x, queue.point[queue.writing_index].y, queue.writing_index);
-		queue.writing_index++;
-		
-		add_to_queue(&queue, (queue.point[queue.writing_index - 2].x - 1), queue.point[queue.writing_index - 2].y);
-		printf("%f %f  and writing_index = %i\n", queue.point[queue.writing_index].x, queue.point[queue.writing_index].y, queue.writing_index);
-		queue.writing_index++;
-		
-		add_to_queue(&queue, queue.point[queue.writing_index - 3].x, queue.point[queue.writing_index - 3].y + 1);
-		printf("%f %f  and writing_index = %i\n", queue.point[queue.writing_index].x, queue.point[queue.writing_index].y, queue.writing_index);
-		queue.writing_index++;
-		
-		add_to_queue(&queue, queue.point[queue.writing_index - 4].x, queue.point[queue.writing_index - 4].y - 1);
-		printf("%f %f  and writing_index = %i\n", queue.point[queue.writing_index].x, queue.point[queue.writing_index].y, queue.writing_index);
-
-		break ;
-		/* resize si queue trop petite
-	
-
-		
-		if indice valide, on ajoute les copains de l'indice dans la queue
-		
-
-		
-		else indice pas bon donc on break le while (1)
-		
- 	if (is_border(map, (int)queue.point.x, (int)queue.point.y))
-			return (1); */
-		
+		current = queue.point[queue.reading_index++];
+		if (is_border(map, current.x, current.y))
+		{
+			if (map->map[(int)(current.y)][(int)(current.x)] == '0')
+				return (1);	
+		}
+		if (map->map[(int)(current.y)][(int)(current.x)] != '0')
+			continue ;
+		map->map[(int)(current.y)][(int)(current.x)] = ' ';
+		if ((queue.writing_index + 4) >= queue.size_queue)
+			if(resize_of_queue(&queue))
+				return (1);
+		should_add_to_queue(map->map, &queue, current);
+	}
+ 	int i = 0;
+	while (map->map[i])
+	{
+		printf("%s\n", map->map[i]);
+		i++;
 	}
 	return (0);
 }
@@ -143,7 +160,7 @@ int	map_good(t_map *map, t_player *player)
 	player->y = player_y;
 	map->player_position->x = player_x;
 	map->player_position->y = player_y;
-	if (iter_flood_fill(map, player_x, player_y))
+	if (iter_flood_fill(map))
 		return (1);
 	set_angle_view(map);
 	map->map[player_y][player_x] = '0';
