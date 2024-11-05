@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 13:55:52 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:59:54 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static t_map	*fill_cardinal(char *line, char *path, t_map *map)
 {
 	char	*s1;
 
-	s1 = "/home/saperrie/cmor/WIP/cub3d/";
-	// s1 = "/home/aljulien/Documents/C/C4/Cub3D/";
+	//s1 = "/home/saperrie/cmor/WIP/cub3d/";
+	s1 = "/home/aljulien/Documents/C/C4/Cub3D/";
 	if (ft_strncmp("NO ", line, 3) == 0)
 		map->north = ft_strjoin(s1, path);
 	else if (ft_strncmp("SO ", line, 3) == 0)

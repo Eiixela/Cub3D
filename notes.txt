@@ -15,15 +15,9 @@ https://lodev.org/cgtutor/raycasting.html
 
 
 TODOOOOOOO :
-Do a full check for leaks in parsing
 Fix leaks in the following list
-Change the flood_fill algorithm to iterative
-Fix parsing outcomes in the following list
+Change the s1 string for path of texture files in cardinal check file (fill_cardinal funtion (line 19/20))
 
-output issues :
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/map_double.cub
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_value_too_big.cub
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/tex_after_map.cub
 
 leaks :
 lil gnl	valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/color_more_than_three_values.cub
@@ -44,8 +38,6 @@ valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds
 valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_value_too_small.cub
 valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/tex_after_map.cub 
 valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/tex_spaces_and_tabs.cub
-
-
 
 LEAKS ON 5/11/2024
 valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/color_missing_one_value_color.cub

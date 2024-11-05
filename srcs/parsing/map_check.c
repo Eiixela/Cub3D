@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 13:57:16 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:06:32 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static bool resize_of_queue(t_queue *queue)
 }
 
 //TODO work in progress
+//OPTI envoyer le **map, changer les cast (redeclarer struct vector en int), 
 static	int	iter_flood_fill(t_map *map)
 {
 	t_queue queue;
