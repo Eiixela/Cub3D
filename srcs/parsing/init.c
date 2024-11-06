@@ -6,13 +6,13 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:26:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/29 15:01:39 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:22:44 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static void init_player(t_point *player)
+static void	init_player(t_point *player)
 {
 	player->angle = 0;
 	player->dx = 0;

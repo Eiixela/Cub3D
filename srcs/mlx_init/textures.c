@@ -46,7 +46,7 @@ void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double 
 	y = draw_start;
 	while (y <= draw_end)
 	{
-		tex_pos.y = (int)tex_pos_win % data->tex->height; //int cast might cause trouble
+		tex_pos.y = (int)tex_pos_win % data->tex->height;
 		tex_pos_win += step;
 		if (n_ray >= 0 && n_ray < WIDTH && y >= 0 && y < HEIGHT &&
 			tex_pos.x >= 0 && tex_pos.x < data->tex->width && tex_pos.y >= 0 \

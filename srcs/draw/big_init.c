@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:07:36 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/30 11:24:35 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:00:39 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	player_init(t_player *player)
 {
 	player->view_height = 32;
 	player->fov = FOV;
-	player->view_angle = PI * 0.5; // 270 == S; N == 90; W == 180; E == 0
+	player->view_angle = PI * 0.5;
 	return (0);
 }
 
@@ -26,7 +26,7 @@ int	projection_plane_init(t_pplane *pplane)
 	pplane->height = HEIGHT;
 	pplane->center_w = (pplane->width >> 1);
 	pplane->center_h = (pplane->height >> 1);
-	pplane->distance_from_player = (pplane->center_w) / tan(FOV / 2);
+	pplane->dst_from_player = (pplane->center_w) / tan(FOV / 2);
 	pplane->angle_between_rays = (double)FOV / pplane->width;
 	return (0);
 }

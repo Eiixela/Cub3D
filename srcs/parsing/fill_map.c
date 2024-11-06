@@ -6,46 +6,11 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 11:33:54 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:26:55 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-/* if (line != NULL && (ft_strcmp(line, "\n") != 0) && what_use == 0)
-			return (free(line), 1); */
-
-int	read_till_the_end_map(int fd, char *line)
-{
-	if (line)
-		free(line);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (line != NULL && (ft_strcmp(line, "\n") != 0))
-			return (free(line), 1);
-		free(line);
-		line = get_next_line(fd);
-	}
-	free(line);
-	return (0);
-}
-
-int	read_till_the_end(int fd, char *line)
-{
-	if (line)
-		free(line);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (line == NULL && (ft_strcmp(line, "\n") != 0))
-			return (free(line), 1);
-		free(line);
-		line = get_next_line(fd);
-	}
-	free(line);
-	return (0);
-}
 
 int	count_line(int fd)
 {
@@ -136,65 +101,6 @@ static int	fill_map(int fd, t_map *map, int number_line_map, int i)
 	if (read_till_the_end_map(fd, line))
 		return (1);
 	return (0);
-}
-
-void	pimp_strlcpy(char *dst, const char *src, int size)
-{
-	int	i;
-	int	len;
-
-	len = ft_strlen(src);
-	i = 0;
-	while (i < len && i < size - 1)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	while (i < size - 1)
-		dst[i++] = -32;
-	dst[i] = '\0';
-}
-
-char	**map_fill_square(t_map *map)
-{
-	char	**map_square;
-	int		i;
-	int		j;
-
-	map_square = malloc(sizeof(char *) * (map->size->x + 2));
-	if (!map_square)
-		return (NULL);
-	i = 0;
-	while (i <= map->size->x)
-	{
-		map_square[i] = malloc(sizeof(char) * (map->size->y + 2));
-		if (!map_square[i])
-		{
-			while (--i >= 0)
-				free(map_square[i]);
-			free(map_square);
-			return (NULL);
-		}
-		if (i < map->size->x)
-			pimp_strlcpy(map_square[i], map->map[i], map->size->y + 2);
-		else
-		{
-			j = 0;
-			while (j <= map->size->y)
-				map_square[i][j++] = -32;
-			map_square[i][j] = '\0';
-		}
-		i++;
-	}
-	map_square[i] = NULL;
-	if (map->map)
-	{
-		i = 0;
-		while (map->map[i])
-			free(map->map[i++]);
-		free(map->map);
-	}
-	return (map_square);
 }
 
 int	map_fill(int fd, t_map *map, int number_line_map)

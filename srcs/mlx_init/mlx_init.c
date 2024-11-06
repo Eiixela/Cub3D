@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:15 by saperrie          #+#    #+#             */
-/*   Updated: 2024/11/05 22:51:00 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:13:20 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ static void	keys_init(t_data *data)
 	data->keys->left = 0;
 }
 
+// data->img.ptr = mlx_new_image(data->mlx_ptr, data->width,
+// data->height);
+// data->img.addr = mlx_get_data_addr(data->img.ptr,
+//&data->img.bit_per_pixel,
+// 		&data->img.line_len, &data->img.endian);
 void	data_init(t_data *data)
 {
 	data->width = WIDTH;
@@ -48,9 +53,6 @@ void	data_init(t_data *data)
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, \
 	data->width, data->height, "smol wolf 3d");
-	// data->img.ptr = mlx_new_image(data->mlx_ptr, data->width, data->height);
-	// data->img.addr = mlx_get_data_addr(data->img.ptr, &data->img.bit_per_pixel,
-	// 		&data->img.line_len, &data->img.endian);
 	keys_init(data);
 	mlx_hook(data->win_ptr, EXIT_CROSS, 0, &handle_win_exit, data);
 	mlx_hook(data->win_ptr, 2, 1L << 0, &handle_key_press, data);

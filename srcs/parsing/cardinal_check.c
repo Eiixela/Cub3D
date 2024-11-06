@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 11:19:45 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:23:31 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ int	cardinal_check(int fd, t_map *map)
 	if (all_cardinal_found == false)
 		return (printf("Multiple textures\n"), close(fd), 1);
 	if (check_access_textures(map))
-		return (printf("Please check permissions on textures files\n"), close(fd), 1);
+		return (printf("Please check perm on textures files\n"), close(fd), 1);
 	return (close(fd), 0);
 }

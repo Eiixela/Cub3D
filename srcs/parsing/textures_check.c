@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:22:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 10:08:59 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:23:07 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_extention_textures(char *file)
 {
 	char	*db_ext;
-	
+
 	if (file)
 	{
 		db_ext = ft_strnstr(file, ".xpm", ft_strlen(file));
@@ -49,16 +49,20 @@ static int	check_access_textures_files(char *texture_file)
 int	check_access_textures(t_map *map)
 {
 	if (map->north)
-		if (check_extention_textures(map->north) || check_access_textures_files(map->north))
+		if (check_extention_textures(map->north)
+			|| check_access_textures_files(map->north))
 			return (1);
 	if (map->south)
-		if (check_extention_textures(map->south) || check_access_textures_files(map->south))
+		if (check_extention_textures(map->south)
+			|| check_access_textures_files(map->south))
 			return (1);
 	if (map->east)
-		if (check_extention_textures(map->east) || check_access_textures_files(map->east))
+		if (check_extention_textures(map->east)
+			|| check_access_textures_files(map->east))
 			return (1);
 	if (map->west)
-		if (check_extention_textures(map->west) || check_access_textures_files(map->west))
+		if (check_extention_textures(map->west)
+			|| check_access_textures_files(map->west))
 			return (1);
 	return (0);
 }

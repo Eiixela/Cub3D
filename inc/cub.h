@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 11:20:08 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:26:44 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ typedef struct s_pplane
 	int		height;
 	int		center_w;
 	int		center_h;
-	int		distance_from_player;
+	int		dst_from_player;
 	double	angle_between_rays;
 }	t_pplane;
 
@@ -213,12 +213,15 @@ void	draw_new_image(t_data *data);
 void	draw_all_rays(t_data *data, t_map *map);
 
 //ray_casting
+double	final_distance(t_ray_data *ray, t_vector2D player_coor);
+void	get_wall_orientation(t_ray_data *ray, int what_use);
+double	dda(t_data *data, t_ray_data *ray);
+void	calculate_step_and_side_dist(t_ray_data *ray,
+	t_vector2D player_coor);
 void	init_ray(t_ray_data *ray, double *angle, t_vector2D player_coor);
-double	calculate_wall_distance(t_data *data, t_vector2D player_coor, double *angle);
 
 //draw_rays_utils
 double	calculate_distance(double x, double y, double x1, double y1);
-void	draw_point(t_data *data, int x, int y, int draw_end, int color);
 void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double wall_height, t_texture *tex, double ray_distance);
 int		is_out_of_bounds(t_map *map, int map_x, int map_y);
 int		max(int a, int b);
@@ -277,11 +280,21 @@ int		cardinal_check(int fd, t_map *map);
 //textures_check
 int		check_access_textures(t_map *map);
 
-//color_check
+//get_color
 int		color_check(int fd, t_map *map);
+
+//check_color
+bool	check_color_value(t_map *map);
+t_map	*check_for_color(t_map *map);
+int		color_cmp(char *line);
+int		count_array_size(char **s);
+int		*fill_color_tab(int	*color_tab);
 
 //map_check
 int		map_good(t_map *map, t_player *player);
+
+//flood_fill
+int		iter_flood_fill(t_map *map);
 
 //map_check_utils
 int		find_player(char c);
@@ -293,10 +306,14 @@ int		map_fill(int fd, t_map *map, int number_line_map);
 int		count_line(int fd);
 int		read_till_the_end(int fd, char *line);
 
+//fill_map_square
+char	**map_fill_square(t_map *map);
+int		read_till_the_end_map(int fd, char *line);
+
 //free
 void	free_map(t_map *map);
 
-//GNL
+//---------------------------------------GNL--------------------------------
 char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_calloc(size_t nmemb, size_t size);

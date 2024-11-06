@@ -6,12 +6,11 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:52:48 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 13:58:52 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:57:28 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
 
 void	draw_first_image(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:50:26 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 15:50:44 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:57:48 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static unsigned int	rgb_to_hex(int rgb[3])
 	unsigned int	result;
 	int				i;
 	int				value;
-	
+
 	result = 0;
 	i = 0;
 	while (i < 3)

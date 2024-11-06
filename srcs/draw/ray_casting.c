@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:11:48 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 00:02:33 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:11:04 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static double	final_distance(t_ray_data *ray, t_vector2D player_coor)
+double	final_distance(t_ray_data *ray, t_vector2D player_coor)
 {
 	double	wall_dist;
 
@@ -25,7 +25,25 @@ static double	final_distance(t_ray_data *ray, t_vector2D player_coor)
 	return (wall_dist);
 }
 
-static double	dda(t_data *data, t_ray_data *ray)
+void	get_wall_orientation(t_ray_data *ray, int what_use)
+{
+	if (what_use == 0)
+	{
+		if (ray->step.x > 0)
+			ray->wall_direction = EAST;
+		else
+			ray->wall_direction = WEST;
+	}
+	else
+	{
+		if (ray->step.y > 0)
+			ray->wall_direction = SOUTH;
+		else
+			ray->wall_direction = NORTH;
+	}
+}
+
+double	dda(t_data *data, t_ray_data *ray)
 {
 	while (1)
 	{
@@ -35,10 +53,7 @@ static double	dda(t_data *data, t_ray_data *ray)
 			ray->map_pos.x += ray->step.x;
 			ray->side = 0;
 			data->tex->side = 0;
-			if (ray->step.x > 0)
-				ray->wall_direction = EAST;
-			else
-				ray->wall_direction = WEST;
+			get_wall_orientation(ray, 0);
 		}
 		else
 		{
@@ -46,10 +61,7 @@ static double	dda(t_data *data, t_ray_data *ray)
 			ray->map_pos.y += ray->step.y;
 			ray->side = 1;
 			data->tex->side = 1;
-			if (ray->step.y > 0)
-				ray->wall_direction = SOUTH;
-			else
-				ray->wall_direction = NORTH;
+			get_wall_orientation(ray, 1);
 		}
 		if (is_out_of_bounds(data->map, (int)ray->map_pos.x,
 				(int)ray->map_pos.y))
@@ -60,7 +72,7 @@ static double	dda(t_data *data, t_ray_data *ray)
 	return (0);
 }
 
-static void	calculate_step_and_side_dist(t_ray_data *ray,
+void	calculate_step_and_side_dist(t_ray_data *ray,
 	t_vector2D player_coor)
 {
 	if (ray->ray_dir.x < 0)
@@ -98,13 +110,4 @@ void	init_ray(t_ray_data *ray, double *angle, t_vector2D player_coor)
 	ray->delta_dist.x = fabs(1 / ray->ray_dir.x);
 	ray->delta_dist.y = fabs(1 / ray->ray_dir.y);
 	ray->wall_direction = 0;
-}
-
-double	calculate_wall_distance(t_data *data, t_vector2D player_coor,
-	double *angle)
-{
-	init_ray(data->ray, angle, player_coor);
-	calculate_step_and_side_dist(data->ray, player_coor);
-	data->ray->wall_dist = dda(data, data->ray);
-	return (final_distance(data->ray, player_coor));
 }
