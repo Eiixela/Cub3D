@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:36:17 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 14:47:28 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/06 10:22:56 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ int	file_access(char *file)
 	int	fd;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
-	{
-		printf("Please check the permission of the map\n");
-		return (-1);
-	}
 	return (fd);
 }
 
@@ -57,7 +52,7 @@ int	file_check(char *file, t_map *map)
 		return (1);
 	fd = file_access(file);
 	if (fd == -1)
-		return (1);
+		return (printf("Please check the permission of the map\n"), 1);
 	if (cardinal_check(fd, map))
 		return (close (fd), 1);
 	fd = file_access(file);

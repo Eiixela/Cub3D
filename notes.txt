@@ -12,37 +12,22 @@ Get textures here ---> https://itch.io/
 
 https://lodev.org/cgtutor/raycasting.html
 
-
-
 TODOOOOOOO :
-Fix leaks in the following list
-Change the s1 string for path of texture files in cardinal check file (fill_cardinal funtion (line 19/20))
+add error message 
+Norm
 
-
-leaks :
-lil gnl	valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/color_more_than_three_values.cub
-		valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/color_value_too_big.cub +PROBLEMS IN OUTPUT
-		valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/color_value_too_small.cub
-		valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/tex_spaces_and_tabs.cub
-Add error message in parsing
-Wtf map not close is working ???
-
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/map_double.cub
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_value_too_big.cub
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/tex_after_map.cub 
-
-leaks :
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_missing_one_value_color.cu
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_more_than_three_values.cub
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_value_too_big.cub +PROBLEMS IN OUTPUT
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/color_value_too_small.cub
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/tex_after_map.cub 
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub maps/bad/tex_spaces_and_tabs.cub
-
-LEAKS ON 5/11/2024
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/color_missing_one_value_color.cub
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/color_value_too_small.cub
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/map_double.cub
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/map_not_close_east.cub
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/tex_after_map.cub 
+Add error message 
 valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/tex_spaces_and_tabs.cub
+
+Output problems ON 5/11/2024
+valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/tex_after_map.cub 
+valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/map_double.cub
+
+Opti :
+Appel de fonction
+Casts
+Boolean for moving 
+fiar eune image fix floor_cleiling drawn
+
+Profiler
+

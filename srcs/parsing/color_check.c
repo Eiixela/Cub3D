@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:56:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 13:40:09 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/06 11:19:53 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	*fill_color_int(char **color, int *color_tab)
 	i = count_array_size(color);
 	if (i != 3)
 	{
-		printf("Please check the colors presence\n");
+		printf("Please check the colors are there\n");
 		color_tab = fill_color_tab(color_tab);
 		return (color_tab);
 	}
@@ -65,11 +65,13 @@ bool	check_color_value(t_map *map)
 	{
 		if (255 < (map)->floor_c[i] || 0 > (map)->floor_c[i])
 		{
+			printf("Colors values are not in 0-255 range\n");
 			free_map(map);
 			return (false);
 		}
 		if (255 < (map)->ceiling_c[i] || 0 > (map)->ceiling_c[i])
 		{
+			printf("Colors values are not in 0-255 range\n");
 			free_map(map);
 			return (false);
 		}
@@ -187,12 +189,12 @@ int	color_check(int fd, t_map *map)
 		if (!line)
 			return (1);
 		if (map_started(line))
-			return ((void)read_till_the_end(fd, line, 1), \
+			return ((void)read_till_the_end(fd, line), \
 				close(fd), printf("Missing colors\n"), 1);
 		line = format_line(line);
 		map = found_one_color(line, map);
 		if (!map)
-			return ((void)read_till_the_end(fd, line, 1), close(fd), 1);
+			return ((void)read_till_the_end(fd, line), close(fd), 1);
 		all_color_found = found_all_color(map);
 		free(line);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 00:33:08 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/06 11:17:23 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static int	player_where(t_map *map, int *player_y, int *player_x)
 	return (count_player);
 }
 
-static int is_border(t_map *map, int x, int y)
+static int	is_border(t_map *map, int x, int y)
 {
-	return (x == 0 || y == 0 || y == map->size->y - 1 || map->map[y][x + 1] == '\0');
+	return (x == 0 || y == 0 || y == map->size->y - 1 || map->map[y][x + 1] == -32 || map->map[y][x - 1] == -32 || map->map[y + 1][x] == -32 || map->map[y - 1][x] == -32);
 }
 
 static void	add_to_queue(t_queue *queue, t_vector2D current)
@@ -77,8 +77,7 @@ static bool	resize_of_queue(t_queue *queue)
 	return (0);
 }
 
-//TODO work in progress
-//OPTI envoyer le **map, changer les cast (redeclarer struct vector en int),
+//TODO OPTI envoyer le **map, changer les cast (redeclarer struct vector en int),
 static	int	iter_flood_fill(t_map *map)
 {
 	t_queue		queue;
@@ -97,7 +96,7 @@ static	int	iter_flood_fill(t_map *map)
 		current = queue.point[queue.reading_index++];
 		if (is_border(map, current.x, current.y))
 			if (map->map[(int)(current.y)][(int)(current.x)] == '0')
-				return (free(queue.point), 1);
+				return (free(queue.point), printf("%f %f %c", current.x, current.y, map->map[(int)(current.y)][(int)(current.x)]), 1);
 		if (map->map[(int)(current.y)][(int)(current.x)] != '0')
 			continue ;
 		map->map[(int)(current.y)][(int)(current.x)] = 'F';
@@ -128,17 +127,16 @@ int	map_good(t_map *map, t_player *player)
 
 	player_x = 0;
 	player_y = 0;
-
 	if (check_char_map(&map))
-		return (1);
+		return (printf("Invalid character on map\n"), 1);
 	if (player_where(map, &player_x, &player_y) != 1)
-		return (1);
+		return (printf("Too many players on map\n"), 1);
 	player->x = player_x;
 	player->y = player_y;
 	map->player_position->x = player_x;
 	map->player_position->y = player_y;
 	if (iter_flood_fill(map))
-		return (1);
+		return (printf("Please make sure the map is fully closed\n"), 1);
 	set_angle_view(map);
 	map->map[player_y][player_x] = '0';
 	return (0);

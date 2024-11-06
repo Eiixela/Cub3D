@@ -3,25 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 23:50:59 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/06 11:33:54 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	read_till_the_end(int fd, char *line, int what_use)
+/* if (line != NULL && (ft_strcmp(line, "\n") != 0) && what_use == 0)
+			return (free(line), 1); */
+
+int	read_till_the_end_map(int fd, char *line)
 {
 	if (line)
 		free(line);
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (line == NULL && (ft_strcmp(line, "\n") != 0) && what_use == 1)
+		if (line != NULL && (ft_strcmp(line, "\n") != 0))
 			return (free(line), 1);
-		if (line == NULL && (ft_strcmp(line, "\n") != 0) && what_use == 0)
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	return (0);
+}
+
+int	read_till_the_end(int fd, char *line)
+{
+	if (line)
+		free(line);
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (line == NULL && (ft_strcmp(line, "\n") != 0))
 			return (free(line), 1);
 		free(line);
 		line = get_next_line(fd);
@@ -116,7 +133,7 @@ static int	fill_map(int fd, t_map *map, int number_line_map, int i)
 		i++;
 	}
 	map->map[i] = NULL;
-	if (read_till_the_end(fd, line, 0))
+	if (read_till_the_end_map(fd, line))
 		return (1);
 	return (0);
 }
@@ -159,7 +176,7 @@ char	**map_fill_square(t_map *map)
 			return (NULL);
 		}
 		if (i < map->size->x)
-			pimp_strlcpy(map_square[i], map->map[i], map->size->y + 1);
+			pimp_strlcpy(map_square[i], map->map[i], map->size->y + 2);
 		else
 		{
 			j = 0;

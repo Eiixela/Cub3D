@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+         #
+#    By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/11/06 00:33:20 by saperrie         ###   ########.fr        #
+#    Updated: 2024/11/06 10:06:24 by aljulien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INCLUDE_DIR = inc/
 LIBFT_DIR = libft/
 MLX_DIR = mlx/
 
-CFLAGS = -Wall -Wextra -Werror -g3 -Ofast -march=native -flto -pipe
+CFLAGS = -Wall -Wextra -Werror #-g3 -Ofast -march=native -flto -pipe 
 IFLAGS = -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 DFLAGS = -MMD -MP
 LFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cardinal_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 22:38:13 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/06 11:19:45 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,14 @@
 
 static t_map	*fill_cardinal(char *line, char *path, t_map *map)
 {
-	char	*s1;
-
-	s1 = "/home/saperrie/cmor/WIP/cub3d/";
-	// s1 = "/home/aljulien/Documents/C/C4/Cub3D/";
 	if (ft_strncmp("NO ", line, 3) == 0)
-		map->north = ft_strjoin(s1, path);
+		map->north = ft_strdup(path);
 	else if (ft_strncmp("SO ", line, 3) == 0)
-		map->south = ft_strjoin(s1, path);
+		map->south = ft_strdup(path);
 	else if (ft_strncmp("WE ", line, 3) == 0)
-		map->west = ft_strjoin(s1, path);
+		map->west = ft_strdup(path);
 	else if (ft_strncmp("EA ", line, 3) == 0)
-		map->east = ft_strjoin(s1, path);
+		map->east = ft_strdup(path);
 	return (map);
 }
 
@@ -75,7 +71,6 @@ static bool	found_all_cardinal(t_map *map)
 	return (true);
 }
 
-//TODO leak of GNL cannot fine it tho
 int	cardinal_check(int fd, t_map *map)
 {
 	char	*line;
@@ -88,7 +83,7 @@ int	cardinal_check(int fd, t_map *map)
 		if (!line)
 			return (1);
 		if (map_started(line))
-			return ((void)read_till_the_end(fd, line, 1), close(fd), \
+			return ((void)read_till_the_end(fd, line), close(fd), \
 				printf("Textures missing\n"), 1);
 		line = format_line(line);
 		found_one_cardinal(line, map);
@@ -96,7 +91,7 @@ int	cardinal_check(int fd, t_map *map)
 		free(line);
 	}
 	all_cardinal_found = true;
-	while (line) //for no leaks, please leave it there
+	while (line)
 	{
 		line = get_next_line(fd);
 		if (!cardinal_cmp(line))
@@ -106,6 +101,6 @@ int	cardinal_check(int fd, t_map *map)
 	if (all_cardinal_found == false)
 		return (printf("Multiple textures\n"), close(fd), 1);
 	if (check_access_textures(map))
-		return (printf("Please check permissions on textures files.\n"), close(fd), 1);
+		return (printf("Please check permissions on textures files\n"), close(fd), 1);
 	return (close(fd), 0);
 }

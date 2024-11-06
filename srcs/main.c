@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 00:20:50 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/06 10:02:19 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ int	main(int ac, char **av)
 			return (1);
 		draw_first_image(&data);
 		free_map(&map);
-		printf("ok!\n");
 	}
 	else
-		return (printf("Error...\n"), free_map(&map), 1);
+		return (printf("Error\n"), free_map(&map), 1);
 	return (0);
 }

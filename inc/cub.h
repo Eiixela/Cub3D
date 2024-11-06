@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 23:38:00 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/06 11:20:08 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,7 +291,7 @@ int		valid_char(char c);
 //fill_map
 int		map_fill(int fd, t_map *map, int number_line_map);
 int		count_line(int fd);
-int		read_till_the_end(int fd, char *line, int what_use);
+int		read_till_the_end(int fd, char *line);
 
 //free
 void	free_map(t_map *map);

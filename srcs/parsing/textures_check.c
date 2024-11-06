@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:22:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/05 13:55:07 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/06 10:08:59 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_extention_textures(char *file)
 {
 	char	*db_ext;
-
+	
 	if (file)
 	{
 		db_ext = ft_strnstr(file, ".xpm", ft_strlen(file));
