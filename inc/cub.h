@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/07 13:28:56 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:54:49 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ void	init_ray(t_ray_data *ray, double *angle, t_vector2D player_coor);
 
 //draw_rays_utils
 double	calculate_distance(double x, double y, double x1, double y1);
-void    draw_texture(t_data *data, t_draw_params *params, t_texture *tex);
+void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double wall_height, t_texture *tex, double ray_distance);
 int		is_out_of_bounds(t_map *map, int map_x, int map_y);
 int		max(int a, int b);
 
