@@ -31,35 +31,33 @@ double	get_x_pos_tex(t_data *data, double ray_distance)
 	return (tex_x);
 }
 
-void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double wall_height, t_texture *tex, double ray_distance)
+void	draw_texture(t_data *data, t_draw_params *draw_param, \
+	t_texture *tex_cardinal, double ray_distance)
 {
 	t_vector2D	tex_pos;
-	double		step;
-	double		tex_pos_win;
-	int			screen_index;
-	int			tex_index;
-	int			y;
+	t_draw_tex	tex;
 
-	step = 1.0 * data->tex->height / wall_height;
-	tex_pos_win = (draw_start - HEIGHT / 2 + wall_height / 2) * step;
+	tex.step = 1.0 * data->tex->height / draw_param->wall_height;
+	tex.tex_pos_win = (draw_param->draw_start - HEIGHT / 2 \
+		+ draw_param->wall_height / 2) * tex.step;
 	tex_pos.x = get_x_pos_tex(data, ray_distance);
-	y = draw_start;
-	while (y <= draw_end)
+	tex.y = draw_param->draw_start;
+	while (++tex.y <= draw_param->draw_end)
 	{
-		tex_pos.y = (int)tex_pos_win % data->tex->height;
-		tex_pos_win += step;
-		if (n_ray >= 0 && n_ray < WIDTH && y >= 0 && y < HEIGHT &&
-			tex_pos.x >= 0 && tex_pos.x < data->tex->width && tex_pos.y >= 0 \
+		tex_pos.y = (int)tex.tex_pos_win % data->tex->height;
+		tex.tex_pos_win += tex.step;
+		if (draw_param->n_ray >= 0 && draw_param->n_ray < WIDTH && \
+			tex.y >= 0 && tex.y < HEIGHT && tex_pos.x >= 0 \
+			&& tex_pos.x < data->tex->width && tex_pos.y >= 0 \
 				&& tex_pos.y < data->tex->height)
 		{
-			screen_index = y * data->img.line_len + n_ray * \
+			tex.screen_index = tex.y * data->img.line_len + draw_param->n_ray * \
 				(data->img.bit_per_pixel / 8);
-			tex_index = tex_pos.y * data->tex->line_len + tex_pos.x \
+			tex.tex_index = tex_pos.y * data->tex->line_len + tex_pos.x \
 			* (data->tex->bit_per_pixel / 8);
-			(*(unsigned int *)(data->img.addr + screen_index)) = \
-				(*(unsigned int *)(tex->addr + tex_index));
+			(*(unsigned int *)(data->img.addr + tex.screen_index)) = \
+				(*(unsigned int *)(tex_cardinal->addr + tex.tex_index));
 		}
-		y++;
 	}
 }
 

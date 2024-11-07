@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cardinal_found_all.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/07 15:58:31 by aljulien         ###   ########.fr       */
+/*   Created: 2024/11/07 16:28:08 by aljulien          #+#    #+#             */
+/*   Updated: 2024/11/07 16:28:28 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	main(int ac, char **av)
+bool	found_all_cardinal(t_map *map)
 {
-	t_map		map;
-	t_data		data;
-	t_player	player;
-	t_pplane	pplane;
-	t_keys		keys;
-	t_ray_data	ray;
+	if (map->north == NULL)
+		return (false);
+	else if (map->south == NULL)
+		return (false);
+	else if (map->west == NULL)
+		return (false);
+	else if (map->east == NULL)
+		return (false);
+	return (true);
+}
 
-	data.ray = &ray;
-	data.keys = &keys;
-	if (!init_map(&map))
+int	did_found_all_cardinal(bool all_car, t_map *map)
+{
+	if (all_car == false)
 		return (1);
-	if (!parsing(ac, av, &map, &player))
-	{
-		if (big_init(&data, &player, &pplane, &map) == 1)
-			return (1);
-		draw_first_image(&data);
-		free_map(&map);
-	}
-	else
-		return (printf("Error\n"), free_map(&map), 1);
+	if (check_access_textures(map))
+		return (1);
 	return (0);
 }

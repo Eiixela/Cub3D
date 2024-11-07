@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:15:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 13:17:48 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:01:01 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 static int	is_border(t_map *map, int x, int y)
 {
-	return (x == 0 || y == 0 || y == map->size->y - 1
-		|| map->map[y][x + 1] == -32 || map->map[y][x - 1] == -32
-		|| map->map[y + 1][x] == -32 || map->map[y - 1][x] == -32);
+	if (map->map[y][x] == '0')
+		return (x == 0 || y == 0 || y == map->size->y - 1
+			|| map->map[y][x + 1] == -32 || map->map[y][x - 1] == -32
+			|| map->map[y + 1][x] == -32 || map->map[y - 1][x] == -32);
+	return (0);
 }
 
 static void	add_to_queue(t_queue *queue, t_vector2D current)
@@ -70,8 +72,7 @@ int	iter_flood_fill(t_map *map)
 	{
 		current = queue.point[queue.reading_index++];
 		if (is_border(map, current.x, current.y))
-			if (map->map[(int)(current.y)][(int)(current.x)] == '0')
-				return (free(queue.point), 1);
+			return (free(queue.point), 1);
 		if (map->map[(int)(current.y)][(int)(current.x)] != '0')
 			continue ;
 		map->map[(int)(current.y)][(int)(current.x)] = 'F';

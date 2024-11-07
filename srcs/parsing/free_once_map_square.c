@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_once_map_square.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/07 15:58:31 by aljulien         ###   ########.fr       */
+/*   Created: 2024/11/07 16:25:41 by aljulien          #+#    #+#             */
+/*   Updated: 2024/11/07 16:26:37 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	main(int ac, char **av)
+void	free_char_map(t_map *map)
 {
-	t_map		map;
-	t_data		data;
-	t_player	player;
-	t_pplane	pplane;
-	t_keys		keys;
-	t_ray_data	ray;
+	int	i;
 
-	data.ray = &ray;
-	data.keys = &keys;
-	if (!init_map(&map))
-		return (1);
-	if (!parsing(ac, av, &map, &player))
+	i = 0;
+	if (map->map)
 	{
-		if (big_init(&data, &player, &pplane, &map) == 1)
-			return (1);
-		draw_first_image(&data);
-		free_map(&map);
+		while (map->map[i])
+			free(map->map[i++]);
+		free(map->map);
 	}
-	else
-		return (printf("Error\n"), free_map(&map), 1);
-	return (0);
+}
+
+void	map_free_square(char **map_square, int i)
+{
+	while (--i >= 0)
+		free(map_square[i]);
+	free(map_square);
 }

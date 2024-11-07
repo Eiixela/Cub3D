@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:19:18 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 13:21:23 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:24:10 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +56,4 @@ int	color_cmp(char *line)
 		|| ft_strncmp("C ", line, 2) == 0))
 		return (0);
 	return (1);
-}
-
-int	count_array_size(char **s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-int	*fill_color_tab(int	*color_tab)
-{
-	int	i;
-
-	i = 0;
-	while (i < 3)
-	{
-		color_tab[i] = -1;
-		i++;
-	}
-	return (color_tab);
 }

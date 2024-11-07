@@ -6,7 +6,7 @@
 #    By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/11/07 14:41:23 by aljulien         ###   ########.fr        #
+#    Updated: 2024/11/07 16:28:38 by aljulien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INCLUDE_DIR = inc/
 LIBFT_DIR = libft/
 MLX_DIR = mlx/
 
-CFLAGS = -Wall -Wextra -Werror -g3 -Ofast -march=native -flto -pipe -pg
+CFLAGS = -Wall -Wextra -Werror -g3 #-Ofast -march=native -flto -pipe -pg
 IFLAGS = -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 DFLAGS = -MMD -MP
 LFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
@@ -31,6 +31,7 @@ OBJECTS = $(patsubst srcs/%.c,$(OBJECT_DIR)%.o,\
 		srcs/parsing/init.c\
 		srcs/parsing/parsing_utils.c\
 		srcs/parsing/cardinal_check.c\
+		srcs/parsing/cardinal_found_all.c\
 		srcs/parsing/map_check.c\
 		srcs/parsing/flood_fill.c\
 		srcs/parsing/map_check_utils.c\
@@ -38,7 +39,9 @@ OBJECTS = $(patsubst srcs/%.c,$(OBJECT_DIR)%.o,\
 		srcs/parsing/fill_map_square.c\
 		srcs/parsing/textures_check.c\
 		srcs/parsing/check_color.c\
-		srcs/parsing/get_color.c\
+		srcs/parsing/fill_color.c\
+		srcs/parsing/free_once_map_square.c\
+		srcs/parsing/look_for_color.c\
 		srcs/gnl/get_next_line.c\
 		srcs/gnl/get_next_line_utils.c\
 		srcs/mlx_init/mlx_init.c\

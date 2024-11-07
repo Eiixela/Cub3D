@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/07 14:54:49 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:29:07 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,14 +130,24 @@ typedef struct s_texture
 	int		side;
 }	t_texture;
 
+typedef struct s_draw_tex
+{
+	double		step;
+	double		tex_pos_win;
+	int			screen_index;
+	int			tex_index;
+	int			y;
+}	t_draw_tex;
+
 typedef struct s_draw_params
 {
-    int        n_ray;
-    int        draw_start;
-    int        draw_end;
-    double    wall_height;
-    double    ray_distance;
-}    t_draw_params;
+	int		n_ray;
+	int		draw_start;
+	int		draw_end;
+	double	perpen_dst;
+	double	wall_height;
+	double	ray_distance;
+}	t_draw_params;
 
 typedef struct s_img
 {
@@ -204,7 +214,8 @@ void	init_ray(t_ray_data *ray, double *angle, t_vector2D player_coor);
 
 //draw_rays_utils
 double	calculate_distance(double x, double y, double x1, double y1);
-void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double wall_height, t_texture *tex, double ray_distance);
+void	draw_texture(t_data *data, t_draw_params *draw_param, \
+	t_texture *tex, double ray_distance);
 int		is_out_of_bounds(t_map *map, int map_x, int map_y);
 int		max(int a, int b);
 
@@ -257,6 +268,10 @@ int		file_check(char *file, t_map *map);
 //cardinal_check
 int		cardinal_check(int fd, t_map *map);
 
+//cardinal_found_all
+bool	found_all_cardinal(t_map *map);
+int		did_found_all_cardinal(bool all_car, t_map *map);
+
 //textures_check
 int		check_access_textures(t_map *map);
 
@@ -269,6 +284,9 @@ t_map	*check_for_color(t_map *map);
 int		color_cmp(char *line);
 int		count_array_size(char **s);
 int		*fill_color_tab(int	*color_tab);
+
+//fill_color
+t_map	*fill_color(char *line, char *path, t_map *map);
 
 //map_check
 int		map_good(t_map *map, t_player *player);
@@ -289,6 +307,10 @@ int		read_till_the_end(int fd, char *line);
 //fill_map_square
 char	**map_fill_square(t_map *map);
 int		read_till_the_end_map(int fd, char *line);
+
+//free_once_map_square
+void	free_char_map(t_map *map);
+void	map_free_square(char **map_square, int i);
 
 //free
 void	free_map(t_map *map);

@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:24:20 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 13:25:28 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:25:55 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,10 @@ static void	pimp_strlcpy(char *dst, const char *src, int size)
 	dst[i] = '\0';
 }
 
-char	**map_fill_square(t_map *map)
+static char	**map_allocate_square(t_map *map)
 {
 	char	**map_square;
 	int		i;
-	int		j;
 
 	map_square = malloc(sizeof(char *) * (map->size->x + 2));
 	if (!map_square)
@@ -76,11 +75,26 @@ char	**map_fill_square(t_map *map)
 		map_square[i] = malloc(sizeof(char) * (map->size->y + 2));
 		if (!map_square[i])
 		{
-			while (--i >= 0)
-				free(map_square[i]);
-			free(map_square);
+			map_free_square(map_square, i);
 			return (NULL);
 		}
+		i++;
+	}
+	return (map_square);
+}
+
+char	**map_fill_square(t_map *map)
+{
+	char	**map_square;
+	int		i;
+	int		j;
+
+	map_square = map_allocate_square(map);
+	if (!map_square)
+		return (NULL);
+	i = 0;
+	while (i <= map->size->x)
+	{
 		if (i < map->size->x)
 			pimp_strlcpy(map_square[i], map->map[i], map->size->y + 2);
 		else
@@ -93,12 +107,6 @@ char	**map_fill_square(t_map *map)
 		i++;
 	}
 	map_square[i] = NULL;
-	if (map->map)
-	{
-		i = 0;
-		while (map->map[i])
-			free(map->map[i++]);
-		free(map->map);
-	}
+	free_char_map(map);
 	return (map_square);
 }

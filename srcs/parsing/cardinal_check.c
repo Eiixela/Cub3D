@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 13:23:31 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:28:17 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,15 @@ static t_map	*found_one_cardinal(char *line, t_map *map)
 	return (map);
 }
 
-static bool	found_all_cardinal(t_map *map)
+static bool	search_extra_cardinal(char *line, int fd)
 {
-	if (map->north == NULL)
-		return (false);
-	else if (map->south == NULL)
-		return (false);
-	else if (map->west == NULL)
-		return (false);
-	else if (map->east == NULL)
-		return (false);
+	while (line)
+	{
+		line = get_next_line(fd);
+		if (!cardinal_cmp(line))
+			return (false);
+		free(line);
+	}
 	return (true);
 }
 
@@ -83,24 +82,15 @@ int	cardinal_check(int fd, t_map *map)
 		if (!line)
 			return (1);
 		if (map_started(line))
-			return ((void)read_till_the_end(fd, line), close(fd), \
-				printf("Textures missing\n"), 1);
+			return ((void)read_till_the_end(fd, line), close(fd), 1);
 		line = format_line(line);
 		found_one_cardinal(line, map);
 		all_cardinal_found = found_all_cardinal(map);
 		free(line);
 	}
 	all_cardinal_found = true;
-	while (line)
-	{
-		line = get_next_line(fd);
-		if (!cardinal_cmp(line))
-			all_cardinal_found = false;
-		free(line);
-	}
-	if (all_cardinal_found == false)
-		return (printf("Multiple textures\n"), close(fd), 1);
-	if (check_access_textures(map))
-		return (printf("Please check perm on textures files\n"), close(fd), 1);
+	all_cardinal_found = search_extra_cardinal(line, fd);
+	if (did_found_all_cardinal(all_cardinal_found, map))
+		return (close(fd), 1);
 	return (close(fd), 0);
 }

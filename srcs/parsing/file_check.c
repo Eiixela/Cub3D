@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:36:17 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 10:22:56 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:41:35 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	file_check(char *file, t_map *map)
 	if (fd == -1)
 		return (printf("Please check the permission of the map\n"), 1);
 	if (cardinal_check(fd, map))
-		return (close (fd), 1);
+		return (printf("Issue with textures\n"), close (fd), 1);
 	fd = file_access(file);
 	if (color_check(fd, map))
 		return (1);
