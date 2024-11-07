@@ -31,36 +31,45 @@ double	get_x_pos_tex(t_data *data, double ray_distance)
 	return (tex_x);
 }
 
-void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double wall_height, t_texture *tex, double ray_distance)
+static void    draw_texture_part(t_data *data, t_draw_params *params,
+    t_vector2D tex_pos, int y)
 {
-	t_vector2D 	tex_pos;
-	double		step;
-	double		tex_pos_win;
-	int			screen_index;
-	int			tex_index;
-	int			y;
+    int    screen_index;
+    int    tex_index;
 
-	step = 1.0 * data->tex->height / wall_height;
-	tex_pos_win = (draw_start - HEIGHT / 2 + wall_height / 2) * step;
-	tex_pos.x = get_x_pos_tex(data, ray_distance);
-	y = draw_start;
-	while (y <= draw_end)
-	{
-		tex_pos.y = (int)tex_pos_win % data->tex->height;
-		tex_pos_win += step;
-		if (n_ray >= 0 && n_ray < WIDTH && y >= 0 && y < HEIGHT &&
-			tex_pos.x >= 0 && tex_pos.x < data->tex->width && tex_pos.y >= 0 \
-				&& tex_pos.y < data->tex->height)
-		{
-			screen_index = y * data->img.line_len + n_ray * \
-				(data->img.bit_per_pixel / 8);
-			tex_index = tex_pos.y * data->tex->line_len + tex_pos.x * \
-				(data->tex->bit_per_pixel / 8);
-			(*(unsigned int *)(data->img.addr + screen_index)) = \
-				(*(unsigned int *)(tex->addr + tex_index));
-		}
-		y++;
-	}
+    if (params->n_ray >= 0 && params->n_ray < WIDTH && y >= 0 && y < HEIGHT &&
+        tex_pos.x >= 0 && tex_pos.x < data->tex->width &&
+        tex_pos.y >= 0 && tex_pos.y < data->tex->height)
+    {
+        screen_index = y * data->img.line_len + params->n_ray *
+            (data->img.bit_per_pixel / 8);
+        tex_index = (int)tex_pos.y * data->tex->line_len + (int)tex_pos.x *
+            (data->tex->bit_per_pixel / 8);
+        (*(unsigned int *)(data->img.addr + screen_index)) =
+            (*(unsigned int *)(data->tex->addr + tex_index));
+    }
+}
+
+void    draw_texture(t_data *data, t_draw_params *params, t_texture *tex)
+{
+    t_vector2D    tex_pos;
+    double        step;
+    double        tex_pos_win;
+    int            y;
+	(void)tex;
+
+    step = 1.0 * data->tex->height / params->wall_height;
+    tex_pos_win = (params->draw_start - HEIGHT / 2 + params->wall_height / 2) *
+        step;
+    tex_pos.x = get_x_pos_tex(data, params->ray_distance);
+    y = params->draw_start;
+    while (y <= params->draw_end)
+    {
+        tex_pos.y = fmod(tex_pos_win, data->tex->height);
+        tex_pos_win += step;
+        draw_texture_part(data, params, tex_pos, y);
+        y++;
+    }
 }
 
 int	texture_init(t_data *data)

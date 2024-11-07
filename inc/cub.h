@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 13:26:44 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/07 13:28:56 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,47 +32,24 @@
 # define PI	3.1415926535
 # define VISIBLE_MAP_SIZE 200
 # define PLAYER_SIZE 0.20
-# define SQUARE_SIZE 15 // 15
-# define MOVE_SPEED 0.1 // 0.064 is 1 pixel
-# define ROTATION_ANGLE 0.06 // initial value is 0.04
-# define FOV 1.0472  // 60 degree field of view
-# define P2 PI/2
-# define P3 3*PI/2
-# define ISAAC 0
-# define MV 1
+# define SQUARE_SIZE 15
+# define MOVE_SPEED 0.2
+# define ROTATION_ANGLE 0.06
+# define FOV 1.0472 // 60 degree field of view
+# define P2 1.5707963267 // PI/2
+# define P3 4.7123889803 // 3*PI/2
 # define NORTH 0
 # define SOUTH 1
 # define EAST  2
 # define WEST  3
 
-
 //--------------------------------------------------|
 
-//Define for colors
-
-//basic colors
-# define LIME_GREEN 0xdaf7a6
-# define ORANGE 0xffc300
-# define BRIGHT_RED 0xff5733
-# define CRIMSON 0xc70039
-# define PINK 0xff5cbe
-# define PASTEL_PURPLE 0xb1a3ff
+//Barbie color palette for 2d map
 # define GRID_COLOR 0x808080
-# define RED 0xFF0000
-# define YELLOW 0xFFFF00
-
-//Barbie color palette
-# define BUBBLEGUM_PINK 0xFF9EE2
+# define PASTEL_PURPLE 0xb1a3ff
 # define DARK_PINK 0xFF36AF
 # define LIGHT_PINK 0xFFC4F3
-# define LIGHT_BLUE 0x5DADE2
-
-//pretty color palette
-# define RICH_BLACK 0x001514
-# define CITRON 0xC2D076
-# define VIOLET 0xFFE1EA
-# define PURPLE_PIZZAZZ 0xFFA0FD
-# define MIMI_PINK 0xE952DE
 
 typedef struct s_vector2d
 {
@@ -111,12 +88,11 @@ typedef struct s_pplane
 typedef struct s_player
 {
 	int		view_height;
-	double		fov;
+	double	fov;
 	double	x;
 	double	y;
-	//double	move_speed;
-    double	rotation_speed;
-	double	view_angle; // x,y and view_angle is POV
+	double	rotation_speed;
+	double	view_angle;
 }	t_player;
 
 typedef struct s_point
@@ -154,6 +130,15 @@ typedef struct s_texture
 	int		side;
 }	t_texture;
 
+typedef struct s_draw_params
+{
+    int        n_ray;
+    int        draw_start;
+    int        draw_end;
+    double    wall_height;
+    double    ray_distance;
+}    t_draw_params;
+
 typedef struct s_img
 {
 	void	*ptr;
@@ -165,22 +150,21 @@ typedef struct s_img
 
 typedef struct s_ray_data
 {
-    t_vector2D	ray_dir;
-    t_vector2D	side_dist;
-    t_vector2D	delta_dist;
-    t_vector2D	map_pos;
-    t_vector2D	step;
-    double		wall_dist;
-    double		ray_len;
+	t_vector2D	ray_dir;
+	t_vector2D	side_dist;
+	t_vector2D	delta_dist;
+	t_vector2D	map_pos;
+	t_vector2D	step;
+	double		wall_dist;
+	double		ray_len;
 	int			side;
 	int			wall_direction;
 	int			wall_id;
-
-} t_ray_data;
+}	t_ray_data;
 
 typedef struct s_queue
 {
-	t_vector2D 	*point;
+	t_vector2D	*point;
 	int			size_queue;
 	int			writing_index;
 	int			reading_index;
@@ -201,8 +185,6 @@ typedef struct s_data
 	t_ray_data	*ray;
 }	t_data;
 
-
-
 //---------------------------------------DRAW-----------------------------------
 
 //draw
@@ -216,13 +198,13 @@ void	draw_all_rays(t_data *data, t_map *map);
 double	final_distance(t_ray_data *ray, t_vector2D player_coor);
 void	get_wall_orientation(t_ray_data *ray, int what_use);
 double	dda(t_data *data, t_ray_data *ray);
-void	calculate_step_and_side_dist(t_ray_data *ray,
-	t_vector2D player_coor);
+void	calculate_step_and_side_dist(t_ray_data *ray, \
+		t_vector2D player_coor);
 void	init_ray(t_ray_data *ray, double *angle, t_vector2D player_coor);
 
 //draw_rays_utils
 double	calculate_distance(double x, double y, double x1, double y1);
-void	draw_texture(t_data *data, int n_ray, int draw_start, int draw_end, double wall_height, t_texture *tex, double ray_distance);
+void    draw_texture(t_data *data, t_draw_params *params, t_texture *tex);
 int		is_out_of_bounds(t_map *map, int map_x, int map_y);
 int		max(int a, int b);
 
@@ -234,8 +216,6 @@ void	draw_ceiling_and_floor(t_data *data);
 
 //big_init
 int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
-/*int		projection_plane_init(t_pplane *pplane, t_player *player);
-int		player_init(t_player *player);*/
 
 //---------------------------------------MLX_INIT-------------------------------
 

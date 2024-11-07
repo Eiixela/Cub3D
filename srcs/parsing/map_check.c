@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 13:16:02 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:43:09 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	map_good(t_map *map, t_player *player)
 		return (printf("Too many players on map\n"), 1);
 	player->x = player_x;
 	player->y = player_y;
-	map->player_position->x = player_x;
-	map->player_position->y = player_y;
+	map->player_position->x = player_x + 0.5;
+	map->player_position->y = player_y + 0.5;
 	if (iter_flood_fill(map))
 		return (printf("Please make sure the map is fully closed\n"), 1);
 	set_angle_view(map);

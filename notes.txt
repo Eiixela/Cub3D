@@ -27,7 +27,7 @@ Opti :
 Appel de fonction
 Casts
 Boolean for moving 
-fiar eune image fix floor_cleiling drawn
+faire une image fix floor_cleiling drawn
 
 Profiler
 

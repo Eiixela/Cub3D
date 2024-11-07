@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:52:48 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 12:57:28 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/07 13:11:58 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	draw_first_image(t_data *data)
 {
+	
 	data->img.ptr = mlx_new_image(data->mlx_ptr, data->width, data->height);
 	data->img.addr = mlx_get_data_addr(data->img.ptr, \
 	&data->img.bit_per_pixel, &data->img.line_len, &data->img.endian);
