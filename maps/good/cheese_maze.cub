@@ -1,14 +1,14 @@
-NO textures/isaac64.xpm
-WE textures/isaac64.xpm
-SO textures/isaac64.xpm
-EA textures/isaac64.xpm
+WE textures/purple_cheetah.xpm
+SO textures/cheetah.xpm
+EA textures/blue_cheetah.xpm
+NO textures/pink_cheetah.xpm
 
 F 255,253,208
 C 135,206,250
 
         1111111111111111111111111
-        1000000000110000000000001
-        101100S001110000000000001
+        1S00000000110000000000001
+        1011000001110000000000001
         1001000000000000000000001
 111111111011000001110000000000001
 100000000011000001110111111111111

@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:50:26 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 12:57:48 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:18:03 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,14 @@ void	draw_ceiling_and_floor(t_data *data)
 	pixels = data->img.addr;
 	ceiling = rgb_to_hex(data->map->ceiling_c);
 	floor = rgb_to_hex(data->map->floor_c);
-	while (y < HEIGHT * WIDTH * 0.5)
-		((int *)pixels)[y++] = (int)ceiling;
+	while (y < HEIGHT * WIDTH >> 1)
+	{
+		((int *)pixels)[y] = (int)ceiling;
+		y++;
+	}
 	while (y < HEIGHT * WIDTH)
-		((int *)pixels)[y++] = (int)floor;
+	{
+		((int *)pixels)[y] = (int)floor;
+		y++;
+	}
 }
