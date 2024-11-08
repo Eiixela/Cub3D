@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/07 15:29:06 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:55:52 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	draw_wall(t_data *data, double ray_distance, int n_ray,
 
 	draw_param.n_ray = n_ray;
 	draw_param.perpen_dst = ray_distance * cos(angle \
-		- data->map->player_position->angle);
+		- data->map->play_pos->angle);
 	draw_param.wall_height = (1 / draw_param.perpen_dst) \
 		* data->pplane->dst_from_player;
 	draw_param.draw_start = (-((int)draw_param.wall_height >> 1) \
@@ -64,9 +64,9 @@ void	draw_all_rays(t_data *data, t_map *map)
 
 	ray_len = 0;
 	i = 0;
-	player_coor.x = map->player_position->x;
-	player_coor.y = map->player_position->y;
-	angle = map->player_position->angle - (FOV * 0.5);
+	player_coor.x = map->play_pos->x;
+	player_coor.y = map->play_pos->y;
+	angle = map->play_pos->angle - (FOV * 0.5);
 	angle_step = FOV / WIDTH;
 	while (i < WIDTH)
 	{

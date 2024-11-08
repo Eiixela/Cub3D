@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:26:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 13:22:44 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:55:52 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ bool	init_map(t_map *map)
 	if (!map->ceiling_c)
 		return (false);
 	map->player_way = -1;
-	map->player_position = malloc(sizeof(t_point));
-	if (!map->player_position)
+	map->play_pos = malloc(sizeof(t_point));
+	if (!map->play_pos)
 		return (false);
-	init_player(map->player_position);
-	map->player_position->x = 0;
-	map->player_position->y = 0;
+	init_player(map->play_pos);
+	map->play_pos->x = 0;
+	map->play_pos->y = 0;
 	init_color(map);
 	return (true);
 }

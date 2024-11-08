@@ -17,10 +17,10 @@ double	get_x_pos_tex(t_data *data, double ray_distance)
 	double	tex_x;
 
 	if (data->ray->wall_direction == EAST || data->ray->wall_direction == WEST)
-		tex_x = (data->map->player_position->y + \
+		tex_x = (data->map->play_pos->y + \
 			ray_distance * data->ray->ray_dir.y);
 	else
-		tex_x = data->map->player_position->x + \
+		tex_x = data->map->play_pos->x + \
 			ray_distance * data->ray->ray_dir.x;
 	tex_x -= floor(tex_x);
 	if (data->ray->wall_direction == SOUTH)

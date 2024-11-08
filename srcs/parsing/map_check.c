@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/07 15:30:48 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:55:52 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ static int	player_where(t_map *map, int *player_y, int *player_x)
 static void	set_angle_view(t_map *map)
 {
 	if (map->player_way == 'N')
-		map->player_position->angle = 3 * PI / 2;
+		map->play_pos->angle = 3 * PI / 2;
 	if (map->player_way == 'S')
-		map->player_position->angle = PI / 2;
+		map->play_pos->angle = PI / 2;
 	if (map->player_way == 'E')
-		map->player_position->angle = 0;
+		map->play_pos->angle = 0;
 	if (map->player_way == 'W')
-		map->player_position->angle = PI;
+		map->play_pos->angle = PI;
 }
 
-int	map_good(t_map *map, t_player *player)
+int	map_good(t_map *map)
 {
 	int	player_x;
 	int	player_y;
@@ -63,10 +63,8 @@ int	map_good(t_map *map, t_player *player)
 		return (printf("Invalid character on map\n"), 1);
 	if (player_where(map, &player_x, &player_y) != 1)
 		return (printf("Too many players on map\n"), 1);
-	player->x = player_x;
-	player->y = player_y;
-	map->player_position->x = player_x + 0.5;
-	map->player_position->y = player_y + 0.5;
+	map->play_pos->x = player_x + 0.5;
+	map->play_pos->y = player_y + 0.5;
 	if (iter_flood_fill(map))
 		return (printf("Please make sure the map is fully closed\n"), 1);
 	set_angle_view(map);

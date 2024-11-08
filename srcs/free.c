@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:20:18 by saperrie          #+#    #+#             */
-/*   Updated: 2024/11/07 14:39:42 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:55:52 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ void	free_map(t_map *map)
 			free(map->size);
 			map->size = NULL;
 		}
-		if (map->player_position)
+		if (map->play_pos)
 		{
-			free(map->player_position);
-			map->player_position = NULL;
+			free(map->play_pos);
+			map->play_pos = NULL;
 		}
 		map = NULL;
 	}

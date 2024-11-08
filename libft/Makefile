@@ -10,7 +10,12 @@
 #  #
 # **************************************************************************** #
 
-SRC = ft_atoi.c\
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+OBJECT_DIR = .obj/
+
+OBJ = $(patsubst %.c,$(OBJECT_DIR)%.o,\
+	ft_atoi.c\
 	ft_bzero.c\
 	ft_isalnum.c\
 	ft_isalpha.c\
@@ -49,47 +54,55 @@ SRC = ft_atoi.c\
 	ft_atoll.c\
 	ft_free_dtab.c\
 	ft_strndup.c\
-	ft_strncpy.c\
-	
+	ft_strncpy.c)
 
-SRC_B =	ft_lstnew_bonus.c\
-	ft_lstadd_front_bonus.c\
-	ft_lstadd_back_bonus.c\
-	ft_lstsize_bonus.c\
-	ft_lstlast_bonus.c\
-	ft_lstdelone_bonus.c\
-	ft_lstclear_bonus.c\
-	ft_lstiter_bonus.c\
-	ft_lstmap_bonus.c\
+OBJ_B = $(patsubst %.c,$(OBJECT_DIR)%.o,\
+		ft_lstnew_bonus.c\
+		ft_lstadd_front_bonus.c\
+		ft_lstadd_back_bonus.c\
+		ft_lstsize_bonus.c\
+		ft_lstlast_bonus.c\
+		ft_lstdelone_bonus.c\
+		ft_lstclear_bonus.c\
+		ft_lstiter_bonus.c\
+		ft_lstmap_bonus.c )
 
-CC = cc
 
-FLAGS = -Wall -Werror -Wextra -I.
-
-OBJ = $(SRC:%.c=%.o)
-
-OBJ_B = $(SRC_B:%.c=%.o)
+DEPENDENCIES = $(OBJ:.o=.d) $(OBJ_B:.o=.d)
 
 NAME = libft.a
 
+.PHONY: all clean fclean re debug run
+
 all: $(NAME)
 
-$(NAME): 		$(OBJ) $(OBJ_B)
-		ar rcs $(NAME) $(OBJ) $(OBJ_S)
+-include $(DEPENDENCIES)
 
-bonus:	$(OBJ) $(OBJ_B)
-			ar rcs $(NAME) $(OBJ) $(OBJ_B)
+$(NAME): $(OBJ) $(OBJ_B)
+	ar rcs $@ $^
 
-%.o : %.c libft.h
-	$(CC) $(FLAGS) -c $< -o $@
-				
-clean :
-		rm -f $(OBJ) $(OBJ_B)
+$(OBJECT_DIR)%.o: %.c libft.h | $(OBJECT_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
 
-fclean : clean
-		rm -f $(NAME) 
+$(OBJECT_DIR):
+	mkdir -p $(OBJECT_DIR)
+
+clean:
+	rm -rf $(OBJECT_DIR)
+
+fclean: clean
+	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY : all clean fclean re bonus 
+.PHONY: debug
+debug:
+	@clear
+	@make -s re CFLAGS+="-g3 -fsanitize=address"
+	@./$(NAME)
 
+.PHONY: run
+run:
+	@clear
+	@make -sj re
+	@./$(NAME)

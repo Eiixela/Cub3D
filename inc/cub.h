@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/07 16:29:07 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:55:52 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,6 @@ typedef struct s_pplane
 	double	angle_between_rays;
 }	t_pplane;
 
-typedef struct s_player
-{
-	int		view_height;
-	double	fov;
-	double	x;
-	double	y;
-	double	rotation_speed;
-	double	view_angle;
-}	t_player;
-
 typedef struct s_point
 {
 	double	x;
@@ -115,7 +105,7 @@ typedef struct s_map
 	char	**map;
 	char	player_way;
 	t_point	*size;
-	t_point	*player_position;
+	t_point	*play_pos;
 }	t_map;
 
 typedef struct s_texture
@@ -188,7 +178,6 @@ typedef struct s_data
 	void		*win_ptr;
 	t_img		img;
 	t_map		*map;
-	t_player	*player;
 	t_pplane	*pplane;
 	t_keys		*keys;
 	t_texture	tex[4];
@@ -226,7 +215,7 @@ int		draw_map2d(t_map *map, t_data *data);
 void	draw_ceiling_and_floor(t_data *data);
 
 //big_init
-int		big_init(t_data *data, t_player *player, t_pplane *pplane, t_map *map);
+int		big_init(t_data *data, t_pplane *pplane, t_map *map);
 
 //---------------------------------------MLX_INIT-------------------------------
 
@@ -253,7 +242,7 @@ int		key_loop(t_data *data);
 //---------------------------------------PARSING--------------------------------
 
 //parsing
-int		parsing(int ac, char **av, t_map *map, t_player *player);
+int		parsing(int ac, char **av, t_map *map);
 
 //init
 bool	init_map(t_map *map);
@@ -289,7 +278,7 @@ int		*fill_color_tab(int	*color_tab);
 t_map	*fill_color(char *line, char *path, t_map *map);
 
 //map_check
-int		map_good(t_map *map, t_player *player);
+int		map_good(t_map *map);
 
 //flood_fill
 int		iter_flood_fill(t_map *map);

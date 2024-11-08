@@ -1,24 +1,16 @@
 /* ************************************************************************** */
-/**/
-/*:::  ::::::::   */
-/*   ft_split.c :+:  :+::+:   */
-/*+:+ +:+ +:+ */
-/*   By: aljulien <aljulien@student.42.fr>  +#+  +:+   +#+*/
-/*+#+#+#+#+#+   +#+   */
-/*   Created: 2023/11/12 19:25:02 by aljulien  #+##+# */
-/*   Updated: 2024/06/28 10:47:13 by aljulien ###   ########.fr   */
-/**/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/08 10:24:02 by aljulien          #+#    #+#             */
+/*   Updated: 2024/11/08 10:24:15 by aljulien         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <stdbool.h>
-#include <math.h>
 
 void	ft_free_tab(char **tab)
 {

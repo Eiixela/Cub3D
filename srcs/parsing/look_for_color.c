@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:56:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/07 16:24:34 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:38:15 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,17 @@ static bool	found_all_color(t_map *map)
 
 static bool	search_extra_color(char *line, int fd)
 {
+	bool	all_color_found;
+
+	all_color_found = true;
 	while (line)
 	{
 		line = get_next_line(fd);
 		if (!color_cmp(line))
-			return (false);
+			all_color_found = false;
 		free(line);
 	}
-	return (true);
+	return (all_color_found);
 }
 
 int	color_check(int fd, t_map *map)

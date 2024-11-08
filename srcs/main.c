@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/07 15:58:31 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/08 09:33:33 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(int ac, char **av)
 {
 	t_map		map;
 	t_data		data;
-	t_player	player;
 	t_pplane	pplane;
 	t_keys		keys;
 	t_ray_data	ray;
@@ -25,9 +24,9 @@ int	main(int ac, char **av)
 	data.keys = &keys;
 	if (!init_map(&map))
 		return (1);
-	if (!parsing(ac, av, &map, &player))
+	if (!parsing(ac, av, &map))
 	{
-		if (big_init(&data, &player, &pplane, &map) == 1)
+		if (big_init(&data, &pplane, &map) == 1)
 			return (1);
 		draw_first_image(&data);
 		free_map(&map);
