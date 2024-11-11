@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   big_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:07:36 by saperrie          #+#    #+#             */
-/*   Updated: 2024/11/08 09:34:54 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/11 09:58:20 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	projection_plane_init(t_pplane *pplane)
 	pplane->height = HEIGHT;
 	pplane->center_w = (pplane->width >> 1);
 	pplane->center_h = (pplane->height >> 1);
-	pplane->dst_from_player = (pplane->center_w) / tan(FOV / 2);
+	pplane->dst_from_player = (pplane->center_w) / tan(FOV * 0.5);
 	pplane->angle_between_rays = (double)FOV / pplane->width;
 	return (0);
 }

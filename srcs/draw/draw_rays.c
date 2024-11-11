@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/08 13:58:58 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/11 09:30:26 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@ static double	calculate_wall_distance(t_data *data, t_vector2D player_coor,
 	calculate_step_and_side_dist(data->ray, player_coor);
 	data->ray->wall_dist = dda(data, data->ray);
 	return (final_distance(data->ray, player_coor));
-}
-
-static double	draw_one_ray(t_data *data, t_vector2D player_coor,
-	double *angle)
-{
-	return (calculate_wall_distance(data, player_coor, angle));
 }
 
 static void	draw_wall(t_data *data, double ray_distance, int n_ray,
@@ -70,7 +64,7 @@ void	draw_all_rays(t_data *data, t_map *map)
 	angle_step = FOV / WIDTH;
 	while (i < WIDTH)
 	{
-		ray_len = draw_one_ray(data, player_coor, &angle);
+		ray_len = calculate_wall_distance(data, player_coor, &angle);
 		draw_wall(data, ray_len, i++, angle);
 		angle += angle_step;
 	}

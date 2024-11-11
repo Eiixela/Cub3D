@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_input.c                                     :+:      :+:    :+:   */
+/*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 00:01:13 by saperrie          #+#    #+#             */
-/*   Updated: 2024/10/30 21:18:27 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/11 09:27:12 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ int	key_loop(t_data *data)
 		a_key(data);
 	if (data->keys->d == 1)
 		d_key(data);
-	draw_new_image(data);
+	draw_image(data, 0);
 	return (0);
 }

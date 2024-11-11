@@ -14,8 +14,8 @@
 
 static int	play_pos(double new_x, double new_y, t_map *map)
 {
-	double	player_y_middle;
 	double	player_x_middle;
+	double	player_y_middle;
 
 	player_x_middle = map->play_pos->x * SQUARE_SIZE;
 	player_y_middle = map->play_pos->y * SQUARE_SIZE;

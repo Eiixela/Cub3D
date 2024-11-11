@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/08 13:37:19 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/11 09:26:51 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,7 @@ typedef struct s_data
 //---------------------------------------DRAW-----------------------------------
 
 //draw
-void	draw_first_image(t_data *data);
-void	draw_new_image(t_data *data);
+void	draw_image(t_data *data, bool first_image);
 
 //draw_rays
 void	draw_all_rays(t_data *data, t_map *map);

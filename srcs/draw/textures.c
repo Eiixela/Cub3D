@@ -12,7 +12,8 @@
 
 #include "cub.h"
 
-double	get_x_pos_tex(t_data *data, double ray_distance, t_texture *tex_cardinal)
+double	get_x_pos_tex(t_data *data, double ray_distance, \
+	t_texture *tex_cardinal)
 {
 	double	tex_x;
 
@@ -38,8 +39,8 @@ void	draw_texture(t_data *data, t_draw_params *draw_param, \
 	t_draw_tex	tex;
 
 	tex.step = 1.0 * tex_cardinal->height / draw_param->wall_height;
-	tex.tex_pos_win = (draw_param->draw_start - HEIGHT / 2 \
-		+ draw_param->wall_height / 2) * tex.step;
+	tex.tex_pos_win = (draw_param->draw_start - (HEIGHT >> 1) \
+		+ (draw_param->wall_height * 0.5)) * tex.step;
 	tex_pos.x = get_x_pos_tex(data, ray_distance, tex_cardinal);
 	tex.y = draw_param->draw_start;
 	while (++tex.y <= draw_param->draw_end)
@@ -52,9 +53,9 @@ void	draw_texture(t_data *data, t_draw_params *draw_param, \
 				&& tex_pos.y < tex_cardinal->height)
 		{
 			tex.screen_index = tex.y * data->img.line_len + draw_param->n_ray * \
-				(data->img.bit_per_pixel / 8);
+				(data->img.bit_per_pixel >> 3);
 			tex.tex_index = tex_pos.y * tex_cardinal->line_len + tex_pos.x \
-			* (tex_cardinal->bit_per_pixel / 8);
+			* (tex_cardinal->bit_per_pixel >> 3);
 			(*(unsigned int *)(data->img.addr + tex.screen_index)) = \
 				(*(unsigned int *)(tex_cardinal->addr + tex.tex_index));
 		}
@@ -78,15 +79,12 @@ int	texture_init(t_data *data)
 			texture_path = data->map->east;
 		else if (i == 3)
 			texture_path = data->map->west;
-		data->tex[i].ptr = mlx_xpm_file_to_image(data->mlx_ptr,texture_path,&data->tex[i].width, &data->tex[i].height);
+		data->tex[i].ptr = mlx_xpm_file_to_image(data->mlx_ptr, texture_path, \
+			&data->tex[i].width, &data->tex[i].height);
 		data->tex[i].addr = mlx_get_data_addr(data->tex[i].ptr, \
 			&(data->tex[i].bit_per_pixel), \
 			&(data->tex[i].line_len), &(data->tex[i].endian));
-	printf("%i %i\n", i, data->tex[i].line_len);
 		i++;
 	}
-	printf("\n%s\n", data->map->south);
-	printf("%s\n", data->map->east);
-	printf("%s\n", data->map->west);
 	return (0);
 }
