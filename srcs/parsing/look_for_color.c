@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:56:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/12 13:07:16 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:12:00 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ int	color_check(int fd, t_map *map)
 		free(line);
 	}
 	if (!search_extra_color(line, fd))
-		return (printf("Multiple colors\n"), close(fd), 1);
+		return (free(line), printf("Multiple colors\n"), close(fd), 1);
 	return (close(fd), 0);
 }
