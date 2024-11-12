@@ -1,7 +1,7 @@
-NO textures/try.xpm
-EA textures/try.xpm
-SO textures/try.xpm
-WE textures/try.xpm
+NO textures/minecraft_stone_wall_mossy.xpm
+WE textures/minecraft_stone_wall.xpm
+SO textures/minecraft_stone_wall.xpm
+EA textures/minecraft_stone_wall.xpm
 
 C 35,19,73
 F 15,6,40
