@@ -6,7 +6,7 @@
 
 
 
-NO textures/test/north.xpm
+NO textures/isaac64.xpm
 
 
 
@@ -15,9 +15,9 @@ NO textures/test/north.xpm
 
 
 
-SO textures/test/south.xpm
-                        WE textures/test/west.xpm
-        EA textures/test/east.xpm            
+SO textures/isaac64.xpm
+                        WE textures/isaac64.xpm
+        EA textures/isaac64.xpm            
 
         F 20,           20,             20
 C 200,          200,200

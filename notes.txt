@@ -13,15 +13,10 @@ Get textures here ---> https://itch.io/
 https://lodev.org/cgtutor/raycasting.html
 
 TODOOOOOOO :
-add error message 
-Norm
+Add textures
+Add maps good for corr
+Add white space handles in color check
 
-Add error message 
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/tex_spaces_and_tabs.cub
-
-Output problems ON 5/11/2024
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/tex_after_map.cub 
-valgrind --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --log-file=valgrind_output.txt ./cub3D maps/bad/map_double.cub
 
 Opti :
 Appel de fonction

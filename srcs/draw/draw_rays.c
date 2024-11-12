@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/11 09:30:26 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/12 09:39:38 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static void	draw_wall(t_data *data, double ray_distance, int n_ray,
 		draw_param.draw_start = 0;
 	if (draw_param.draw_end >= HEIGHT)
 		draw_param.draw_end = HEIGHT - 1;
-	if (data->ray->wall_direction == NORTH)
+	if (data->ray->wall_direction == SOUTH)
 		draw_texture(data, &draw_param, data->tex + NORTH, ray_distance);
-	else if (data->ray->wall_direction == SOUTH)
+	else if (data->ray->wall_direction == NORTH)
 		draw_texture(data, &draw_param, data->tex + SOUTH, ray_distance);
-	else if (data->ray->wall_direction == EAST)
-		draw_texture(data, &draw_param, data->tex + EAST, ray_distance);
 	else if (data->ray->wall_direction == WEST)
+		draw_texture(data, &draw_param, data->tex + EAST, ray_distance);
+	else if (data->ray->wall_direction == EAST)
 		draw_texture(data, &draw_param, data->tex + WEST, ray_distance);
 }
 
