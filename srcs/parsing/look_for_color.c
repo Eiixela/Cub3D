@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   look_for_color.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:56:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/08 10:38:15 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/12 13:07:16 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static t_map	*found_one_color(char *line, t_map *map)
+static t_map	*found_one_color(char *line, t_map *map, int *all_colour_found)
 {
 	char	*path;
 	char	*trimmed_path;
@@ -27,7 +27,7 @@ static t_map	*found_one_color(char *line, t_map *map)
 			free(trimmed_path);
 			if (path)
 			{
-				map = fill_color(line, path, map);
+				map = fill_color(line, path, map, all_colour_found);
 				free(path);
 				if (!map)
 					return (NULL);
@@ -76,10 +76,10 @@ static bool	search_extra_color(char *line, int fd)
 int	color_check(int fd, t_map *map)
 {
 	char	*line;
-	bool	all_color_found;
+	int		all_color_found;
 
-	all_color_found = false;
-	while (!all_color_found)
+	all_color_found = 0;
+	while (all_color_found != 2)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -88,15 +88,14 @@ int	color_check(int fd, t_map *map)
 			return ((void)read_till_the_end(fd, line), \
 				close(fd), printf("Missing colors\n"), 1);
 		line = format_line(line);
-		map = found_one_color(line, map);
+		map = found_one_color(line, map, &all_color_found);
 		if (!map)
 			return ((void)read_till_the_end(fd, line), close(fd), 1);
-		all_color_found = found_all_color(map);
+		if (found_all_color(map))
+			break ;
 		free(line);
 	}
-	all_color_found = true;
-	all_color_found = search_extra_color(line, fd);
-	if (all_color_found == false)
+	if (!search_extra_color(line, fd))
 		return (printf("Multiple colors\n"), close(fd), 1);
 	return (close(fd), 0);
 }

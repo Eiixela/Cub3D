@@ -6,7 +6,7 @@
 /*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/11 09:26:51 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/12 12:54:33 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,7 @@ int		count_array_size(char **s);
 int		*fill_color_tab(int	*color_tab);
 
 //fill_color
-t_map	*fill_color(char *line, char *path, t_map *map);
+t_map	*fill_color(char *line, char *path, t_map *map, int *all_colour_found);
 
 //map_check
 int		map_good(t_map *map);

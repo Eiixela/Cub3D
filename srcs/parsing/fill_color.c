@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_color.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:22:17 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/07 16:24:15 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/12 13:11:36 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	*fill_color_tab(int	*color_tab)
 	return (color_tab);
 }
 
-static int	*fill_color_int(char **color, int *color_tab)
+static int	*fill_color_int(char **color, int *color_tab, int *all_colour_found)
 {
 	int	i;
 
@@ -53,10 +53,11 @@ static int	*fill_color_int(char **color, int *color_tab)
 			color_tab[i] = ft_atoi(color[i]);
 		i++;
 	}
+	*all_colour_found += 1;
 	return (color_tab);
 }
 
-t_map	*fill_color(char *line, char *path, t_map *map)
+t_map	*fill_color(char *line, char *path, t_map *map, int *colours_found)
 {
 	char	**color;
 
@@ -65,7 +66,7 @@ t_map	*fill_color(char *line, char *path, t_map *map)
 		color = ft_split(path, ',');
 		if (!color)
 			return (NULL);
-		map->floor_c = fill_color_int(color, map->floor_c);
+		map->floor_c = fill_color_int(color, map->floor_c, colours_found);
 		free_dtab(color);
 		if (!check_color_value(map))
 			return (NULL);
@@ -77,7 +78,7 @@ t_map	*fill_color(char *line, char *path, t_map *map)
 		color = ft_split(path, ',');
 		if (!color)
 			return (NULL);
-		map->ceiling_c = fill_color_int(color, map->ceiling_c);
+		map->ceiling_c = fill_color_int(color, map->ceiling_c, colours_found);
 		free_dtab(color);
 		if (!map->ceiling_c)
 			return (free_map(map), NULL);
