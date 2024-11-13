@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/12 12:54:33 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/13 09:43:40 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define PLAYER_SIZE 0.20
 # define SQUARE_SIZE 15
 # define MOVE_SPEED 0.2
-# define ROTATION_ANGLE 0.06
+# define ROTATION_ANGLE 0.1
 # define FOV 1.0472 // 60 degree field of view
 # define P2 1.5707963267 // PI/2
 # define P3 4.7123889803 // 3*PI/2

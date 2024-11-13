@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:56:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/12 15:01:19 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/13 09:21:03 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ int	color_check(int fd, t_map *map)
 		map = found_one_color(line, map, &all_color_found);
 		if (!map)
 			return ((void)read_till_the_end(fd, line), close(fd), 1);
+		free(line);
 		if (found_all_color(map))
 			break ;
-		free(line);
 	}
 	if (!search_extra_color(line, fd))
-		return (free(line), printf("Multiple colors\n"), close(fd), 1);
-	return (free(line), close(fd), 0);
+		return (printf("Multiple colors\n"), close(fd), 1);
+	return (close(fd), 0);
 }

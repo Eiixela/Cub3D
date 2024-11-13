@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:15:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/08 10:55:57 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/13 09:44:54 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	is_border(t_map *map, int x, int y)
 {
-	return (x == 0 || y == 0 || y == map->size->y - 1
-		|| map->map[y][x + 1] == -32 || map->map[y][x - 1] == -32
-		|| map->map[y + 1][x] == -32 || map->map[y - 1][x] == -32);
+	return (x == 0 || y == 0 || map->map[y][x + 1] == -32
+		|| map->map[y][x - 1] == -32 || map->map[y + 1][x] == -32
+		|| map->map[y - 1][x] == -32);
 }
 
 static void	add_to_queue(t_queue *queue, t_vector2D current)

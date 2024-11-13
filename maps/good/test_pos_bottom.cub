@@ -1,7 +1,7 @@
-NO textures/test/north.xpm
-SO textures/test/south.xpm
-WE textures/test/west.xpm
-EA textures/test/east.xpm
+NO textures/minecraft_stone_wall_mossy.xpm
+WE textures/minecraft_stone_wall.xpm
+SO textures/minecraft_stone_wall.xpm
+EA textures/minecraft_stone_wall.xpm
 
 F 20,20,20
 C 200,200,200
@@ -17,5 +17,5 @@ C 200,200,200
 101
 101
 101
-1S1
+1N1
 111
