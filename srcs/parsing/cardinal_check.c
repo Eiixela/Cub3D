@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:40 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/08 13:51:39 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:24:25 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,27 @@
 
 static t_map	*fill_cardinal(char *line, char *path, t_map *map)
 {
-	if (ft_strncmp("NO ", line, 3) == 0)
+	if (ft_strncmp("NO ", line, 3) == 0 && map->north == NULL)
+	{
 		map->north = ft_strdup(path);
-	else if (ft_strncmp("SO ", line, 3) == 0)
+		return (map);
+	}
+	else if (ft_strncmp("SO ", line, 3) == 0 && map->south == NULL)
+	{
 		map->south = ft_strdup(path);
-	else if (ft_strncmp("WE ", line, 3) == 0)
+		return (map);
+	}
+	else if (ft_strncmp("WE ", line, 3) == 0 && map->west == NULL)
+	{
 		map->west = ft_strdup(path);
-	else if (ft_strncmp("EA ", line, 3) == 0)
+		return (map);
+	}
+	else if (ft_strncmp("EA ", line, 3) == 0 && map->east == NULL)
+	{
 		map->east = ft_strdup(path);
-	return (map);
+		return (map);
+	}
+	return (NULL);
 }
 
 int	cardinal_cmp(char *line)
@@ -52,6 +64,8 @@ static t_map	*found_one_cardinal(char *line, t_map *map)
 			{
 				map = fill_cardinal(line, path, map);
 				free(path);
+				if (!map)
+					return (NULL);
 			}
 		}
 	}
@@ -87,12 +101,14 @@ int	cardinal_check(int fd, t_map *map)
 		if (map_started(line))
 			return ((void)read_till_the_end(fd, line), close(fd), 1);
 		line = format_line(line);
-		found_one_cardinal(line, map);
+		if (!found_one_cardinal(line, map))
+			return ((void)read_till_the_end(fd, line), close(fd), 1);
 		all_cardinal_found = found_all_cardinal(map);
 		free(line);
 	}
 	all_cardinal_found = true;
-	all_cardinal_found = search_extra_cardinal(line, fd);
+	if (!search_extra_cardinal(line, fd))
+		return (close(fd), 1);
 	if (did_found_all_cardinal(all_cardinal_found, map))
 		return (close(fd), 1);
 	return (close(fd), 0);

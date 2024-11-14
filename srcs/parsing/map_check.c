@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 09:39:15 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/12 15:36:17 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:46:08 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	map_good(t_map *map)
 	if (check_char_map(&map))
 		return (printf("Invalid character on map\n"), 1);
 	if (player_where(map, &player_x, &player_y) != 1)
-		return (printf("Too many players on map\n"), 1);
+		return (printf("Please make sure there only one player\n"), 1);
 	map->play_pos->x = player_x + 0.5;
 	map->play_pos->y = player_y + 0.5;
 	if (iter_flood_fill(map))

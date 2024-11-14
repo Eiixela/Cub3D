@@ -23,6 +23,12 @@
 # include <stdbool.h>
 # include <math.h>
 
+typedef struct s_vector_int
+{
+	int	x;
+	int	y;
+}	t_vector_int;
+
 typedef struct s_list
 {
 	void			*content;
@@ -58,7 +64,6 @@ ssize_t					ft_putendl_fd(char *s, int fd);
 void					ft_putnbr_fd(int n, int fd);
 int						ft_putstr_fd(char *s, int fd);
 void					ft_striteri(char *s, void (*f)(unsigned int, char*));
-//char					*ft_strjoin(char const *s1, char const *s2);
 char					*ft_strmapi(char const *s,
 							char (*f)(unsigned int, char));
 char					*ft_strtrim(char const *s1, char const *set);

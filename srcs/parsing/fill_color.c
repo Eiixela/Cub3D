@@ -6,13 +6,13 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:22:17 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/13 09:44:32 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:22:41 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	count_array_size(char **s)
+static int	count_array_size(char **s)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ int	count_array_size(char **s)
 	return (i);
 }
 
-int	*fill_color_tab(int	*color_tab)
+static int	*fill_color_tab(int	*color_tab)
 {
 	int	i;
 
@@ -35,8 +35,22 @@ int	*fill_color_tab(int	*color_tab)
 	return (color_tab);
 }
 
-static int	*fill_color_int(char **color, int *color_tab, \
-	int *all_colour_found, t_map *map)
+static int	is_num_color(char *color)
+{
+	int	i;
+
+	i = 0;
+	while (color[i])
+	{
+		if (!((color[i] >= '0' && color[i] <= '9') \
+			|| color[i] == ' ' || color[i] == '\t'))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static int	*fill_color_int(char **color, int *color_tab, t_map *map)
 {
 	long	i;
 
@@ -52,15 +66,17 @@ static int	*fill_color_int(char **color, int *color_tab, \
 	{
 		if (color[i])
 			color_tab[i] = ft_atoll(color[i]);
+		if (!is_num_color(color[i]))
+			return (printf("Invalid color value\n"), free_map(map), NULL);
 		if (color_tab[i] == -4000000)
 			return (printf("Invalid color value\n"), free_map(map), NULL);
 		i++;
 	}
-	*all_colour_found += 1;
 	return (color_tab);
 }
 
-t_map	*fill_color(char *line, char *path, t_map *map, int *colours_found)
+t_map	*fill_color(char *line, char *path, \
+	t_map *map, t_vector2D *colours_found)
 {
 	char	**color;
 
@@ -69,7 +85,8 @@ t_map	*fill_color(char *line, char *path, t_map *map, int *colours_found)
 		color = ft_split(path, ',');
 		if (!color)
 			return (NULL);
-		map->floor_c = fill_color_int(color, map->floor_c, colours_found, map);
+		colours_found->x++;
+		map->floor_c = fill_color_int(color, map->floor_c, map);
 		free_dtab(color);
 		if (!map->floor_c || !check_color_value(map))
 			return (free_map(map), NULL);
@@ -79,8 +96,8 @@ t_map	*fill_color(char *line, char *path, t_map *map, int *colours_found)
 		color = ft_split(path, ',');
 		if (!color)
 			return (NULL);
-		map->ceiling_c = fill_color_int(color, \
-			map->ceiling_c, colours_found, map);
+		colours_found->y++;
+		map->ceiling_c = fill_color_int(color, map->ceiling_c, map);
 		free_dtab(color);
 		if (!map->ceiling_c || !check_color_value(map))
 			return (free_map(map), NULL);

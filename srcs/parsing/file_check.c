@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:36:17 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/07 15:41:35 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:48:29 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,57 @@ int	file_extension_check(char *file)
 	return (1);
 }
 
+static int	condition_for_line(char *line, int what_use)
+{
+	if (what_use == 1)
+	{
+		if (!ft_strncmp(line, "N", 1) || !ft_strncmp(line, "S", 1) \
+			|| !ft_strncmp(line, "E", 1) || !ft_strncmp(line, "W", 1)
+			|| !ft_strncmp(line, "F", 1) || !ft_strncmp(line, "C", 1))
+			return (0);
+		return (1);
+	}
+	if (what_use == 2)
+	{
+		if (ft_isascii(*line) && (ft_strncmp(line, "N", 1) \
+			|| ft_strncmp(line, "S", 1) || ft_strncmp(line, "E", 1)
+				|| ft_strncmp(line, "W", 1) || ft_strncmp(line, "F", 1)
+				|| ft_strncmp(line, "C", 1)))
+			return (0);
+		return (1);
+	}
+	return (1);
+}
+
+static int	line_not_allowed(char *file)
+{
+	int		fd;
+	char	*line;
+	char	*tmp;
+	int		counter;
+
+	fd = open(file, O_RDONLY);
+	counter = 0;
+	line = get_next_line(fd);
+	tmp = line;
+	while (line != NULL)
+	{
+		while (*line == ' ' || *line == '\t')
+			line++;
+		if (!condition_for_line(line, 1))
+			counter++;
+		else if (!condition_for_line(line, 2))
+			return (free(tmp), close(fd), 1);
+		free(tmp);
+		line = get_next_line(fd);
+		tmp = line;
+	}
+	close(fd);
+	if (counter == 6)
+		return (0);
+	return (1);
+}
+
 int	file_check(char *file, t_map *map)
 {
 	int	fd;
@@ -53,6 +104,8 @@ int	file_check(char *file, t_map *map)
 	fd = file_access(file);
 	if (fd == -1)
 		return (printf("Please check the permission of the map\n"), 1);
+	if (line_not_allowed(file))
+		return (printf("Invalid line or issue a key input\n"), close (fd), 1);
 	if (cardinal_check(fd, map))
 		return (printf("Issue with textures\n"), close (fd), 1);
 	fd = file_access(file);
