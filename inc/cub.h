@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:13:52 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/12 12:54:33 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:39:15 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define PLAYER_SIZE 0.20
 # define SQUARE_SIZE 15
 # define MOVE_SPEED 0.2
-# define ROTATION_ANGLE 0.06
+# define ROTATION_ANGLE 0.08
 # define FOV 1.0472 // 60 degree field of view
 # define P2 1.5707963267 // PI/2
 # define P3 4.7123889803 // 3*PI/2
@@ -164,10 +164,10 @@ typedef struct s_ray_data
 
 typedef struct s_queue
 {
-	t_vector2D	*point;
-	int			size_queue;
-	int			writing_index;
-	int			reading_index;
+	t_vector_int	*point;
+	int				size_queue;
+	int				writing_index;
+	int				reading_index;
 }	t_queue;
 
 typedef struct s_data
@@ -270,11 +270,10 @@ int		color_check(int fd, t_map *map);
 bool	check_color_value(t_map *map);
 t_map	*check_for_color(t_map *map);
 int		color_cmp(char *line);
-int		count_array_size(char **s);
-int		*fill_color_tab(int	*color_tab);
 
 //fill_color
-t_map	*fill_color(char *line, char *path, t_map *map, int *all_colour_found);
+t_map	*fill_color(char *line, char *path, t_map *map, \
+	t_vector2D *colours_found);
 
 //map_check
 int		map_good(t_map *map);

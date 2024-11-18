@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:26:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/11 09:13:11 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:40:18 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	init_color(t_map *map)
 	}
 }
 
-//TODO add error message when return NULL
 bool	init_map(t_map *map)
 {
 	map->north = NULL;

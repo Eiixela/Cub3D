@@ -1,7 +1,7 @@
-NR textures/pngegg.xpm
-WE textures/pngegg.xpm
-SO textures/pngegg.xpm
-EA textures/pngegg.xpm
+WE textures/purple_cheetah.xpm
+SO textures/cheetah.xpm
+EE textures/blue_cheetah.xpm
+NO textures/pink_cheetah.xpm
 
 F 255,253,208
 C 135,206,250

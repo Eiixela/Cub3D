@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:26:09 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/06 13:26:55 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/14 08:58:37 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,8 @@ int	map_fill(int fd, t_map *map, int number_line_map)
 	while (map->map[i])
 	{
 		if (ft_strlen(map->map[i++]) > map->size->y)
-			map->size->y = ft_strlen(map->map[i]);
+			if (map->map[i])
+				map->size->y = ft_strlen(map->map[i]);
 	}
 	map->map = map_fill_square(map);
 	if (!map->map)

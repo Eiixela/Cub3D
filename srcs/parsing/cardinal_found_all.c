@@ -6,7 +6,7 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:28:08 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/07 16:28:28 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:16:22 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ bool	found_all_cardinal(t_map *map)
 {
 	if (map->north == NULL)
 		return (false);
-	else if (map->south == NULL)
+	if (map->south == NULL)
 		return (false);
-	else if (map->west == NULL)
+	if (map->west == NULL)
 		return (false);
-	else if (map->east == NULL)
+	if (map->east == NULL)
 		return (false);
 	return (true);
 }

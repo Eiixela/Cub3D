@@ -1,7 +1,7 @@
-NO textures/try.xpm
-SO textures/try.xpm
-EA textures/try.xpm
-WE textures/try.xpm
+NO textures/minecraft_stone_wall_mossy.xpm
+WE textures/book.xpm
+SO textures/minecraft_stone_wall.xpm
+EA textures/minecraft_stone_wall.xpm
 
 F 20,20,20
 C 200,200,200

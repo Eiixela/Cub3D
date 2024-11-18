@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:15:14 by aljulien          #+#    #+#             */
-/*   Updated: 2024/11/12 14:19:58 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:44:48 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ unsigned long long	ft_atoll(char *nptr)
 {
 	size_t					i;
 	int						sign;
-	unsigned long long	nbr;
+	unsigned long long		nbr;
 
 	nbr = 0;
 	if (!nptr)
