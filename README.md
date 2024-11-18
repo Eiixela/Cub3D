@@ -47,7 +47,7 @@ The raycasting algorithm is given a map that looks like this :
 '1' reprensents wall, and '0' reprensents walkable spaces. The 'N' is the spot the player spawns. The goal of the raycasting algorithm is to 'draw' invisible rays from the player to the distance in order to calculate the distance between every wall in the player POV to the player.
 The ray are fictonal and are not actually visible by the player. From the top it look like this :
 
-    ![ray](raycasting-map.jpg?raw=true)
+![raycasting-map](https://github.com/user-attachments/assets/e48e0ebf-3f77-4a1f-9a73-6c89ace4d50a)
 
 Once the distance from the player to the wall is computed, we now have the needed information to 'draw' a wall. The height of said wall will depend on the distance from the player i.e the futher away the wall, the smaller and vise-versa.
 
