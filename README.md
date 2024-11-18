@@ -47,7 +47,7 @@ The raycasting algorithm is given a map that looks like this :
 '1' reprensents wall, and '0' reprensents walkable spaces. The 'N' is the spot the player spawns. The goal of the raycasting algorithm is to 'draw' invisible rays from the player to the distance in order to calculate the distance between every wall in the player POV to the player.
 The ray are fictonal and are not actually visible by the player. From the top it look like this :
 
-    ![alt text](https://github.com/Eiixela/Cub3D/main/raycasting-map.jpg?raw=true)
+    ![alt text](https://github.com/Eiixela/Cub3D/blob/main/raycasting-map.jpg?raw=true)
 
 Once the distance from the player to the wall is computed, we now have the needed information to 'draw' a wall. The height of said wall will depend on the distance from the player i.e the futher away the wall, the smaller and vise-versa.
 
