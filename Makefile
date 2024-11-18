@@ -6,7 +6,7 @@
 #    By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/25 14:26:21 by aljulien          #+#    #+#              #
-#    Updated: 2024/10/22 15:55:04 by aljulien         ###   ########.fr        #
+#    Updated: 2024/11/14 12:39:52 by aljulien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INCLUDE_DIR = inc/
 LIBFT_DIR = libft/
 MLX_DIR = mlx/
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -Ofast
 IFLAGS = -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 DFLAGS = -MMD -MP
 LFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
@@ -25,27 +25,36 @@ OBJECT_DIR = .obj/
 
 OBJECTS = $(patsubst srcs/%.c,$(OBJECT_DIR)%.o,\
 		srcs/main.c\
+		srcs/free.c\
 		srcs/parsing/parsing.c\
 		srcs/parsing/file_check.c\
 		srcs/parsing/init.c\
 		srcs/parsing/parsing_utils.c\
 		srcs/parsing/cardinal_check.c\
+		srcs/parsing/cardinal_found_all.c\
 		srcs/parsing/map_check.c\
+		srcs/parsing/flood_fill.c\
 		srcs/parsing/map_check_utils.c\
 		srcs/parsing/fill_map.c\
+		srcs/parsing/fill_map_square.c\
 		srcs/parsing/textures_check.c\
-		srcs/parsing/color_check.c\
+		srcs/parsing/check_color.c\
+		srcs/parsing/fill_color.c\
+		srcs/parsing/free_once_map_square.c\
+		srcs/parsing/look_for_color.c\
 		srcs/gnl/get_next_line.c\
 		srcs/gnl/get_next_line_utils.c\
 		srcs/mlx_init/mlx_init.c\
-		srcs/mlx_init/handle_input.c\
-		srcs/mlx_init/key_hook_happening.c\
+		srcs/mlx_init/handle_events.c\
+		srcs/mlx_init/player_movement.c\
+		srcs/mlx_init/key_directions.c\
+		srcs/draw/textures.c\
 		srcs/draw/big_init.c\
 		srcs/draw/draw_rays.c\
-		srcs/draw/draw_2D_map.c\
+		srcs/draw/draw_map2d.c\
 		srcs/draw/draw_rays_utils.c\
-		srcs/draw/draw_ceiling_floor.c\
 		srcs/draw/draw.c\
+		srcs/draw/ray_casting.c\
 							)
 
 OBJ_SUBDIRS = $(sort $(dir ${OBJECTS}))
@@ -54,7 +63,7 @@ DEPENDENCIES = $(OBJECTS:.o=.d)
 
 LIBFT = $(LIBFT_DIR)libft.a
 MLX = $(MLX_DIR)libmlx.a
-NAME = cub
+NAME = cub3D
 
 .PHONY: all
 all: $(NAME)

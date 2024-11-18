@@ -1,13 +1,13 @@
-   WE                            textures/wolfenstein/grey_stone.xpm
-NO      textures/wolfenstein/purple_stone.xpm
+   WE                            textures/minecraft_stone_wall_mossy.xpm
+NO		textures/minecraft_stone_wall_mossy.xpm
 
 
 
-SO textures/wolfenstein/red_brick.xpm
+SO textures/minecraft_stone_wall_mossy.xpm
 
 F      17,    38,     64
 
-EA textures/wolfenstein/wood.xpm
+EA textures/minecraft_stone_wall_mossy.xpm
 
 
 
@@ -19,3 +19,6 @@ C 218, 234, 235
 1000110000000000110001001
 1000000000100000000001001
 1111111111111111111111111
+
+
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:22:34 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/15 18:09:37 by saperrie         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:23:07 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,34 @@ static int	check_extention_textures(char *file)
 	return (1);
 }
 
+static int	check_access_textures_files(char *texture_file)
+{
+	int	fd;
+
+	fd = open(texture_file, O_RDONLY);
+	if (fd == -1)
+		return (1);
+	close(fd);
+	return (0);
+}
+
 int	check_access_textures(t_map *map)
 {
 	if (map->north)
-	{
 		if (check_extention_textures(map->north)
-			|| access(map->north, O_RDONLY) == -1)
+			|| check_access_textures_files(map->north))
 			return (1);
-	}
 	if (map->south)
-	{
 		if (check_extention_textures(map->south)
-			|| access(map->south, O_RDONLY) == -1)
+			|| check_access_textures_files(map->south))
 			return (1);
-	}
-	if (map->west)
-	{
-		if (check_extention_textures(map->west)
-			|| access(map->west, O_RDONLY) == -1)
-			return (1);
-	}
 	if (map->east)
-	{
 		if (check_extention_textures(map->east)
-			|| access(map->east, O_RDONLY) == -1)
+			|| check_access_textures_files(map->east))
 			return (1);
-	}
+	if (map->west)
+		if (check_extention_textures(map->west)
+			|| check_access_textures_files(map->west))
+			return (1);
 	return (0);
 }

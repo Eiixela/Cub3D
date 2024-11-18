@@ -3,70 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saperrie <saperrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:32:46 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 14:51:10 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/11 09:26:36 by saperrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	free_map_array(char **map, int height)
-{
-	int	i;
-
-	i = 0;
-	while (i < height)
-	{
-		free(map[i]);
-		i++;
-	}
-}
-
-void	free_map(t_map *map)
-{
-	if (map)
-	{
-		free(map->north);
-		free(map->south);
-		free(map->east);
-		free(map->west);
-		if (map->map)
-		{
-			free_map_array(map->map, map->size->x + 1);
-			free(map->map);
-		}
-		free(map->ceiling_c);
-		free(map->floor_c);
-		free(map->size);
-		free(map->player_position);
-		// free(map);
-		map = NULL;
-	}
-}
-
 int	main(int ac, char **av)
 {
 	t_map		map;
 	t_data		data;
-	t_player	player;
 	t_pplane	pplane;
 	t_keys		keys;
+	t_ray_data	ray;
 
+	data.ray = &ray;
 	data.keys = &keys;
 	if (!init_map(&map))
 		return (1);
-	if (!parsing(ac, av, &map, &player))
+	if (!parsing(ac, av, &map))
 	{
-		if (big_init(&data, &player, &pplane, &map) == 1)
+		if (big_init(&data, &pplane, &map) == 1)
 			return (1);
-		printf("ok!\n");
-		draw_new_image(&data);
+		draw_image(&data, 1);
 		free_map(&map);
-		return (0);
 	}
-	printf("hmmm...\n");
-	free_map(&map);
-	return (1);
+	else
+		return (printf("Error\n"), free_map(&map), 1);
+	return (0);
 }

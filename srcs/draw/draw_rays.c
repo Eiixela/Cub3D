@@ -6,38 +6,66 @@
 /*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:38:30 by aljulien          #+#    #+#             */
-/*   Updated: 2024/10/22 14:16:58 by aljulien         ###   ########.fr       */
+/*   Updated: 2024/11/12 09:39:38 by aljulien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-double	draw_line(t_data *data, t_vector2D player_coor, double *angle,
-		int color)
+static double	calculate_wall_distance(t_data *data, t_vector2D player_coor,
+	double *angle)
 {
-	t_vector2D	point;
-	t_vector2D	diff;
-	t_vector2D	map_coor;
-	int			i;
-	int			max_distance;
+	init_ray(data->ray, angle, player_coor);
+	calculate_step_and_side_dist(data->ray, player_coor);
+	data->ray->wall_dist = dda(data, data->ray);
+	return (final_distance(data->ray, player_coor));
+}
 
+static void	draw_wall(t_data *data, double ray_distance, int n_ray,
+	double angle)
+{
+	t_draw_params	draw_param;
+
+	draw_param.n_ray = n_ray;
+	draw_param.perpen_dst = ray_distance * cos(angle \
+		- data->map->play_pos->angle);
+	draw_param.wall_height = (1 / draw_param.perpen_dst) \
+		* data->pplane->dst_from_player;
+	draw_param.draw_start = (-((int)draw_param.wall_height >> 1) \
+		+ (HEIGHT >> 1));
+	draw_param.draw_end = (((int)draw_param.wall_height >> 1) + (HEIGHT >> 1));
+	if (draw_param.draw_start < 0)
+		draw_param.draw_start = 0;
+	if (draw_param.draw_end >= HEIGHT)
+		draw_param.draw_end = HEIGHT - 1;
+	if (data->ray->wall_direction == SOUTH)
+		draw_texture(data, &draw_param, data->tex + NORTH, ray_distance);
+	else if (data->ray->wall_direction == NORTH)
+		draw_texture(data, &draw_param, data->tex + SOUTH, ray_distance);
+	else if (data->ray->wall_direction == WEST)
+		draw_texture(data, &draw_param, data->tex + EAST, ray_distance);
+	else if (data->ray->wall_direction == EAST)
+		draw_texture(data, &draw_param, data->tex + WEST, ray_distance);
+}
+
+void	draw_all_rays(t_data *data, t_map *map)
+{
+	t_vector2D	player_coor;
+	double		ray_len;
+	int			i;
+	double		angle;
+	double		angle_step;
+
+	ray_len = 0;
 	i = 0;
-	max_distance = max(data->map->size->x, data->map->size->y) * SQUARE_SIZE;
-	diff.x = cos(*angle);
-	diff.y = sin(*angle);
-	while (i < max_distance)
+	player_coor.x = map->play_pos->x;
+	player_coor.y = map->play_pos->y;
+	angle = map->play_pos->angle - (FOV * 0.5);
+	angle_step = FOV / WIDTH;
+	while (i < WIDTH)
 	{
-		point.x = (int)(player_coor.x) + i * diff.x;
-		point.y = (int)(player_coor.y) + i * diff.y;
-		map_coor.x = (int)(point.x / SQUARE_SIZE);
-		map_coor.y = (int)(point.y / SQUARE_SIZE);
-		if (is_out_of_bounds(data->map, (int)(map_coor.x), (int)(map_coor.y)))
-			break ;
-		if (data->map->map[(int)(map_coor.y)][(int)(map_coor.x)] == '1')
-			break ;
-		draw_point(data, (int)point.x, (int)point.y, color);
-		i++;
+		ray_len = calculate_wall_distance(data, player_coor, &angle);
+		draw_wall(data, ray_len, i++, angle);
+		angle += angle_step;
 	}
-	return (calculate_distance(point.x, point.y, (int)(player_coor.x),
-		(int)(player_coor.y)));
 }

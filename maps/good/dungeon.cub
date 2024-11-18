@@ -1,11 +1,12 @@
+
 F 76,76,76
-EA textures/try.xpm
+EA textures/minecraft_stone_wall_mossy.xpm
 
-NO 		textures/try.xpm
-SO textures/try.xpm
-C 99,    99,     100
+NO textures/minecraft_stone_wall_mossy.xpm
+SO textures/minecraft_stone_wall_mossy.xpm
+C 76,76,76
 
-WE textures/try.xpm
+WE textures/minecraft_stone_wall_mossy.xpm
 1111111111111111111
 10W1001001001000001
 1011000001000001001

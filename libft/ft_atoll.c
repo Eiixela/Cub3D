@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/**/
-/*:::  ::::::::   */
-/*   ft_atoll.c :+:  :+::+:   */
-/*+:+ +:+ +:+ */
-/*   By: aljulien <aljulien@student.42.fr>  +#+  +:+   +#+*/
-/*+#+#+#+#+#+   +#+   */
-/*   Created: 2024/07/16 13:41:34 by aljulien  #+##+# */
-/*   Updated: 2024/07/16 13:54:54 by aljulien ###   ########.fr   */
-/**/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aljulien <aljulien@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/08 10:15:14 by aljulien          #+#    #+#             */
+/*   Updated: 2024/11/13 11:44:48 by aljulien         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
@@ -33,11 +33,11 @@ static int	ft_issign(char *str, int i)
 		return (sign);
 }
 
-unsigned long long int	ft_atoll(char *nptr)
+unsigned long long	ft_atoll(char *nptr)
 {
 	size_t					i;
 	int						sign;
-	unsigned long long int	nbr;
+	unsigned long long		nbr;
 
 	nbr = 0;
 	if (!nptr)
@@ -51,5 +51,7 @@ unsigned long long int	ft_atoll(char *nptr)
 		nbr = nbr * 10 + nptr[i] - '0';
 		i++;
 	}
+	if (ft_isalpha(nptr[i]))
+		return (-4000000);
 	return (nbr * sign);
 }
